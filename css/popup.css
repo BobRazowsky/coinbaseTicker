@@ -1,0 +1,55 @@
+thead{
+    border-bottom: 1px solid #3c90df;
+}
+
+body{
+    background: #f4f7fa;
+    color: #5c6878;
+}
+
+td{
+    height: 25px;
+}
+
+.ethereumTable td{
+    text-align: center;
+    vertical-align: middle;
+}
+
+#tabletitle{
+    display: inline;
+}
+
+.flat-butt {
+  display: inline-block;
+  margin:2px 5px 2px 5px;
+  border-radius: 2px;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  padding: 6px 10px;
+  border: 0;
+  background-color:#3c90df;
+  color: #ffffff;
+  cursor: pointer;
+  outline: 0;
+}
+.flat-butt:hover {
+  background: #2e7bc4;
+  color: white;
+}
+
+a {
+  color: #1abc9c;
+}
+
+a:link{
+    text-decoration: none;
+}
+
+.prices{
+    border: 1px solid #dae1e9;
+    background: #ffffff;
+    padding: 5px;
+    border-radius: 2px;
+    margin: 0px 5px 0px 5px;
+}
