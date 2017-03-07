@@ -5,7 +5,7 @@
    "browser_action": {
       "default_icon": "img/icon.png",
       "default_popup": "popup.html",
-      "default_title": "Click to update price now"
+      "default_title": "Click to see buy and sell prices"
    },
    "description": "Track Ethereum price in EUR",
    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkt4mpeODdJDh3ZEoPQmYYLQHALcUtiOPRCpCEDtLHkuk/sWb9I6xg/WCuKhGoAFPCYnTQC7T3zsxSjFoVDwiM6iY663JktMc5OGyNOKDSXNGszCyn2w2WpmPUPuqJFJKCNyrJ8cIXrVUfF2prAf1HHpBKMTF/Iw91GKt4FxO9qK7PRvFmz5rS3ASsNvsHowamuiIl0oYrulPrPOelsi/cvKxwcp3RUWZRoEPipX3mt3bXLW9PXTlxu+WZ/wKo+CPw9Pc9GInhW18hShTG427yaKRI7jWiLCxFc1IrZlfg9ynAILY0b6iRHg2D4X5CcAN1bO0GUnzSxJrMKWzV+DHnwIDAQAB",

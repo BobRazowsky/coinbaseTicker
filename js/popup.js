@@ -1,6 +1,20 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-	var baseURL = "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/"
+	var baseURL = "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/";
+
+  if(localStorage.targetCurrency === "ETH"){
+    document.querySelector('img[name="currIco"]').src = "img/eth16.png";
+    
+  } else{
+    document.querySelector('img[name="currIco"]').src = "img/btc16.png";
+    //document.getElementById("tabletitle").innerHTML = "Bitcoin";
+  }
+
+  document.getElementById("tabletitle").innerHTML = localStorage.targetCurrency + " to " + localStorage.sourceCurrency;
+  document.getElementById("targetPrice").innerHTML = "Target price is " + localStorage.alertValue;
+
+  document.querySelector('input[name="targetPrice"]').value = localStorage.alertValue;
+  document.querySelector('input[name="targetPrice"]').onchange=updateAlertValue;
 
 	jQuery.getJSON(
       baseURL + "spot", 
@@ -41,6 +55,10 @@ document.addEventListener('DOMContentLoaded', function () {
 $(function(){
     $("#closeBtn").click(function(){window.close();})
 });
+
+function updateAlertValue(event){
+    localStorage.alertValue = event.target.value;
+}
 
 // function updatePopup(){
 

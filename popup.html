@@ -3,52 +3,55 @@
     <meta charset="UTF-8">
     <title>ETH Chart</title>
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="css/popup.css" type="text/css"/>
 </head>
 <body style="width:200px;">
 	<div class="tools" style="height: 40px;">
-		<a href="options.html" target="_blank" id="settingsBtn" class="btn btn-small pull-left" style="margin: 5px 20px 5px 5px;">Settings</a>
-		<div id="closeBtn" class="btn btn-small pull-right" style="margin: 5px;">X</div>
+		<a href="options.html" type="button" target="_blank" id="settingsBtn" class="flat-butt pull-left" style="margin: 5px 20px 5px 5px;">Settings</a>
+		<div id="closeBtn" type="button" class="flat-butt pull-right" style="margin: 5px;">X</div>
 	</div>
 	<div class="prices">
-		<!-- <div class="bitcoin" style="width:200px; float:left;">
-			<table class="bitcoinTable" style="margin: auto;float:left;">
-				<thead>
-					<tr>
-						<th>Bitcoin</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-				        <td id="bitcoinRate">0</td>
-				        <td id="bitcoinBuy">0</td>
-				        <td id="bitcoinSell">0</td>
-				    </tr>	
-				</tbody>
-					
-			</table>
-		</div> -->
-		<div class="ethereum" style="width:200px;">
+		<div class="ethereum" style="width:185px;">
 			<table class="ethereumTable" style="margin:auto;">
-				<thead>
+				<thead style="margin:auto;">
 					<tr>
-						<th>Ethereum</th>
+						<th ><img name="currIco" src="img/eth16.png"></th>
+						<th id="tableHead" class="tableHead"><p id="tabletitle"></p></th>
 					</tr>
+					
 				</thead>
 				<tbody>
 					<tr>
+						<td style="margin:auto;">Spotrate</td>
 						<td id="ethereumRate" style="margin:auto;">0</td>
 					</tr>
 				    <tr>
+				    	<td style="margin:auto;">Buy price</td>
 						<td id="ethereumBuy" style="margin:auto;">0</td>
 					</tr>
 					<tr>
+						<td style="margin:auto;">Sell price</td>
 						<td id="ethereumSell" style="margin:auto;">0</td>
 					</tr> 
 				    </tr>
 				</tbody>
 			</table>
+			
+		</div>
+
+		<div style="width:200px; margin:auto;">
+			<label class="control-label" style="width: 100px; display:inline; margin-left:22px;">Target price is</label>
+			<input id="targetPrice" name="targetPrice" type="text" placeholder=""  style="height: 20px; width:40px; display:inline; margin-top:7px;">
 		</div>
 	</div>
+	<!-- <div style="margin:auto; width: 200px;">
+		<p id="targetPrice" style="margin:auto; width:110px; text-align:center;"></p>
+	</div> -->
+	
+	<div style="margin:auto; width: 200px;">
+		<a href="https://www.coinbase.com/dashboard" type="button" target="_blank" id="coinbaseBtn" class="flat-butt pull-left" style="text-align:center; width:170px;margin: 5px 20px 5px 5px;">Go to Coinbase</a>
+	</div>
+	<br/>
 
 	<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="js/popup.js"></script>
