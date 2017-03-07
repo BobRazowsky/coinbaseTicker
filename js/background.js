@@ -4,6 +4,10 @@ default_config = {
     // "alertsActive": 1,
     // "alertsAmountChange": 0.0005,
     "updateDelay": 30,
+};
+
+if (typeof localStorage.delay === "undefined") {
+    localStorage.setItem("delay", 10000);
 }
 
 
@@ -23,7 +27,7 @@ jQuery.getJSON(
       priceString = data.data.amount.toString();
       price = data.data.amount;
       chrome.browserAction.setBadgeText({text: priceString});
-      if(typeof localStorage.alertValue === "undefined" && price > localStorage.alertValue){
+      if(price > localStorage.alertValue && localStorage.alertValue > 0){
         chrome.notifications.create("price", {
           type: "basic",
           title: "Eth price is over " + localStorage.alertValue,
@@ -35,14 +39,7 @@ jQuery.getJSON(
     }); 
 }
 
-// chrome.browserAction.onClicked.addListener(function(tab)
-//     {
-          
-//           updateTicker();
-          
-//     });
-
-window.setInterval(updateTicker, 10000);
+window.setInterval(updateTicker, localStorage.delay);
 
 updateTicker();
 

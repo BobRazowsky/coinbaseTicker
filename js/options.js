@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+    document.querySelector('input[name="alertValue"]').value = localStorage.alertValue;
+    document.querySelector('input[name="refreshDelay"]').value = localStorage.delay / 1000;
+    document.querySelector('select[name="currency"]').value = localStorage.sourceCurrency;
+    document.querySelector('select[name="crypto"]').value = localStorage.targetCurrency;
+
     document.querySelector('select[name="currency"]').onchange=updateCurrency;
     document.querySelector('select[name="crypto"]').onchange=updateCrypto;
     document.querySelector('input[name="refreshDelay"]').onchange=updateDelay;
@@ -16,12 +21,10 @@ function updateCurrency(event){
 
 function updateCrypto(event){
     localStorage.targetCurrency = event.target.value;
-    alert(localStorage.targetCurrency);
 }
 
 function updateDelay(event){
-    alert(event.target.value);
-    localStorage.delay = event.target.value;
+    localStorage.delay = event.target.value * 1000;
 }
 
 // function toggleNotification(event){
