@@ -1,6 +1,7 @@
 default_config = {
     "sourceCurrency": "EUR",
     "targetCurrency": "ETH",
+    "chartPeriod":"hour",
     // "alertsActive": 1,
     // "alertsAmountChange": 0.0005,
     "updateDelay": 30,
@@ -9,6 +10,10 @@ default_config = {
 
 if (typeof localStorage.delay === "undefined") {
     localStorage.setItem("delay", 10000);
+}
+
+if (typeof localStorage.chartPeriod === "undefined") {
+    localStorage.setItem("chartPeriod", "hour");
 }
 
 if (typeof localStorage.delay === "undefined") {

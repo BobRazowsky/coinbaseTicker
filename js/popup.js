@@ -15,13 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
     
   } else{
     document.querySelector('img[name="currIco"]').src = "img/btc16.png";
-    //document.getElementById("tabletitle").innerHTML = "Bitcoin";
   }
 
   document.getElementById("tabletitle").innerHTML = localStorage.targetCurrency + " to " + localStorage.sourceCurrency;
-  /*document.getElementById("targetPrice").innerHTML = "Target price is " + localStorage.alertValue;
-  document.getElementById("panicValue").innerHTML = "Target price is " + localStorage.panicValue;*/
-
+  
   document.querySelector('input[name="targetPrice"]').value = localStorage.alertValue;
   document.querySelector('input[name="targetPrice"]').onchange=updateAlertValue;
 
@@ -162,33 +159,3 @@ function updateChartPeriod(event){
     localStorage.chartPeriod = event.target.value;
     createChart();
 }
-
-// function updatePopup(){
-
-// 	jQuery.getJSON(
-//       "https://api.coinbase.com/v2/prices/ETH-EUR/spot", 
-//       function (data, txtStatus, xhr) {
-//         priceString = data.data.amount.toString();
-//         price = data.data.amount;
-//         chrome.browserAction.setBadgeText({text: priceString});
-
-//         alert(priceString);
-        
-//         // if(price > 18.5){
-//         //   chrome.notifications.create("price", {
-//         //     type: "basic",
-//         //     title: "Eth price is over your fixed limit",
-//         //     message: "Eth sell price is",
-//         //     iconUrl: "img/icon.png"
-//         //   }, function (notifId) {
-//         //   });
-//         // }
-//      });
-
-// 	$("#ethereumRate").html().text(priceString);
-
-
-// }
-
-// updatePopup();
-
