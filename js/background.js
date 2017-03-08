@@ -2,26 +2,25 @@ default_config = {
     "sourceCurrency": "EUR",
     "targetCurrency": "ETH",
     "chartPeriod":"hour",
-    // "alertsActive": 1,
-    // "alertsAmountChange": 0.0005,
-    "updateDelay": 30,
-    "panicValue" : 0
+    "updateDelay": 10,
+    "panicValue" : 0,
+    "alertValue" : 0
 };
 
 if (typeof localStorage.delay === "undefined") {
-    localStorage.setItem("delay", 10000);
+    localStorage.setItem("delay", default_config.updateDelay);
 }
 
 if (typeof localStorage.chartPeriod === "undefined") {
-    localStorage.setItem("chartPeriod", "hour");
+    localStorage.setItem("chartPeriod", default_config.chartPeriod);
 }
 
 if (typeof localStorage.delay === "undefined") {
-    localStorage.setItem("alertValue", 0);
+    localStorage.setItem("alertValue", default_config.alertValue);
 }
 
 if (typeof localStorage.panicValue === "undefined") {
-    localStorage.setItem("panicValue", 0);
+    localStorage.setItem("panicValue", default_config.panicValue);
 }
 
 if (typeof localStorage.sourceCurrency === "undefined") {
@@ -40,73 +39,35 @@ function updateTicker() {
             priceString = data.data.amount.toString();
             price = data.data.amount;
             chrome.browserAction.setBadgeText({text: priceString});
-            if(price > localStorage.alertValue && localStorage.alertValue > 0){
-
-                chrome.notifications.create("price", {
-                    type: "basic",
-                    title: localStorage.targetCurrency + " price is over " + localStorage.alertValue,
-                    message: localStorage.targetCurrency + " rate price is" + priceString,
-                    iconUrl: "img/icon.png"
-                    }, function () {
-                });
+            if(parseFloat(price) > localStorage.alertValue && localStorage.alertValue > 0){
+              createNotification(" is over ");
             }
 
-            else if(price < localStorage.panicValue && localStorage.panicValue > 0){
-
-                chrome.notifications.create("price", {
-                    type: "basic",
-                    title: localStorage.targetCurrency + " price is under " + localStorage.panicValue,
-                    message: localStorage.targetCurrency + " rate price is" + priceString,
-                    iconUrl: "img/icon.png"
-                    }, function () {
-                });
+            else if(parseFloat(price) < localStorage.panicValue && localStorage.panicValue > 0){
+              createNotification(" is under ");
             }
-
-    });
-
-    var dateObj = new Date();
-    var month = dateObj.getUTCMonth() + 1; //months from 1-12
-    var day = dateObj.getUTCDate();
-    var year = dateObj.getUTCFullYear();
-    var monthString, dayString;
-
-    //alert(year +""+ month+"" + day);
-
-    if(month < 10){
-      monthString = "0" + month;
-    } else{
-      monthString = month.toString();
-    }
-
-    if(day < 10){
-      dayString = "0" + (day - 1);
-    } else{
-      dayString = day.toString();
-    }
-
-    var dateString = year + "-" + monthString + "-" + dayString;
-    //alert(dateString);
-
-    jQuery.getJSON(
-        "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=EUR&limit=60&aggregate=3&e=CCCAGG",
-        //"https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/spot?date=" + dateString,
-        function (data, txtStatus, xhr) {
-
-          var sum = 0;
-
-          for(var i = 0; i < data.Data.length; i++){
-            sum += data.Data[i].low;
-          }
-
-          //alert(sum / 60);
-
-            /*priceString = data.data.amount.toString();
-            price = data.data.amount;*/
-            //alert(data.Data[0].low);
-
     });
 }
 
+function createNotification(sentence){
+    var myNotificationID = null;
+
+    chrome.notifications.create("price", {
+      type: "basic",
+      title: localStorage.targetCurrency + "" + sentence + "" + localStorage.alertValue,
+      message: localStorage.targetCurrency + " rate price is " + priceString,
+      iconUrl: "img/icon80.png",
+      buttons: [
+        {
+          title: "Go to Coinbase",
+          iconUrl: "img/icon.png"
+        }
+      ]
+      }, function (id) {
+        myNotificationID = id;
+      }
+  );
+}
 
 window.setInterval(updateTicker, localStorage.delay);
 
@@ -118,7 +79,6 @@ chrome.extension.onMessage.addListener(
     }
 );
 
-
-
-/*var newURL = "https://coinbase.com/buys";
-          chrome.tabs.create({ url: newURL });*/
+chrome.notifications.onButtonClicked.addListener(function(notifId, btnIdx) {
+  chrome.tabs.create({ url: "https://www.coinbase.com/dashboard" });
+});

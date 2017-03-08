@@ -1,5 +1,19 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+jQuery.getJSON(
+  "https://api.coinbase.com/v2/accounts",
+  function (data, txtStatus, xhr) {
+    console.log(data);
+    /*priceString = data.data.amount.toString();
+    price = data.data.amount;
+    chrome.browserAction.setBadgeText({text: priceString});
+
+    var ethRate = document.getElementById("ethereumRate");
+    ethRate.innerHTML = priceString.toString();*/
+
+});
+
+
   if (typeof localStorage.chartPeriod === "undefined") {
       localStorage.setItem("chartPeriod", "hour");
   }
@@ -8,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.querySelector('select[name="chartPeriod"]').onchange=updateChartPeriod;
 
-	var baseURL = "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/";
+	
 
   if(localStorage.targetCurrency === "ETH"){
     document.querySelector('img[name="currIco"]').src = "img/eth16.png";
@@ -25,7 +39,19 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('input[name="panicValue"]').value = localStorage.panicValue;
   document.querySelector('input[name="panicValue"]').onchange=updatePanicValue;
 
-	jQuery.getJSON(
+	updatePopup();
+  createChart();
+
+});
+
+$(function(){
+    $("#closeBtn").click(function(){window.close();})
+});
+
+function updatePopup(){
+  var baseURL = "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/";
+
+  jQuery.getJSON(
       baseURL + "spot", 
       function (data, txtStatus, xhr) {
         priceString = data.data.amount.toString();
@@ -33,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
         chrome.browserAction.setBadgeText({text: priceString});
 
         var ethRate = document.getElementById("ethereumRate");
-		ethRate.innerHTML = priceString.toString();
+        ethRate.innerHTML = priceString.toString();
 
     });
 
@@ -44,8 +70,8 @@ document.addEventListener('DOMContentLoaded', function () {
         price = data.data.amount;
         chrome.browserAction.setBadgeText({text: priceString});
 
-		var ethBuy = document.getElementById("ethereumBuy");
-		ethBuy.innerHTML = priceString.toString();
+        var ethBuy = document.getElementById("ethereumBuy");
+        ethBuy.innerHTML = priceString.toString();
     });
 
     jQuery.getJSON(
@@ -55,19 +81,14 @@ document.addEventListener('DOMContentLoaded', function () {
         price = data.data.amount;
         chrome.browserAction.setBadgeText({text: priceString});
 
-		var ethSell = document.getElementById("ethereumSell");
-		ethSell.innerHTML = priceString.toString();
+        var ethSell = document.getElementById("ethereumSell");
+        ethSell.innerHTML = priceString.toString();
     });
 
     // CHART
 
-    createChart();
-
-});
-
-$(function(){
-    $("#closeBtn").click(function(){window.close();})
-});
+    //createChart();
+}
 
 function createChart(){
 
@@ -123,7 +144,8 @@ function createChart(){
                     data: chartsData,
                     pointRadius: 0,
                     borderWidth: 2,
-                    borderColor: "#2B71B1"
+                    borderColor: "#2B71B1",
+                    lineTension: 0
                   }
                 ]
               },
@@ -159,3 +181,5 @@ function updateChartPeriod(event){
     localStorage.chartPeriod = event.target.value;
     createChart();
 }
+
+window.setInterval(updatePopup, localStorage.delay);
