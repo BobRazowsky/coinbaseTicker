@@ -1,5 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+  if (typeof localStorage.chartPeriod === "undefined") {
+      localStorage.setItem("chartPeriod", "hour");
+  }
+
+  document.querySelector('select[name="chartPeriod"]').value = localStorage.chartPeriod;
+
+  document.querySelector('select[name="chartPeriod"]').onchange=updateChartPeriod;
+
 	var baseURL = "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/";
 
   if(localStorage.targetCurrency === "ETH"){
@@ -54,45 +62,80 @@ document.addEventListener('DOMContentLoaded', function () {
 		ethSell.innerHTML = priceString.toString();
     });
 
-
-
     // CHART
+
+    createChart();
+
+});
+
+$(function(){
+    $("#closeBtn").click(function(){window.close();})
+});
+
+function createChart(){
 
     var ctx = document.getElementById("hourChart");
 
+    var limit = 0;
+    var type = "";
+
+    switch(localStorage.chartPeriod){
+      case "hour":
+        limit = 60;
+        type="minute";
+        break;
+      case "day":
+        limit = 24;
+        type = "hour";
+        break;
+      case "month":
+        limit = 30;
+        type = "day";
+        break;
+      case "year":
+        limit = 365;
+        type = "day";
+        break;
+      default:
+        limit =60;
+        type = "minute";
+    }
     
 
     var chartsData = [];
 
     jQuery.getJSON(
-        "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=EUR&limit=60&aggregate=3&e=CCCAGG",
+        "https://min-api.cryptocompare.com/data/histo"+ type +"?fsym="+ localStorage.targetCurrency +"&tsym="+ localStorage.sourceCurrency +"&limit="+ limit +"&aggregate=3&e=CCCAGG&useBTC=false",
         function (data, txtStatus, xhr) {
 
           var sum = 0;
 
 
           for(var i = 0; i < data.Data.length; i++){
-            chartsData.push({x: i ,y: (data.Data[i].high + data.Data[i].low) / 2});
-            //sum += data.Data[i].low;
+            console.log(data.Data[i]);
+            chartsData.push({x: i*(200/limit) ,y: (data.Data[i].close + data.Data[i].open) / 2});
           }
-
-          //alert(chartsData);
 
           var hourChart = new Chart(ctx, {
               type: 'line',
               data: {
                 datasets:[
                   {
-                    label: "Eth price",
+                    label: "price",
                     fill: false,
                     data: chartsData,
-                    pointBorderWidth: 0
+                    pointRadius: 0,
+                    borderWidth: 2,
+                    borderColor: "#2B71B1"
                   }
                 ]
               },
               options: {
                   legend: {
                     display: false
+                  },
+                  tooltips: {
+                    enabled: false
                   },
                   scales: {
                       xAxes: [{
@@ -105,14 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
           });
 
     });
-
-
-
-});
-
-$(function(){
-    $("#closeBtn").click(function(){window.close();})
-});
+}
 
 function updateAlertValue(event){
     localStorage.alertValue = event.target.value;
@@ -120,6 +156,11 @@ function updateAlertValue(event){
 
 function updatePanicValue(event){
     localStorage.panicValue = event.target.value;
+}
+
+function updateChartPeriod(event){
+    localStorage.chartPeriod = event.target.value;
+    createChart();
 }
 
 // function updatePopup(){

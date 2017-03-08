@@ -46,11 +46,11 @@ function updateTicker() {
                 });
             }
 
-            if(price < localStorage.panicValue && localStorage.panicValue > 0){
+            else if(price < localStorage.panicValue && localStorage.panicValue > 0){
 
                 chrome.notifications.create("price", {
                     type: "basic",
-                    title: localStorage.targetCurrency + " price is lower " + localStorage.panicValue,
+                    title: localStorage.targetCurrency + " price is under " + localStorage.panicValue,
                     message: localStorage.targetCurrency + " rate price is" + priceString,
                     iconUrl: "img/icon.png"
                     }, function () {

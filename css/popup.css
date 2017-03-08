@@ -22,7 +22,7 @@ td{
 
 .flat-butt {
   display: inline-block;
-  margin:2px 5px 2px 5px;
+  margin:0px 5px 0px 5px;
   border-radius: 2px;
   font-family: "Lato", sans-serif;
   font-size: 14px;
@@ -51,11 +51,21 @@ a:link{
     background: #ffffff;
     padding: 5px;
     border-radius: 2px;
-    margin: 0px 5px 0px 5px;
+    margin: 5px 5px 0px 5px;
 }
 
 #closeBtn{
     color: #3c90df;
     cursor: pointer;
     font-size: 20px;
+}
+
+#chart{
+  width: 180px;
+  background-color: white;
+  border-radius: 2px;
+  border: 1px solid #dae1e9;
+  padding: 5px;
+  margin: auto;
+  margin-top: 5px;
 }

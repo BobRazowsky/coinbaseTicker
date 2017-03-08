@@ -6,10 +6,9 @@
     <link rel="stylesheet" href="css/popup.css" type="text/css"/>
 </head>
 <body style="width:200px;">
-	<div class="tools" style="height: 40px;">
-		<a href="options.html" type="button" target="_blank" id="settingsBtn" class="flat-butt pull-left" style="margin: 5px 20px 5px 5px;">Settings</a>
+	<!-- <div class="tools" style="height: 40px;">
 		<div id="closeBtn" type="button" class="pull-right" style="margin: 5px;">X</div>
-	</div>
+	</div> -->
 	<div class="prices">
 		<div class="ethereum" style="width:185px;">
 			<table class="ethereumTable" style="margin:auto;">
@@ -52,11 +51,22 @@
 	</div> -->
 
 	<div id="chart">
-		<canvas id="hourChart" width="200" height="100"></canvas>
+		<canvas id="hourChart" width="180" height="100"></canvas>
+		<label class="control-label" style="width: 30px; display:inline; margin-left:22px;">Last</label>
+		<select id="chartPeriod" name="chartPeriod" class="form-control" style="width:100px; margin-top: 7px;">
+            <option value="hour" >hour</option>
+            <option value="day" >day</option>
+            <option value="month" >month</option>
+            <option value="year" >year</option>
+        </select>
 	</div>
 	
 	<div style="margin:auto; width: 200px;">
 		<a href="https://www.coinbase.com/dashboard" type="button" target="_blank" id="coinbaseBtn" class="flat-butt pull-left" style="text-align:center; width:170px;margin: 5px 20px 5px 5px;">Go to Coinbase</a>
+	</div>
+
+	<div style="margin:auto; width: 200px;">
+		<a href="options.html" type="button" target="_blank" id="settingsBtn" class="flat-butt pull-left" style="text-align:center; width:170px;margin: 0px 20px 5px 5px;">Settings</a>
 	</div>
 	<br/>
 
