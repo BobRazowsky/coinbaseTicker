@@ -1,34 +1,36 @@
-default_config = {
+let default_config = {
     "sourceCurrency": "EUR",
     "targetCurrency": "ETH",
-    "chartPeriod":"hour",
+    "chartPeriod":"day",
     "updateDelay": 10,
     "panicValue" : 0,
     "alertValue" : 0
 };
 
-if (typeof localStorage.delay === "undefined") {
-    localStorage.setItem("delay", default_config.updateDelay);
-}
+function initializeConfig(configuration){
+    if (typeof localStorage.delay === "undefined") {
+        localStorage.setItem("delay", configuration.updateDelay * 1000);
+    }
 
-if (typeof localStorage.chartPeriod === "undefined") {
-    localStorage.setItem("chartPeriod", default_config.chartPeriod);
-}
+    if (typeof localStorage.chartPeriod === "undefined") {
+        localStorage.setItem("chartPeriod", configuration.chartPeriod);
+    }
 
-if (typeof localStorage.delay === "undefined") {
-    localStorage.setItem("alertValue", default_config.alertValue);
-}
+    if (typeof localStorage.alertValue === "undefined") {
+        localStorage.setItem("alertValue", configuration.alertValue);
+    }
 
-if (typeof localStorage.panicValue === "undefined") {
-    localStorage.setItem("panicValue", default_config.panicValue);
-}
+    if (typeof localStorage.panicValue === "undefined") {
+        localStorage.setItem("panicValue", configuration.panicValue);
+    }
 
-if (typeof localStorage.sourceCurrency === "undefined") {
-    localStorage.setItem("sourceCurrency", default_config.sourceCurrency);
-}
+    if (typeof localStorage.sourceCurrency === "undefined") {
+        localStorage.setItem("sourceCurrency", configuration.sourceCurrency);
+    }
 
-if (typeof localStorage.targetCurrency === "undefined") {
-    localStorage.setItem("targetCurrency", default_config.targetCurrency);
+    if (typeof localStorage.targetCurrency === "undefined") {
+        localStorage.setItem("targetCurrency", configuration.targetCurrency);
+    }
 }
 
 function updateTicker() {
@@ -69,16 +71,22 @@ function createNotification(sentence){
     );
 }
 
+function startExtensionListeners(){
+    chrome.extension.onMessage.addListener(
+        function (request, sender, sendResponse) {
+            if (request.msg == "resetTicker"){
+                updateTicker();
+            }
+        }
+    );
+
+    chrome.notifications.onButtonClicked.addListener(function(notifId, btnIdx) {
+        chrome.tabs.create({ url: "https://www.coinbase.com/dashboard" });
+    });
+}
+
 window.setInterval(updateTicker, localStorage.delay);
 
+initializeConfig(default_config);
 updateTicker();
-
-chrome.extension.onMessage.addListener(
-    function (request, sender, sendResponse) {
-        if (request.msg == "resetTicker") updateTicker();
-    }
-);
-
-chrome.notifications.onButtonClicked.addListener(function(notifId, btnIdx) {
-    chrome.tabs.create({ url: "https://www.coinbase.com/dashboard" });
-});
+startExtensionListeners();

@@ -1,28 +1,36 @@
 document.addEventListener('DOMContentLoaded', function () {
-    if (typeof localStorage.chartPeriod === "undefined") {
-        localStorage.setItem("chartPeriod", "hour");
-    }
-    document.querySelector('select[name="chartPeriod"]').value = localStorage.chartPeriod;
+  
+    startListeners();
+    updateInputValues();
+    updatePrices();
+    changeCurrencyIcon();
+    createChart();
+
+});
+
+function startListeners(){
     document.querySelector('select[name="chartPeriod"]').onchange=updateChartPeriod;
+    document.querySelector('input[name="targetPrice"]').onchange=updateAlertValue;
+    document.querySelector('input[name="panicValue"]').onchange=updatePanicValue;
+}
+
+function changeCurrencyIcon(){
     if(localStorage.targetCurrency === "ETH"){
-      document.querySelector('img[name="currIco"]').src = "img/eth16.png";
+        document.querySelector('img[name="currIco"]').src = "img/eth16.png";
     } else{
-      document.querySelector('img[name="currIco"]').src = "img/btc16.png";
+        document.querySelector('img[name="currIco"]').src = "img/btc16.png";
     }
+}
+
+function updateInputValues(){
+    document.querySelector('select[name="chartPeriod"]').value = localStorage.chartPeriod;
     document.getElementById("tabletitle").innerHTML = localStorage.targetCurrency + " to " + localStorage.sourceCurrency;
     document.querySelector('input[name="targetPrice"]').value = localStorage.alertValue;
-    document.querySelector('input[name="targetPrice"]').onchange=updateAlertValue;
     document.querySelector('input[name="panicValue"]').value = localStorage.panicValue;
-    document.querySelector('input[name="panicValue"]').onchange=updatePanicValue;
-    updatePopup();
-    createChart();
-});
+}
 
-$(function(){
-    $("#closeBtn").click(function(){window.close();});
-});
+function updatePrices(){
 
-function updatePopup(){
     var baseURL = "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/";
     jQuery.getJSON(
         baseURL + "spot",
@@ -78,7 +86,7 @@ function createChart(){
             type = "day";
             break;
         default:
-            limit =60;
+            limit = 60;
             type = "minute";
     }
 
@@ -103,7 +111,7 @@ function createChart(){
                             pointRadius: 0,
                             borderWidth: 2,
                             borderColor: "#2B71B1",
-                            lineTension: 0
+                            lineTension: 0.1
                         }
                     ]
                 },
@@ -140,4 +148,4 @@ function updateChartPeriod(event){
     createChart();
 }
 
-window.setInterval(updatePopup, localStorage.delay);
+window.setInterval(updatePrices, localStorage.delay);
