@@ -54,6 +54,60 @@ document.addEventListener('DOMContentLoaded', function () {
 		ethSell.innerHTML = priceString.toString();
     });
 
+
+
+    // CHART
+
+    var ctx = document.getElementById("hourChart");
+
+    
+
+    var chartsData = [];
+
+    jQuery.getJSON(
+        "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=EUR&limit=60&aggregate=3&e=CCCAGG",
+        function (data, txtStatus, xhr) {
+
+          var sum = 0;
+
+
+          for(var i = 0; i < data.Data.length; i++){
+            chartsData.push({x: i ,y: (data.Data[i].high + data.Data[i].low) / 2});
+            //sum += data.Data[i].low;
+          }
+
+          //alert(chartsData);
+
+          var hourChart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                datasets:[
+                  {
+                    label: "Eth price",
+                    fill: false,
+                    data: chartsData,
+                    pointBorderWidth: 0
+                  }
+                ]
+              },
+              options: {
+                  legend: {
+                    display: false
+                  },
+                  scales: {
+                      xAxes: [{
+                          display: false,
+                          type: 'linear',
+                          position: 'bottom'
+                      }]
+                  }
+              }
+          });
+
+    });
+
+
+
 });
 
 $(function(){
