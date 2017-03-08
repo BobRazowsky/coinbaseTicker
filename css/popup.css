@@ -53,3 +53,9 @@ a:link{
     border-radius: 2px;
     margin: 0px 5px 0px 5px;
 }
+
+#closeBtn{
+    color: #3c90df;
+    cursor: pointer;
+    font-size: 20px;
+}

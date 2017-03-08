@@ -32,28 +32,31 @@ function updateTicker() {
 jQuery.getJSON(
     "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/spot",
     function (data, txtStatus, xhr) {
-      priceString = data.data.amount.toString();
-      price = data.data.amount;
-      chrome.browserAction.setBadgeText({text: priceString});
-      if(price > localStorage.alertValue && localStorage.alertValue > 0){
-        chrome.notifications.create("price", {
-          type: "basic",
-          title: "Eth price is over " + localStorage.alertValue,
-          message: "Eth rate price is" + priceString,
-          iconUrl: "img/icon.png"
-        }, function () {
-        });
-      }
+        priceString = data.data.amount.toString();
+        price = data.data.amount;
+        chrome.browserAction.setBadgeText({text: priceString});
+        if(price > localStorage.alertValue && localStorage.alertValue > 0){
 
-      if(price < localStorage.panicValue && localStorage.panicValue > 0){
-        chrome.notifications.create("price", {
-          type: "basic",
-          title: "Eth price is lower " + localStorage.panicValue,
-          message: "Eth rate price is" + priceString,
-          iconUrl: "img/icon.png"
-        }, function () {
-        });
-      }
+            chrome.notifications.create("price", {
+                type: "basic",
+                title: localStorage.targetCurrency + " price is over " + localStorage.alertValue,
+                message: localStorage.targetCurrency + " rate price is" + priceString,
+                iconUrl: "img/icon.png"
+                }, function () {
+            });
+        }
+
+        if(price < localStorage.panicValue && localStorage.panicValue > 0){
+
+            chrome.notifications.create("price", {
+                type: "basic",
+                title: localStorage.targetCurrency + " price is lower " + localStorage.panicValue,
+                message: localStorage.targetCurrency + " rate price is" + priceString,
+                iconUrl: "img/icon.png"
+                }, function () {
+            });
+        }
+
     });
 }
 
