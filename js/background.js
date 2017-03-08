@@ -40,11 +40,11 @@ function updateTicker() {
             price = data.data.amount;
             chrome.browserAction.setBadgeText({text: priceString});
             if(parseFloat(price) > localStorage.alertValue && localStorage.alertValue > 0){
-              createNotification(" is over ");
+                createNotification(" is over ");
             }
 
             else if(parseFloat(price) < localStorage.panicValue && localStorage.panicValue > 0){
-              createNotification(" is under ");
+                createNotification(" is under ");
             }
     });
 }
@@ -53,20 +53,20 @@ function createNotification(sentence){
     var myNotificationID = null;
 
     chrome.notifications.create("price", {
-      type: "basic",
-      title: localStorage.targetCurrency + "" + sentence + "" + localStorage.alertValue,
-      message: localStorage.targetCurrency + " rate price is " + priceString,
-      iconUrl: "img/icon80.png",
-      buttons: [
-        {
-          title: "Go to Coinbase",
-          iconUrl: "img/icon.png"
+        type: "basic",
+        title: localStorage.targetCurrency + "" + sentence + "" + localStorage.alertValue,
+        message: localStorage.targetCurrency + " rate price is " + priceString,
+        iconUrl: "img/icon80.png",
+        buttons: [
+            {
+                title: "Go to Coinbase",
+                iconUrl: "img/icon.png"
+            }
+        ]
+        }, function (id) {
+            myNotificationID = id;
         }
-      ]
-      }, function (id) {
-        myNotificationID = id;
-      }
-  );
+    );
 }
 
 window.setInterval(updateTicker, localStorage.delay);
@@ -80,5 +80,5 @@ chrome.extension.onMessage.addListener(
 );
 
 chrome.notifications.onButtonClicked.addListener(function(notifId, btnIdx) {
-  chrome.tabs.create({ url: "https://www.coinbase.com/dashboard" });
+    chrome.tabs.create({ url: "https://www.coinbase.com/dashboard" });
 });
