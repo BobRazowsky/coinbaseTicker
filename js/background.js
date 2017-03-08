@@ -49,6 +49,8 @@ function updateTicker() {
                 createNotification(" is under ");
             }
     });
+
+    setTimeout(updateTicker, localStorage.delay);
 }
 
 function createNotification(sentence){
@@ -85,7 +87,7 @@ function startExtensionListeners(){
     });
 }
 
-window.setInterval(updateTicker, localStorage.delay);
+//window.setInterval(updateTicker, localStorage.delay);
 
 initializeConfig(default_config);
 updateTicker();
