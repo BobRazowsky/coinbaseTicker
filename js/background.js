@@ -4,25 +4,33 @@ default_config = {
     // "alertsActive": 1,
     // "alertsAmountChange": 0.0005,
     "updateDelay": 30,
+    "panicValue" : 0
 };
 
 if (typeof localStorage.delay === "undefined") {
     localStorage.setItem("delay", 10000);
 }
 
+if (typeof localStorage.delay === "undefined") {
+    localStorage.setItem("alertValue", 0);
+}
+
+if (typeof localStorage.panicValue === "undefined") {
+    localStorage.setItem("panicValue", 0);
+}
 
 if (typeof localStorage.sourceCurrency === "undefined") {
-    localStorage.setItem("sourceCurrency", "EUR");
-} 
+    localStorage.setItem("sourceCurrency", default_config.sourceCurrency);
+}
 
 if (typeof localStorage.targetCurrency === "undefined") {
-    localStorage.setItem("targetCurrency", "ETH");
+    localStorage.setItem("targetCurrency", default_config.targetCurrency);
 }
 
 function updateTicker() {
 
 jQuery.getJSON(
-    "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/spot", 
+    "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/spot",
     function (data, txtStatus, xhr) {
       priceString = data.data.amount.toString();
       price = data.data.amount;
@@ -36,7 +44,17 @@ jQuery.getJSON(
         }, function () {
         });
       }
-    }); 
+
+      if(price < localStorage.panicValue && localStorage.panicValue > 0){
+        chrome.notifications.create("price", {
+          type: "basic",
+          title: "Eth price is lower " + localStorage.panicValue,
+          message: "Eth rate price is" + priceString,
+          iconUrl: "img/icon.png"
+        }, function () {
+        });
+      }
+    });
 }
 
 window.setInterval(updateTicker, localStorage.delay);

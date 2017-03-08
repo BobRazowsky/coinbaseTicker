@@ -11,10 +11,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   document.getElementById("tabletitle").innerHTML = localStorage.targetCurrency + " to " + localStorage.sourceCurrency;
-  document.getElementById("targetPrice").innerHTML = "Target price is " + localStorage.alertValue;
+  /*document.getElementById("targetPrice").innerHTML = "Target price is " + localStorage.alertValue;
+  document.getElementById("panicValue").innerHTML = "Target price is " + localStorage.panicValue;*/
 
   document.querySelector('input[name="targetPrice"]').value = localStorage.alertValue;
   document.querySelector('input[name="targetPrice"]').onchange=updateAlertValue;
+
+  document.querySelector('input[name="panicValue"]').value = localStorage.panicValue;
+  document.querySelector('input[name="panicValue"]').onchange=updatePanicValue;
 
 	jQuery.getJSON(
       baseURL + "spot", 
@@ -58,6 +62,10 @@ $(function(){
 
 function updateAlertValue(event){
     localStorage.alertValue = event.target.value;
+}
+
+function updatePanicValue(event){
+    localStorage.panicValue = event.target.value;
 }
 
 // function updatePopup(){

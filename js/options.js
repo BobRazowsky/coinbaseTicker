@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelector('input[name="alertValue"]').value = localStorage.alertValue;
+    document.querySelector('input[name="panicValue"]').value = localStorage.panicValue;
     document.querySelector('input[name="refreshDelay"]').value = localStorage.delay / 1000;
     document.querySelector('select[name="currency"]').value = localStorage.sourceCurrency;
     document.querySelector('select[name="crypto"]').value = localStorage.targetCurrency;
@@ -10,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('input[name="refreshDelay"]').onchange=updateDelay;
     //document.querySelector('input[name="notificationToggle"]').onchange=toggleNotification;
     document.querySelector('input[name="alertValue"]').onchange=updateAlertValue;
+    document.querySelector('input[name="panicValue"]').onchange=updatePanicValue;
 
     document.getElementById("save").addEventListener("click", saveAndApply);
 
@@ -42,6 +44,10 @@ function updateDelay(event){
 
 function updateAlertValue(event){
     localStorage.alertValue = event.target.value;
+}
+
+function updatePanicValue(event){
+    localStorage.panicValue = event.target.value;
 }
 
 function saveAndApply(){
