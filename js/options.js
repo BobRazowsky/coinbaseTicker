@@ -25,10 +25,8 @@ function populateCurrencies(){
     jQuery.getJSON(
         "https://api.coinbase.com/v2/currencies",
         function (data, txtStatus, xhr) {
-            console.log(data);
             select = document.querySelector('select[name="currency"]');
             for(var i = 0; i < data.data.length; i++){
-                console.log(data);
                 var opt = document.createElement('option');
                 opt.value = data.data[i].id;
                 opt.innerHTML = data.data[i].name;

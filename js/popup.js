@@ -31,13 +31,14 @@ function updateInputValues(){
 
 function updatePrices(){
 
+  console.log("hello");
+
     var baseURL = "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/";
     jQuery.getJSON(
         baseURL + "spot",
         function (data, txtStatus, xhr) {
             priceString = data.data.amount.toString();
             price = data.data.amount;
-            chrome.browserAction.setBadgeText({text: priceString});
             var ethRate = document.getElementById("ethereumRate");
             ethRate.innerHTML = priceString.toString();
     });
@@ -47,7 +48,6 @@ function updatePrices(){
         function (data, txtStatus, xhr) {
             priceString = data.data.amount.toString();
             price = data.data.amount;
-            chrome.browserAction.setBadgeText({text: priceString});
             var ethBuy = document.getElementById("ethereumBuy");
             ethBuy.innerHTML = priceString.toString();
     });
@@ -57,7 +57,6 @@ function updatePrices(){
         function (data, txtStatus, xhr) {
             priceString = data.data.amount.toString();
             price = data.data.amount;
-            chrome.browserAction.setBadgeText({text: priceString});
             var ethSell = document.getElementById("ethereumSell");
             ethSell.innerHTML = priceString.toString();
     });
@@ -95,6 +94,14 @@ function createChart(){
     jQuery.getJSON(
         "https://min-api.cryptocompare.com/data/histo"+ type +"?fsym="+ localStorage.targetCurrency +"&tsym="+ localStorage.sourceCurrency +"&limit="+ limit +"&aggregate=3&e=CCCAGG&useBTC=false",
         function (data, txtStatus, xhr) {
+
+          console.log(data);
+
+          if(data.Response == "Error"){
+            console.log("No chart data for this currency");
+            document.getElementById("chart").style.display = "none";
+            return;
+          }
 
             for(var i = 0; i < data.Data.length; i++){
                 chartsData.push({x: i*(200/limit) ,y: (data.Data[i].close + data.Data[i].open) / 2});
