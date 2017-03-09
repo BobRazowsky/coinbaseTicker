@@ -9,9 +9,35 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function startListeners(){
-    document.querySelector('select[name="chartPeriod"]').onchange=updateChartPeriod;
+    document.querySelector('select[name="chartPeriod"]').onchange = function(e){
+      this.blur();
+      updateChartPeriod(e);
+    }
+
+
     document.querySelector('input[name="targetPrice"]').onchange=updateAlertValue;
     document.querySelector('input[name="panicValue"]').onchange=updatePanicValue;
+
+    document.querySelector('input[name="targetPrice"]').onkeypress = function(e){
+      
+      if(!e) e = window.event;
+      var keyCode = e.keyCode || e.which;
+      if(keyCode == 13){
+        this.blur();
+        updateAlertValue(e);
+        return false;
+      }
+    }
+
+    document.querySelector('input[name="panicValue"]').onkeypress = function(e){
+      if(!e) e = window.event;
+      var keyCode = e.keyCode || e.which;
+      if(keyCode == '13'){
+        this.blur();
+        updatePanicValue(e);
+        return false;
+      }
+    }
 }
 
 function changeCurrencyIcon(){
@@ -100,6 +126,8 @@ function createChart(){
           if(data.Response == "Error"){
             console.log("No chart data for this currency");
             document.getElementById("chart").style.display = "none";
+            
+            
             return;
           }
 
@@ -140,6 +168,8 @@ function createChart(){
             });
         }
     );
+
+    document.documentElement.style.height = 200;
 }
 
 function updateAlertValue(event){
