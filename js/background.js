@@ -42,23 +42,23 @@ function updateTicker() {
             price = data.data.amount;
             chrome.browserAction.setBadgeText({text: priceString});
             if(parseFloat(price) > localStorage.alertValue && localStorage.alertValue > 0){
-                createNotification(" is over ");
+                createNotification(" is over ", localStorage.alertValue);
             }
 
             else if(parseFloat(price) < localStorage.panicValue && localStorage.panicValue > 0){
-                createNotification(" is under ");
+                createNotification(" is under ", localStorage.panicValue);
             }
     });
 
     setTimeout(updateTicker, localStorage.delay);
 }
 
-function createNotification(sentence){
+function createNotification(sentence, value){
     var myNotificationID = null;
 
     chrome.notifications.create("price", {
         type: "basic",
-        title: localStorage.targetCurrency + "" + sentence + "" + localStorage.alertValue,
+        title: localStorage.targetCurrency + "" + sentence + "" + value,
         message: localStorage.targetCurrency + " rate price is " + priceString,
         iconUrl: "img/icon80.png",
         buttons: [
