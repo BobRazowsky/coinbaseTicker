@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     updateInputValues();
     updatePrices();
     changeCurrencyIcon();
-    createChart();
+    getChartValues();
 
 });
 
@@ -88,8 +88,7 @@ function updatePrices(){
     });
 }
 
-function createChart(){
-    var ctx = document.getElementById("hourChart");
+function getChartValues(){
     var limit = 0;
     var type = "";
 
@@ -102,10 +101,6 @@ function createChart(){
             limit = 24;
             type = "hour";
             break;
-        // case "week":
-        //     limit = 96;
-        //     type = "hour";
-        //     break;
         case "month":
             limit = 30;
             type = "day";
@@ -121,59 +116,62 @@ function createChart(){
 
     var chartsData = [];
 
+
     jQuery.getJSON(
         "https://min-api.cryptocompare.com/data/histo"+ type +"?fsym="+ localStorage.targetCurrency +"&tsym="+ localStorage.sourceCurrency +"&limit="+ limit +"&aggregate=3&e=CCCAGG&useBTC=false",
         function (data, txtStatus, xhr) {
 
-          console.log(data);
-
-          if(data.Response == "Error"){
-            console.log("No chart data for this currency");
-            document.getElementById("chart").style.display = "none";
-            
-            
-            return;
-          }
+            if(data.Response == "Error"){
+              console.log("No chart data for this currency");
+              document.getElementById("chart").style.display = "none";
+              return;
+            }
 
             for(var i = 0; i < data.Data.length; i++){
                 chartsData.push({x: i*(200/limit) ,y: (data.Data[i].close + data.Data[i].open) / 2});
             }
 
-            var hourChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    datasets:[
-                        {
-                            label: "price",
-                            fill: false,
-                            data: chartsData,
-                            pointRadius: 0,
-                            borderWidth: 2,
-                            borderColor: "#2B71B1",
-                            lineTension: 0.1
-                        }
-                    ]
-                },
-                options: {
-                    legend: {
-                        display: false
-                    },
-                    tooltips: {
-                        enabled: false
-                    },
-                    scales: {
-                        xAxes: [{
-                            display: false,
-                            type: 'linear',
-                            position: 'bottom'
-                        }]
-                    }
-                }
-            });
+            buildChart(chartsData);
         }
     );
 
-    document.documentElement.style.height = 200;
+    //document.documentElement.style.height = 200;
+}
+
+function buildChart(chartsData){
+    var ctx = document.getElementById("hourChart");
+
+    var hourChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets:[
+                {
+                    label: "price",
+                    fill: false,
+                    data: chartsData,
+                    pointRadius: 0,
+                    borderWidth: 2,
+                    borderColor: "#2B71B1",
+                    lineTension: 0.1
+                }
+            ]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            tooltips: {
+                enabled: false
+            },
+            scales: {
+                xAxes: [{
+                    display: false,
+                    type: 'linear',
+                    position: 'bottom'
+                }]
+            }
+        }
+    });
 }
 
 function updateAlertValue(event){
@@ -186,7 +184,7 @@ function updatePanicValue(event){
 
 function updateChartPeriod(event){
     localStorage.chartPeriod = event.target.value;
-    createChart();
+    getChartValues();
 }
 
 window.setInterval(updatePrices, localStorage.delay);

@@ -5,7 +5,8 @@ let default_config = {
     "updateDelay": 10,
     "panicValue" : 0,
     "alertValue" : 0,
-    "soundNotification" : 1
+    "soundNotification" : 1,
+    "soundSample" : "pop"
 };
 
 function initializeConfig(configuration){
@@ -41,7 +42,9 @@ function initializeConfig(configuration){
         localStorage.setItem("lastPrice", 0);
     }
 
-    //localStorage.setItem("lastPrice", 0);
+    if (typeof localStorage.soundSample === "undefined") {
+        localStorage.setItem("soundSample", "pop");
+    }
 }
 
 function updateTicker() {
@@ -108,7 +111,7 @@ function createNotification(sentence, value){
 }
 
 function audioNotif(){
-    var sound = new Audio('sounds/pop.mp3');
+    var sound = new Audio("sounds/"+ localStorage.soundSample +".mp3");
     sound.play();
 }
 

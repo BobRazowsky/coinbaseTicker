@@ -11,11 +11,13 @@ function updateValues(){
     document.querySelector('select[name="currency"]').value = localStorage.sourceCurrency;
     document.querySelector('select[name="crypto"]').value = localStorage.targetCurrency;
     document.querySelector('input[name="soundToggle"]').value= localStorage.soundNotification;
+    document.querySelector('select[name="soundSample"]').value= localStorage.soundSample;
 }
 
 function startListeners(){
     document.querySelector('select[name="currency"]').onchange = updateCurrency;
     document.querySelector('select[name="crypto"]').onchange = updateCrypto;
+    document.querySelector('select[name="soundSample"]').onchange = updateSoundSample;
     document.querySelector('input[name="refreshDelay"]').onchange = updateDelay;
     document.querySelector('input[name="alertValue"]').onchange = updateAlertValue;
     document.querySelector('input[name="panicValue"]').onchange = updatePanicValue;
@@ -63,9 +65,17 @@ function updatePanicValue(event){
 function toggleNotificationSound(event){
     if(event.target.checked === true){
         localStorage.soundNotification = 1;
+        var sound = new Audio("sounds/"+ localStorage.soundSample +".mp3");
+        sound.play();
     } else{
         localStorage.soundNotification = 0;
     }
+}
+
+function updateSoundSample(event){
+    localStorage.soundSample = event.target.value;
+    var sound = new Audio("sounds/"+ event.target.value +".mp3");
+    sound.play();
 }
 
 function saveAndApply(){
