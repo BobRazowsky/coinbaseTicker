@@ -111,8 +111,8 @@ function createNotification(sentence, value){
 }
 
 function audioNotif(){
-    var sound = new Audio("sounds/"+ localStorage.soundSample +".mp3");
-    sound.play();
+    var notif = new Audio("sounds/"+ localStorage.soundSample +".mp3");
+    notif.play();
 }
 
 function startExtensionListeners(){
