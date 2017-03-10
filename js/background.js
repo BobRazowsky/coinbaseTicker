@@ -4,7 +4,8 @@ let default_config = {
     "chartPeriod":"day",
     "updateDelay": 10,
     "panicValue" : 0,
-    "alertValue" : 0
+    "alertValue" : 0,
+    "soundNotification" : 1
 };
 
 function initializeConfig(configuration){
@@ -30,6 +31,10 @@ function initializeConfig(configuration){
 
     if (typeof localStorage.targetCurrency === "undefined") {
         localStorage.setItem("targetCurrency", configuration.targetCurrency);
+    }
+
+    if (typeof localStorage.soundNotification === "undefined") {
+        localStorage.setItem("soundNotification", configuration.soundNotification);
     }
 }
 
@@ -71,6 +76,15 @@ function createNotification(sentence, value){
             myNotificationID = id;
         }
     );
+
+    if(parseFloat(localStorage.soundNotification) !== 0){
+      audioNotif();
+    }
+}
+
+function audioNotif(){
+    var sound = new Audio('sounds/pop.mp3');
+    sound.play();
 }
 
 function startExtensionListeners(){
@@ -86,8 +100,6 @@ function startExtensionListeners(){
         chrome.tabs.create({ url: "https://www.coinbase.com/dashboard" });
     });
 }
-
-//window.setInterval(updateTicker, localStorage.delay);
 
 initializeConfig(default_config);
 updateTicker();

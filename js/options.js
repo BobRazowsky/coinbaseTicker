@@ -10,14 +10,16 @@ function updateValues(){
     document.querySelector('input[name="refreshDelay"]').value = localStorage.delay / 1000;
     document.querySelector('select[name="currency"]').value = localStorage.sourceCurrency;
     document.querySelector('select[name="crypto"]').value = localStorage.targetCurrency;
+    document.querySelector('input[name="soundToggle"]').value= localStorage.soundNotification;
 }
 
 function startListeners(){
-    document.querySelector('select[name="currency"]').onchange=updateCurrency;
-    document.querySelector('select[name="crypto"]').onchange=updateCrypto;
-    document.querySelector('input[name="refreshDelay"]').onchange=updateDelay;
-    document.querySelector('input[name="alertValue"]').onchange=updateAlertValue;
-    document.querySelector('input[name="panicValue"]').onchange=updatePanicValue;
+    document.querySelector('select[name="currency"]').onchange = updateCurrency;
+    document.querySelector('select[name="crypto"]').onchange = updateCrypto;
+    document.querySelector('input[name="refreshDelay"]').onchange = updateDelay;
+    document.querySelector('input[name="alertValue"]').onchange = updateAlertValue;
+    document.querySelector('input[name="panicValue"]').onchange = updatePanicValue;
+    document.querySelector('input[name="soundToggle"]').onclick = toggleNotificationSound;
     document.getElementById("save").addEventListener("click", saveAndApply);
 }
 
@@ -56,6 +58,14 @@ function updateAlertValue(event){
 
 function updatePanicValue(event){
     localStorage.panicValue = event.target.value;
+}
+
+function toggleNotificationSound(event){
+    if(event.target.checked === true){
+        localStorage.soundNotification = 1;
+    } else{
+        localStorage.soundNotification = 0;
+    }
 }
 
 function saveAndApply(){
