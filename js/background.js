@@ -42,13 +42,11 @@ function initializeConfig(configuration){
         localStorage.setItem("lastPrice", 0);
     }
 
-    if (typeof localStorage.soundSample === "undefined") {
-        localStorage.setItem("soundSample", "pop");
-    }
+    // if (typeof localStorage.soundSample === "undefined") ? localStorage.setItem("soundSample", "pop") : null;
+    
 }
 
 function updateTicker() {
-
     jQuery.getJSON(
         "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/spot",
         function (data, txtStatus, xhr) {

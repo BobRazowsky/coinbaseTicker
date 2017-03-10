@@ -57,12 +57,12 @@ function updateInputValues(){
 
 function updatePrices(){
 
-  console.log("hello");
 
     var baseURL = "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/";
     jQuery.getJSON(
         baseURL + "spot",
         function (data, txtStatus, xhr) {
+            console.log(xhr);
             priceString = data.data.amount.toString();
             price = data.data.amount;
             var ethRate = document.getElementById("ethereumRate");
