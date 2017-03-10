@@ -36,6 +36,12 @@ function initializeConfig(configuration){
     if (typeof localStorage.soundNotification === "undefined") {
         localStorage.setItem("soundNotification", configuration.soundNotification);
     }
+
+    if (typeof localStorage.lastPrice === "undefined") {
+        localStorage.setItem("lastPrice", 0);
+    }
+
+    //localStorage.setItem("lastPrice", 0);
 }
 
 function updateTicker() {
@@ -45,6 +51,19 @@ function updateTicker() {
         function (data, txtStatus, xhr) {
             priceString = data.data.amount.toString();
             price = data.data.amount;
+
+            if(parseFloat(price) > localStorage.lastPrice){
+              setBadgeColor("#2B8F28");
+              setTimeout(function(){
+                setBadgeColor("#2E7BC4");
+              }, 4000);
+            } else if(parseFloat(price) < localStorage.lastPrice){
+              setBadgeColor("#FF4143");
+              setTimeout(function(){
+                setBadgeColor("#2E7BC4");
+              }, 4000);
+            }
+
             chrome.browserAction.setBadgeText({text: priceString});
             if(parseFloat(price) > localStorage.alertValue && localStorage.alertValue > 0){
                 createNotification(" is over ", localStorage.alertValue);
@@ -53,9 +72,15 @@ function updateTicker() {
             else if(parseFloat(price) < localStorage.panicValue && localStorage.panicValue > 0){
                 createNotification(" is under ", localStorage.panicValue);
             }
+
+            localStorage.lastPrice = price;
     });
 
     setTimeout(updateTicker, localStorage.delay);
+}
+
+function setBadgeColor(color){
+  chrome.browserAction.setBadgeBackgroundColor({color: color});
 }
 
 function createNotification(sentence, value){
