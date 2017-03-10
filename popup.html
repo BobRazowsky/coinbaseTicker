@@ -39,10 +39,10 @@
 		</div>
 
 		<div style="width:200px; margin:auto;">
-			<label class="control-label" style="width: 100px; display:inline; margin-left:22px;">Target price </label>
+			<label class="control-label" for="targetPrice" style="width: 100px; display:inline; margin-left:22px;">Target price </label>
 			<input id="targetPrice" name="targetPrice" type="text" placeholder=""  style="height: 20px; width:50px; display:inline; margin-top:7px;">
 
-			<label class="control-label" style="width: 100px; display:inline; margin-left:22px;">Panic price </label>
+			<label class="control-label" for="panicValue" style="width: 100px; display:inline; margin-left:22px;">Panic price </label>
 			<input id="panicValue" name="panicValue" type="text" placeholder=""  style="height: 20px; width:50px; display:inline; margin-top:7px;">
 		</div>
 	</div>
@@ -56,6 +56,7 @@
 		<select id="chartPeriod" name="chartPeriod" class="form-control" style="width:100px; margin-top: 7px;">
             <option value="hour" >60 mins</option>
             <option value="day" >24 hours</option>
+            <!-- <option value="week" >week</option> -->
             <option value="month" >30 days</option>
             <option value="year" >year</option>
         </select>

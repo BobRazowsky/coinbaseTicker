@@ -102,6 +102,10 @@ function createChart(){
             limit = 24;
             type = "hour";
             break;
+        // case "week":
+        //     limit = 96;
+        //     type = "hour";
+        //     break;
         case "month":
             limit = 30;
             type = "day";
