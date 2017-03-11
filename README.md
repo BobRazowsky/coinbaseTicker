@@ -6,7 +6,7 @@
 * Live update on icon with customizable delay
 * Set "up" and "low" notifications with sound
 
-![alt tag](https://raw.githubusercontent.com/BobRazowsky/coinbaseTicker/master/img/capture.png)
+![alt tag](https://raw.githubusercontent.com/BobRazowsky/coinbaseTicker/master/img/capture.jpg)
 
 ## APIs
 
