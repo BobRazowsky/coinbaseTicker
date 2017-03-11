@@ -117,8 +117,10 @@ function getChartValues(){
 
 
     jQuery.getJSON(
-        "https://min-api.cryptocompare.com/data/histo"+ type +"?fsym="+ localStorage.targetCurrency +"&tsym="+ localStorage.sourceCurrency +"&limit="+ limit +"&aggregate=3&e=CCCAGG&useBTC=false",
+        "https://min-api.cryptocompare.com/data/histo"+ type +"?fsym="+ localStorage.targetCurrency +"&tsym="+ localStorage.sourceCurrency +"&limit="+ limit +"&aggregate=0&e=CCCAGG&useBTC=false",
         function (data, txtStatus, xhr) {
+
+            console.log(data);
 
             if(data.Response == "Error"){
                 console.log("No chart data for this currency");
