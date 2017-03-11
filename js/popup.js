@@ -87,38 +87,45 @@ function updatePrices(){
 function getChartValues(){
     var limit = 0;
     var type = "";
+    var aggregate = 0;
 
     switch(localStorage.chartPeriod){
         case "hour":
             limit = 60;
             type="minute";
+            aggregate = 0;
             break;
         case "day":
             limit = 24;
             type = "hour";
+            aggregate = 0;
             break;
         case "week":
-            limit = 168;
+            limit = 84;
             type = "hour";
+            aggregate = 2;
             break;
         case "month":
             limit = 30;
             type = "day";
+            aggregate = 0;
             break;
         case "year":
-            limit = 365;
+            limit = 122;
             type = "day";
+            aggregate = 3;
             break;
         default:
             limit = 60;
             type = "minute";
+            aggregate = 0;
     }
 
     var chartsData = [];
 
 
     jQuery.getJSON(
-        "https://min-api.cryptocompare.com/data/histo"+ type +"?fsym="+ localStorage.targetCurrency +"&tsym="+ localStorage.sourceCurrency +"&limit="+ limit +"&aggregate=0&e=CCCAGG&useBTC=false",
+        "https://min-api.cryptocompare.com/data/histo"+ type +"?fsym="+ localStorage.targetCurrency +"&tsym="+ localStorage.sourceCurrency +"&limit="+ limit +"&aggregate="+ aggregate +"&e=CCCAGG&useBTC=false",
         function (data, txtStatus, xhr) {
             if(data.Response == "Error"){
                 console.log("No chart data for this currency");
