@@ -1,6 +1,6 @@
 # Coinbase Ticker (Google Chrome extension) - Track BTC and ETH prices from Coinbase
 
-* Track BTC and ETH prices in all currencies supported on Coinbase
+* Track BTC and ETH prices in all currencies supported by Coinbase
 * Popup with spotrate, buy and sell prices.
 * Price charts for last hour, day, month or year (not available for all currencies)
 * Live update on icon with customizable delay
