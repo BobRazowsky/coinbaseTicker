@@ -13,8 +13,7 @@ function startListeners(){
         this.blur();
         updateChartPeriod(e);
     }
-
-
+    
     document.querySelector('input[name="targetPrice"]').onchange=updateAlertValue;
     document.querySelector('input[name="panicValue"]').onchange=updatePanicValue;
 
@@ -56,12 +55,10 @@ function updateInputValues(){
 
 function updatePrices(){
 
-
     var baseURL = "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/";
     jQuery.getJSON(
         baseURL + "spot",
         function (data, txtStatus, xhr) {
-            console.log(xhr);
             priceString = data.data.amount.toString();
             price = data.data.amount;
             var ethRate = document.getElementById("priceRate");
@@ -119,9 +116,6 @@ function getChartValues(){
     jQuery.getJSON(
         "https://min-api.cryptocompare.com/data/histo"+ type +"?fsym="+ localStorage.targetCurrency +"&tsym="+ localStorage.sourceCurrency +"&limit="+ limit +"&aggregate=0&e=CCCAGG&useBTC=false",
         function (data, txtStatus, xhr) {
-
-            console.log(data);
-
             if(data.Response == "Error"){
                 console.log("No chart data for this currency");
                 document.getElementById("chart").style.display = "none";
