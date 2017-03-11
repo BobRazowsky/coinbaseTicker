@@ -13,7 +13,7 @@ function startListeners(){
         this.blur();
         updateChartPeriod(e);
     }
-    
+
     document.querySelector('input[name="targetPrice"]').onchange=updateAlertValue;
     document.querySelector('input[name="panicValue"]').onchange=updatePanicValue;
 
@@ -95,6 +95,10 @@ function getChartValues(){
             break;
         case "day":
             limit = 24;
+            type = "hour";
+            break;
+        case "week":
+            limit = 168;
             type = "hour";
             break;
         case "month":
