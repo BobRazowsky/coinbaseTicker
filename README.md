@@ -8,4 +8,4 @@
 
 ## Installation
 
-Google Chrome > Extensions tab > activate developer mode > Load Unpacked Extension
+Google Chrome > Extensions tab > Activate Developer Mode > Load Unpacked Extension
