@@ -8,9 +8,12 @@
 
 ## APIs
 
-* Ticker data by Coinbase API
-* Charts data by Cryptocompare API
+* Ticker data by [Coinbase API]
+* Charts data by [Cryptocompare API]
 
 ## Installation
 
 Google Chrome > Extensions tab > Activate Developer Mode > Load Unpacked Extension
+
+[Coinbase API]: https://developers.coinbase.com/api/v2
+[Cryptocompare API]: https://www.cryptocompare.com/api/
