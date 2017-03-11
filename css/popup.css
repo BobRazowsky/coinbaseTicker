@@ -5,13 +5,14 @@ thead{
 body{
     background: #f4f7fa;
     color: #5c6878;
+    font-family: 'Roboto', sans-serif;
 }
 
 td{
     height: 25px;
 }
 
-.ethereumTable td{
+.priceTable td{
     text-align: center;
     vertical-align: middle;
 }
@@ -24,7 +25,7 @@ td{
   display: inline-block;
   margin:0px 5px 0px 5px;
   border-radius: 2px;
-  font-family: "Lato", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 14px;
   padding: 6px 10px;
   border: 0;
@@ -33,6 +34,7 @@ td{
   cursor: pointer;
   outline: 0;
 }
+
 .flat-butt:hover {
   background: #2e7bc4;
   color: white;

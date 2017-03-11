@@ -10,40 +10,20 @@ let default_config = {
 };
 
 function initializeConfig(configuration){
-    if (typeof localStorage.delay === "undefined") {
+
+    if (typeof localStorage.beenHereBefore === "undefined") {
+
         localStorage.setItem("delay", configuration.updateDelay * 1000);
-    }
-
-    if (typeof localStorage.chartPeriod === "undefined") {
         localStorage.setItem("chartPeriod", configuration.chartPeriod);
-    }
-
-    if (typeof localStorage.alertValue === "undefined") {
         localStorage.setItem("alertValue", configuration.alertValue);
-    }
-
-    if (typeof localStorage.panicValue === "undefined") {
         localStorage.setItem("panicValue", configuration.panicValue);
-    }
-
-    if (typeof localStorage.sourceCurrency === "undefined") {
         localStorage.setItem("sourceCurrency", configuration.sourceCurrency);
-    }
-
-    if (typeof localStorage.targetCurrency === "undefined") {
         localStorage.setItem("targetCurrency", configuration.targetCurrency);
-    }
-
-    if (typeof localStorage.soundNotification === "undefined") {
         localStorage.setItem("soundNotification", configuration.soundNotification);
-    }
-
-    if (typeof localStorage.lastPrice === "undefined") {
         localStorage.setItem("lastPrice", 0);
+        localStorage.setItem("soundSample", "pop");
+        localStorage.setItem("beenHereBefore", "yes");
     }
-
-    // if (typeof localStorage.soundSample === "undefined") ? localStorage.setItem("soundSample", "pop") : null;
-    
 }
 
 function updateTicker() {
@@ -54,26 +34,24 @@ function updateTicker() {
             price = data.data.amount;
 
             if(parseFloat(price) > localStorage.lastPrice){
-              setBadgeColor("#2B8F28");
-              setTimeout(function(){
-                setBadgeColor("#2E7BC4");
-              }, 4000);
+                setBadgeColor("#2B8F28");
+                setTimeout(function(){
+                    setBadgeColor("#2E7BC4");
+                }, 4000);
             } else if(parseFloat(price) < localStorage.lastPrice){
-              setBadgeColor("#FF4143");
-              setTimeout(function(){
-                setBadgeColor("#2E7BC4");
-              }, 4000);
+                setBadgeColor("#FF4143");
+                setTimeout(function(){
+                    setBadgeColor("#2E7BC4");
+                }, 4000);
             }
 
             chrome.browserAction.setBadgeText({text: priceString});
             if(parseFloat(price) > localStorage.alertValue && localStorage.alertValue > 0){
                 createNotification(" is over ", localStorage.alertValue);
             }
-
             else if(parseFloat(price) < localStorage.panicValue && localStorage.panicValue > 0){
                 createNotification(" is under ", localStorage.panicValue);
             }
-
             localStorage.lastPrice = price;
     });
 
@@ -81,7 +59,7 @@ function updateTicker() {
 }
 
 function setBadgeColor(color){
-  chrome.browserAction.setBadgeBackgroundColor({color: color});
+    chrome.browserAction.setBadgeBackgroundColor({color: color});
 }
 
 function createNotification(sentence, value){
@@ -100,11 +78,10 @@ function createNotification(sentence, value){
         ]
         }, function (id) {
             myNotificationID = id;
-        }
-    );
+    });
 
     if(parseFloat(localStorage.soundNotification) !== 0){
-      audioNotif();
+        audioNotif();
     }
 }
 

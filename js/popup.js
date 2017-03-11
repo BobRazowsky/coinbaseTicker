@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function startListeners(){
     document.querySelector('select[name="chartPeriod"]').onchange = function(e){
-      this.blur();
-      updateChartPeriod(e);
+        this.blur();
+        updateChartPeriod(e);
     }
 
 
@@ -19,24 +19,23 @@ function startListeners(){
     document.querySelector('input[name="panicValue"]').onchange=updatePanicValue;
 
     document.querySelector('input[name="targetPrice"]').onkeypress = function(e){
-      
-      if(!e) e = window.event;
-      var keyCode = e.keyCode || e.which;
-      if(keyCode == 13){
-        this.blur();
-        updateAlertValue(e);
-        return false;
-      }
+        if(!e) e = window.event;
+        var keyCode = e.keyCode || e.which;
+        if(keyCode == 13){
+            this.blur();
+            updateAlertValue(e);
+            return false;
+        }
     }
 
     document.querySelector('input[name="panicValue"]').onkeypress = function(e){
-      if(!e) e = window.event;
-      var keyCode = e.keyCode || e.which;
-      if(keyCode == '13'){
-        this.blur();
-        updatePanicValue(e);
-        return false;
-      }
+        if(!e) e = window.event;
+        var keyCode = e.keyCode || e.which;
+        if(keyCode == '13'){
+            this.blur();
+            updatePanicValue(e);
+            return false;
+        }
     }
 }
 
@@ -65,7 +64,7 @@ function updatePrices(){
             console.log(xhr);
             priceString = data.data.amount.toString();
             price = data.data.amount;
-            var ethRate = document.getElementById("ethereumRate");
+            var ethRate = document.getElementById("priceRate");
             ethRate.innerHTML = priceString.toString();
     });
 
@@ -74,7 +73,7 @@ function updatePrices(){
         function (data, txtStatus, xhr) {
             priceString = data.data.amount.toString();
             price = data.data.amount;
-            var ethBuy = document.getElementById("ethereumBuy");
+            var ethBuy = document.getElementById("priceBuy");
             ethBuy.innerHTML = priceString.toString();
     });
 
@@ -83,7 +82,7 @@ function updatePrices(){
         function (data, txtStatus, xhr) {
             priceString = data.data.amount.toString();
             price = data.data.amount;
-            var ethSell = document.getElementById("ethereumSell");
+            var ethSell = document.getElementById("priceSell");
             ethSell.innerHTML = priceString.toString();
     });
 }
@@ -122,9 +121,9 @@ function getChartValues(){
         function (data, txtStatus, xhr) {
 
             if(data.Response == "Error"){
-              console.log("No chart data for this currency");
-              document.getElementById("chart").style.display = "none";
-              return;
+                console.log("No chart data for this currency");
+                document.getElementById("chart").style.display = "none";
+                return;
             }
 
             for(var i = 0; i < data.Data.length; i++){
@@ -134,8 +133,6 @@ function getChartValues(){
             buildChart(chartsData);
         }
     );
-
-    //document.documentElement.style.height = 200;
 }
 
 function buildChart(chartsData){

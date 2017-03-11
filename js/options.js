@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-
     populateCurrencies();
     startListeners();
 });
@@ -51,7 +50,8 @@ function updateCrypto(event){
 }
 
 function updateDelay(event){
-    localStorage.delay = event.target.value * 1000;
+    var value = (event.target.value < 1) ? 1 : event.target.value;
+    localStorage.delay = value * 1000;
 }
 
 function updateAlertValue(event){
@@ -64,13 +64,10 @@ function updatePanicValue(event){
 
 function toggleNotificationSound(event){
     if(event.target.checked === true){
-
         localStorage.soundNotification = 1;
-        console.log("plop");
         var notif = new Audio("sounds/"+ localStorage.soundSample +".mp3");
         notif.play();
     } else{
-        console.log("zut");
         localStorage.soundNotification = 0;
     }
 }

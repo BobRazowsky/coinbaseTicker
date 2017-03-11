@@ -1,17 +1,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ETH Chart</title>
+    <title>Coinbase Ticker Popup</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="css/popup.css" type="text/css"/>
 </head>
 <body style="width:200px;">
-	<!-- <div class="tools" style="height: 40px;">
-		<div id="closeBtn" type="button" class="pull-right" style="margin: 5px;">X</div>
-	</div> -->
 	<div class="prices">
-		<div class="ethereum" style="width:185px;">
-			<table class="ethereumTable" style="margin:auto;">
+		<div class="main" style="width:185px;">
+			<table class="priceTable" style="margin:auto;">
 				<thead style="margin:auto;">
 					<tr>
 						<th ><img name="currIco" src="img/eth16.png"></th>
@@ -22,15 +20,15 @@
 				<tbody>
 					<tr>
 						<td style="margin:auto;">Spotrate</td>
-						<td id="ethereumRate" style="margin:auto;">0</td>
+						<td id="priceRate" style="margin:auto;">0</td>
 					</tr>
 				    <tr>
 				    	<td style="margin:auto;">Buy price</td>
-						<td id="ethereumBuy" style="margin:auto;">0</td>
+						<td id="priceBuy" style="margin:auto;">0</td>
 					</tr>
 					<tr>
 						<td style="margin:auto;">Sell price</td>
-						<td id="ethereumSell" style="margin:auto;">0</td>
+						<td id="priceSell" style="margin:auto;">0</td>
 					</tr> 
 				    </tr>
 				</tbody>
@@ -46,17 +44,12 @@
 			<input id="panicValue" name="panicValue" type="text" placeholder=""  style="height: 20px; width:50px; display:inline; margin-top:7px;">
 		</div>
 	</div>
-	<!-- <div style="margin:auto; width: 200px;">
-		<p id="targetPrice" style="margin:auto; width:110px; text-align:center;"></p>
-	</div> -->
-
 	<div id="chart">
 		<canvas id="hourChart" width="180" height="100"></canvas>
 		<label class="control-label" style="width: 30px; display:inline; margin-left:22px;">Last</label>
 		<select id="chartPeriod" name="chartPeriod" class="form-control" style="width:100px; margin-top: 7px;">
             <option value="hour" >60 mins</option>
             <option value="day" >24 hours</option>
-            <!-- <option value="week" >week</option> -->
             <option value="month" >30 days</option>
             <option value="year" >year</option>
         </select>
