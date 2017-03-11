@@ -10,6 +10,7 @@ function updateValues(){
     document.querySelector('select[name="currency"]').value = localStorage.sourceCurrency;
     document.querySelector('select[name="crypto"]').value = localStorage.targetCurrency;
     document.querySelector('input[name="soundToggle"]').checked = (localStorage.soundNotification == 1) ? true : false;
+    document.querySelector('input[name="colorChange"]').checked = (localStorage.colorChange == 1) ? true : false;
     document.querySelector('select[name="soundSample"]').value = localStorage.soundSample;
 }
 
@@ -21,6 +22,7 @@ function startListeners(){
     document.querySelector('input[name="alertValue"]').onchange = updateAlertValue;
     document.querySelector('input[name="panicValue"]').onchange = updatePanicValue;
     document.querySelector('input[name="soundToggle"]').onclick = toggleNotificationSound;
+    document.querySelector('input[name="colorChange"]').onclick = toggleColorChange;
     document.getElementById("save").addEventListener("click", saveAndApply);
 }
 
@@ -70,6 +72,10 @@ function toggleNotificationSound(event){
     } else{
         localStorage.soundNotification = 0;
     }
+}
+
+function toggleColorChange(event){
+    localStorage.colorChange = (event.target.checked === true) ? 1 : 0;
 }
 
 function updateSoundSample(event){

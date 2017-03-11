@@ -6,7 +6,8 @@ let default_config = {
     "panicValue" : 0,
     "alertValue" : 0,
     "soundNotification" : 1,
-    "soundSample" : "pop"
+    "soundSample" : "pop",
+    "colorChange" : 1
 };
 
 function initializeConfig(configuration){
@@ -20,6 +21,7 @@ function initializeConfig(configuration){
         localStorage.setItem("sourceCurrency", configuration.sourceCurrency);
         localStorage.setItem("targetCurrency", configuration.targetCurrency);
         localStorage.setItem("soundNotification", configuration.soundNotification);
+        localStorage.setItem("colorChange", configuration.colorChange);
         localStorage.setItem("lastPrice", 0);
         localStorage.setItem("soundSample", "pop");
         localStorage.setItem("beenHereBefore", "yes");
@@ -32,19 +34,19 @@ function updateTicker() {
         function (data, txtStatus, xhr) {
             priceString = data.data.amount.toString();
             price = data.data.amount;
-
-            if(parseFloat(price) > localStorage.lastPrice){
-                setBadgeColor("#2B8F28");
-                setTimeout(function(){
-                    setBadgeColor("#2E7BC4");
-                }, 4000);
-            } else if(parseFloat(price) < localStorage.lastPrice){
-                setBadgeColor("#FF4143");
-                setTimeout(function(){
-                    setBadgeColor("#2E7BC4");
-                }, 4000);
+            if(localStorage.colorChange == true){
+                if(parseFloat(price) > localStorage.lastPrice){
+                    setBadgeColor("#2B8F28");
+                    setTimeout(function(){
+                        setBadgeColor("#2E7BC4");
+                    }, 4000);
+                } else if(parseFloat(price) < localStorage.lastPrice){
+                    setBadgeColor("#FF4143");
+                    setTimeout(function(){
+                        setBadgeColor("#2E7BC4");
+                    }, 4000);
+                }
             }
-
             chrome.browserAction.setBadgeText({text: priceString});
             if(parseFloat(price) > localStorage.alertValue && localStorage.alertValue > 0){
                 createNotification(" is over ", localStorage.alertValue);
