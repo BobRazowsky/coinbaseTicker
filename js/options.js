@@ -12,6 +12,7 @@ function updateValues(){
     document.querySelector('input[name="soundToggle"]').checked = (localStorage.soundNotification == 1) ? true : false;
     document.querySelector('input[name="colorChange"]').checked = (localStorage.colorChange == 1) ? true : false;
     document.querySelector('select[name="soundSample"]').value = localStorage.soundSample;
+    document.querySelector('input[name="roundBadge"]').checked = (localStorage.roundBadge == 1) ? true : false;
 }
 
 function startListeners(){
@@ -23,6 +24,7 @@ function startListeners(){
     document.querySelector('input[name="panicValue"]').onchange = updatePanicValue;
     document.querySelector('input[name="soundToggle"]').onclick = toggleNotificationSound;
     document.querySelector('input[name="colorChange"]').onclick = toggleColorChange;
+    document.querySelector('input[name="roundBadge"]').onclick = toggleRoundBadge;
     document.getElementById("save").addEventListener("click", saveAndApply);
 }
 
@@ -82,6 +84,11 @@ function updateSoundSample(event){
     localStorage.soundSample = event.target.value;
     var sound = new Audio("sounds/"+ event.target.value +".mp3");
     sound.play();
+}
+
+function toggleRoundBadge(event){
+    localStorage.roundBadge = (event.target.checked === true) ? 1 : 0;
+    chrome.extension.sendMessage({msg: "resetTicker"});
 }
 
 function saveAndApply(){

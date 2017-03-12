@@ -7,7 +7,8 @@ let default_config = {
     "alertValue" : 0,
     "soundNotification" : 1,
     "soundSample" : "pop",
-    "colorChange" : 1
+    "colorChange" : 1,
+    "roundBadge" : 0
 };
 
 function initializeConfig(configuration){
@@ -33,6 +34,7 @@ function updateTicker() {
         "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/spot",
         function (data, txtStatus, xhr) {
             priceString = data.data.amount.toString();
+            console.log(parseFloat(data.data.amount).toFixed(1));
             price = data.data.amount;
             if(localStorage.colorChange == true){
                 if(parseFloat(price) > localStorage.lastPrice){
@@ -47,7 +49,12 @@ function updateTicker() {
                     }, 4000);
                 }
             }
-            chrome.browserAction.setBadgeText({text: priceString});
+            if(localStorage.roundBadge == 1){
+                chrome.browserAction.setBadgeText({text: parseFloat(data.data.amount).toFixed(1).toString()});
+            } else{
+                chrome.browserAction.setBadgeText({text: priceString});
+            }
+            
             if(parseFloat(price) > localStorage.alertValue && localStorage.alertValue > 0){
                 createNotification(" is over ", localStorage.alertValue);
             }

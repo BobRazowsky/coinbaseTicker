@@ -2,7 +2,7 @@
 
 * Track BTC and ETH prices in all currencies supported by Coinbase
 * Popup with spotrate, buy and sell prices.
-* Price charts for last hour, day, month or year (not available for all currencies)
+* Price charts for last hour, day, week, month or year (not available for all currencies)
 * Live update on icon with customizable delay and color changes
 * Set "up" and "low" notifications with sound
 
