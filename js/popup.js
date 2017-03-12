@@ -142,6 +142,19 @@ function getChartValues(){
             }
 
             buildChart(chartsData);
+
+            var indexEnd = data.Data.length - 1;
+            var start = (data.Data[0].close + data.Data[0].open) / 2;
+            var end = (data.Data[indexEnd].close + data.Data[indexEnd].open) / 2;
+            var change = ((100 * end) / start) - 100;
+
+            var sign = (change > 0) ? "+" : "-";
+            var color = (change > 0) ? "#2B8F28" : "#FF4143";
+
+            document.querySelector('#changeValue').innerHTML = sign + change.toFixed(2) + "%";
+            document.querySelector('#changeValue').style.color = color;
+
+            console.log(change);
         }
     );
 }
