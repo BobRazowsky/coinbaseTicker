@@ -57,8 +57,10 @@ function updateTicker() {
             localStorage.lastPrice = price;
     });
 
-    setTimeout(updateTicker, localStorage.delay);
+    
 }
+
+setInterval(updateTicker, localStorage.delay);
 
 function setBadgeColor(color){
     chrome.browserAction.setBadgeBackgroundColor({color: color});

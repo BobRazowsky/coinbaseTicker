@@ -96,9 +96,9 @@ function getChartValues(){
             aggregate = 0;
             break;
         case "day":
-            limit = 24;
-            type = "hour";
-            aggregate = 0;
+            limit = 96;
+            type = "minute";
+            aggregate = 15;
             break;
         case "week":
             limit = 84;
@@ -106,9 +106,9 @@ function getChartValues(){
             aggregate = 2;
             break;
         case "month":
-            limit = 30;
-            type = "day";
-            aggregate = 0;
+            limit = 90;
+            type = "hour";
+            aggregate = 8;
             break;
         case "year":
             limit = 122;
@@ -123,9 +123,13 @@ function getChartValues(){
 
     var chartsData = [];
 
-
     jQuery.getJSON(
-        "https://min-api.cryptocompare.com/data/histo"+ type +"?fsym="+ localStorage.targetCurrency +"&tsym="+ localStorage.sourceCurrency +"&limit="+ limit +"&aggregate="+ aggregate +"&e=CCCAGG&useBTC=false",
+        "https://min-api.cryptocompare.com/data/histo"+ type +
+        "?fsym="+ localStorage.targetCurrency +
+        "&tsym="+ localStorage.sourceCurrency +
+        "&limit="+ limit +
+        "&aggregate="+ aggregate +
+        "&useBTC=false",
         function (data, txtStatus, xhr) {
             if(data.Response == "Error"){
                 console.log("No chart data for this currency");
@@ -143,9 +147,13 @@ function getChartValues(){
 }
 
 function buildChart(chartsData){
-    var ctx = document.getElementById("hourChart");
+    var ctx = document.getElementById("chartCanvas");
 
-    var hourChart = new Chart(ctx, {
+    if(typeof priceChart !== "undefined"){
+      priceChart.destroy();
+    }
+
+    priceChart = new Chart(ctx, {
         type: 'line',
         data: {
             datasets:[
@@ -165,7 +173,7 @@ function buildChart(chartsData){
                 display: false
             },
             tooltips: {
-                enabled: false
+                // enabled: false
             },
             scales: {
                 xAxes: [{
@@ -173,9 +181,18 @@ function buildChart(chartsData){
                     type: 'linear',
                     position: 'bottom'
                 }]
+            },
+            hover: {
+
             }
         }
-    });
+    },
+    {
+      lineAtIndex: 2
+    }
+    );
+
+    //priceChart.destroy();
 }
 
 function updateAlertValue(event){
@@ -190,5 +207,7 @@ function updateChartPeriod(event){
     localStorage.chartPeriod = event.target.value;
     getChartValues();
 }
+
+
 
 window.setInterval(updatePrices, localStorage.delay);
