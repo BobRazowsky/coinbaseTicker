@@ -47,7 +47,8 @@ function updateTicker() {
                     }, 4000);
                 }
             }
-            chrome.browserAction.setBadgeText({text: priceString});
+            chrome.browserAction.setBadgeText({text: "21.4"});
+            //chrome.browserAction.setBadgeText({text: priceString});
             if(parseFloat(price) > localStorage.alertValue && localStorage.alertValue > 0){
                 createNotification(" is over ", localStorage.alertValue);
             }
