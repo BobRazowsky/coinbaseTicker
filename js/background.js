@@ -27,6 +27,8 @@ function initializeConfig(configuration){
         localStorage.setItem("soundSample", "pop");
         localStorage.setItem("beenHereBefore", "yes");
     }
+
+    setInterval(updateTicker, localStorage.delay);
 }
 
 function updateTicker() {
@@ -67,7 +69,7 @@ function updateTicker() {
     
 }
 
-setInterval(updateTicker, localStorage.delay);
+
 
 function setBadgeColor(color){
     chrome.browserAction.setBadgeBackgroundColor({color: color});

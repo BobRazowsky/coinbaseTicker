@@ -12,5 +12,5 @@
    "name": "Coinbase Ticker",
    "options_page": "options.html",
    "permissions": [ "https://coinbase.com/", "storage","alarms", "notifications" ],
-   "version": "0.0.0.1"
+   "version": "0.0.0.2"
 }
