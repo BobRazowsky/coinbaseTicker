@@ -16,6 +16,7 @@ function startListeners(){
 
     document.querySelector('input[name="targetPrice"]').onchange=updateAlertValue;
     document.querySelector('input[name="panicValue"]').onchange=updatePanicValue;
+    document.querySelector('input[name="currAmount"]').onchange=updateCurrAmount;
 
     document.querySelector('input[name="targetPrice"]').onkeypress = function(e){
         if(!e) e = window.event;
@@ -51,6 +52,7 @@ function updateInputValues(){
     document.getElementById("tabletitle").innerHTML = localStorage.targetCurrency + " to " + localStorage.sourceCurrency;
     document.querySelector('input[name="targetPrice"]').value = localStorage.alertValue;
     document.querySelector('input[name="panicValue"]').value = localStorage.panicValue;
+    document.querySelector('input[name="currAmount"]').value = (localStorage.targetCurrency == "ETH") ? localStorage.ethAmount : localStorage.btcAmount;
 }
 
 function updatePrices(){
@@ -63,6 +65,9 @@ function updatePrices(){
             price = data.data.amount;
             var ethRate = document.getElementById("priceRate");
             ethRate.innerHTML = priceString.toString();
+
+            var currField = document.getElementById("currResult");
+            currField.innerHTML = (localStorage.targetCurrency == "ETH") ? " " + localStorage.targetCurrency + " = " + (price * localStorage.ethAmount).toFixed(2) + " " +localStorage.sourceCurrency : " " + localStorage.targetCurrency + " = " + (price * localStorage.btcAmount).toFixed(2) + " " +localStorage.sourceCurrency;
     });
 
     jQuery.getJSON(
@@ -214,6 +219,16 @@ function updateAlertValue(event){
 
 function updatePanicValue(event){
     localStorage.panicValue = event.target.value;
+}
+
+function updateCurrAmount(event){
+  if(localStorage.targetCurrency == "ETH"){
+    localStorage.ethAmount = event.target.value;
+  } else{
+    localStorage.btcAmount = event.target.value;
+  }
+
+  updatePrices();
 }
 
 function updateChartPeriod(event){

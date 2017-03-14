@@ -8,7 +8,9 @@ let default_config = {
     "soundNotification" : 1,
     "soundSample" : "pop",
     "colorChange" : 1,
-    "roundBadge" : 0
+    "roundBadge" : 0,
+    "btcAmount" : 0,
+    "ethAmount" : 0
 };
 
 function initializeConfig(configuration){
@@ -26,6 +28,8 @@ function initializeConfig(configuration){
         localStorage.setItem("lastPrice", 0);
         localStorage.setItem("soundSample", "pop");
         localStorage.setItem("beenHereBefore", "yes");
+        localStorage.setItem("btcAmount", configuration.btcAmount);
+        localStorage.setItem("ethAmount", configuration.ethAmount);
     }
 
     setInterval(updateTicker, localStorage.delay);
