@@ -1,4 +1,8 @@
 {
+   "name": "__MSG_appName__",
+   "version": "0.0.0.2",
+   "description": "__MSG_appDesc__",
+   "default_locale": "en",
    "background": {
       "scripts": [ "js/jquery-2.0.3.min.js", "js/background.js" ]
    },
@@ -7,10 +11,7 @@
       "default_popup": "popup.html",
       "default_title": "Click to see prices and graphics"
    },
-   "description": "Track Ethereum and Bitcoin prices from Coinbase in all supported currencies",
-   "manifest_version": 2,
-   "name": "Coinbase Ticker",
    "options_page": "options.html",
-   "permissions": [ "https://coinbase.com/", "storage","alarms", "notifications" ],
-   "version": "0.0.0.2"
+   "permissions": ["storage","alarms", "notifications" ],
+   "manifest_version": 2
 }

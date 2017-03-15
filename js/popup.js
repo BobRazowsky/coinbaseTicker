@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
     changeCurrencyIcon();
     getChartValues();
 
+    translate();
+
 });
 
 function startListeners(){
@@ -68,9 +70,9 @@ function updatePrices(){
             var ethRate = document.getElementById("priceRate");
             ethRate.innerHTML = priceString.toString();
 
-            var persAmount = (localStorage.targetCurrency == "ETH") ? (price * localStorage.ethAmount).toFixed(2) : (price * localStorage.btcAmount).toFixed(2);
-            document.querySelector('#targetAmount').innerHTML = (localStorage.targetCurrency == "ETH") ? localStorage.ethAmount + " ETH": localStorage.btcAmount + " BTC";
-            document.querySelector('#sourceAmount').innerHTML = persAmount + " " + localStorage.sourceCurrency;
+            // var persAmount = (localStorage.targetCurrency == "ETH") ? (price * localStorage.ethAmount).toFixed(2) : (price * localStorage.btcAmount).toFixed(2);
+            // document.querySelector('#targetAmount').innerHTML = (localStorage.targetCurrency == "ETH") ? localStorage.ethAmount + " ETH": localStorage.btcAmount + " BTC";
+            // document.querySelector('#sourceAmount').innerHTML = persAmount + " " + localStorage.sourceCurrency;
 
     });
 
@@ -163,7 +165,6 @@ function getChartValues(){
             document.querySelector('#changeValue').innerHTML = sign + change.toFixed(2) + "%";
             document.querySelector('#changeValue').style.color = color;
 
-            console.log(change);
         }
     );
 }
@@ -225,15 +226,32 @@ function updatePanicValue(event){
     localStorage.panicValue = event.target.value;
 }
 
-function updateCurrAmount(event){
-  if(localStorage.targetCurrency == "ETH"){
-    localStorage.ethAmount = event.target.value;
-  } else{
-    localStorage.btcAmount = event.target.value;
-  }
+function translate(){
 
-  updatePrices();
+    document.getElementById("strSpotrate").innerHTML = chrome.i18n.getMessage("strSpotrate");
+    document.getElementById("strBuyPrice").innerHTML = chrome.i18n.getMessage("strBuyPrice");
+    document.getElementById("strSellPrice").innerHTML = chrome.i18n.getMessage("strSellPrice");
+    document.getElementById("strTargetPrice").innerHTML = chrome.i18n.getMessage("strTargetPrice");
+    document.getElementById("strPanicPrice").innerHTML = chrome.i18n.getMessage("strPanicPrice");
+    document.getElementById("strHour").innerHTML = chrome.i18n.getMessage("strHour");
+    document.getElementById("strDay").innerHTML = chrome.i18n.getMessage("strDay");
+    document.getElementById("strWeek").innerHTML = chrome.i18n.getMessage("strWeek");
+    document.getElementById("strMonth").innerHTML = chrome.i18n.getMessage("strMonth");
+    document.getElementById("strYear").innerHTML = chrome.i18n.getMessage("strYear");
+    document.getElementById("coinbaseBtn").innerHTML = chrome.i18n.getMessage("coinbaseBtn");
+    document.getElementById("settingsBtn").innerHTML = chrome.i18n.getMessage("settingsBtn");
+    document.getElementById("strLast").innerHTML = chrome.i18n.getMessage("strLast");
+
 }
+// function updateCurrAmount(event){
+//   if(localStorage.targetCurrency == "ETH"){
+//     localStorage.ethAmount = event.target.value;
+//   } else{
+//     localStorage.btcAmount = event.target.value;
+//   }
+
+//   updatePrices();
+// }
 
 function updateChartPeriod(event){
     localStorage.chartPeriod = event.target.value;

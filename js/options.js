@@ -13,8 +13,8 @@ function updateValues(){
     document.querySelector('input[name="colorChange"]').checked = (localStorage.colorChange == 1) ? true : false;
     document.querySelector('select[name="soundSample"]').value = localStorage.soundSample;
     document.querySelector('input[name="roundBadge"]').checked = (localStorage.roundBadge == 1) ? true : false;
-    document.querySelector('input[name="btcAmount"]').value = localStorage.btcAmount;
-    document.querySelector('input[name="ethAmount"]').value = localStorage.ethAmount;
+    // document.querySelector('input[name="btcAmount"]').value = localStorage.btcAmount;
+    // document.querySelector('input[name="ethAmount"]').value = localStorage.ethAmount;
 }
 
 function startListeners(){
@@ -28,8 +28,8 @@ function startListeners(){
     document.querySelector('input[name="colorChange"]').onclick = toggleColorChange;
     document.querySelector('input[name="roundBadge"]').onclick = toggleRoundBadge;
     document.getElementById("save").addEventListener("click", saveAndApply);
-    document.querySelector('input[name="btcAmount"]').onchange = updateBtcAmount;
-    document.querySelector('input[name="ethAmount"]').onchange = updateEthAmount;
+    // document.querySelector('input[name="btcAmount"]').onchange = updateBtcAmount;
+    // document.querySelector('input[name="ethAmount"]').onchange = updateEthAmount;
 }
 
 function populateCurrencies(){
@@ -70,13 +70,13 @@ function updatePanicValue(event){
     localStorage.panicValue = event.target.value;
 }
 
-function updateBtcAmount(event){
-    localStorage.btcAmount = event.target.value;
-}
+// function updateBtcAmount(event){
+//     localStorage.btcAmount = event.target.value;
+// }
 
-function updateEthAmount(event){
-    localStorage.ethAmount = event.target.value;
-}
+// function updateEthAmount(event){
+//     localStorage.ethAmount = event.target.value;
+// }
 
 function toggleNotificationSound(event){
     if(event.target.checked === true){
