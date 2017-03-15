@@ -1,0 +1,47 @@
+{
+  "appName": {
+    "message": "Coinbase Ticker"
+  },
+  "appDesc": {
+    "message": "Track Ethereum and Bitcoin prices from Coinbase in all supported currencies"
+  },
+  "strSpotrate": {
+  	"message": "Spotrate"
+  },
+  "strBuyPrice": {
+  	"message": "Buy Price"
+  },
+  "strSellPrice": {
+  	"message": "Sell Price"
+  },
+  "strPanicPrice": {
+  	"message": "Panic Price"
+  },
+  "strTargetPrice": {
+  	"message": "Target Price"
+  },
+  "strHour": {
+  	"message": "Hour"
+  },
+  "strDay": {
+  	"message": "Day"
+  },
+  "strWeek": {
+  	"message": "Week"
+  },
+  "strMonth": {
+  	"message": "Month"
+  },
+  "strYear": {
+  	"message": "Year"
+  },
+  "coinbaseBtn": {
+  	"message": "Go to Coinbase"
+  },
+  "settingsBtn": {
+  	"message": "Settings"
+  },
+  "strLast": {
+  	"message": "Last"
+  }
+}

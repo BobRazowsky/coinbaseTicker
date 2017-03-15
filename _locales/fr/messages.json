@@ -1,0 +1,47 @@
+{
+  "appName": {
+    "message": "Coinbase Ticker"
+  },
+  "appDesc": {
+    "message": "Suivez les cours du Bitcoin et de l'Ethereum chez Coinbase en Euro"
+  },
+  "strSpotrate": {
+   "message": "Spotrate"
+  },
+  "strBuyPrice": {
+   "message": "Prix achat"
+  },
+  "strSellPrice": {
+   "message": "Prix vente"
+  },
+  "strPanicPrice": {
+   "message": "Prix critique"
+  },
+  "strTargetPrice": {
+   "message": "Prix cible"
+  },
+  "strHour": {
+   "message": "Heure"
+  },
+  "strDay": {
+   "message": "Jour"
+  },
+  "strWeek": {
+   "message": "Semaine"
+  },
+  "strMonth": {
+   "message": "Mois"
+  },
+  "strYear": {
+   "message": "Année"
+  },
+  "coinbaseBtn": {
+   "message": "Aller sur Coinbase"
+  },
+  "settingsBtn": {
+   "message": "Réglages"
+  },
+  "strLast": {
+   "message": ""
+  }
+}
