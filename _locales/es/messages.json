@@ -81,12 +81,12 @@
   	"message": " segundos"
   },
   "notifTxt": {
-    "message": " price is "
+    "message": " es "
   },
   "strOver": {
-    "message": " is over "
+    "message": " es superior a "
   },
   "strUnder": {
-    "message": " is under "
+    "message": " es menos de "
   }
 }
