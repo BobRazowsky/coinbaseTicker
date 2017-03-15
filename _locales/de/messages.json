@@ -1,0 +1,83 @@
+{
+  "appName": {
+    "message": "Coinbase Ticker"
+  },
+  "appDesc": {
+    "message": "Track Ethereum and Bitcoin prices from Coinbase in all supported currencies"
+  },
+  "strSpotrate": {
+  	"message": "Spotrate"
+  },
+  "strBuyPrice": {
+  	"message": "Kaufpreis"
+  },
+  "strSellPrice": {
+  	"message": "Verkaufspreis"
+  },
+  "strPanicPrice": {
+  	"message": "Bewertung Preise"
+  },
+  "strTargetPrice": {
+  	"message": "Kursziel"
+  },
+  "strHour": {
+  	"message": "Uhr"
+  },
+  "strDay": {
+  	"message": "Tag"
+  },
+  "strWeek": {
+  	"message": "Woche"
+  },
+  "strMonth": {
+  	"message": "Monat"
+  },
+  "strYear": {
+  	"message": "Jahr"
+  },
+  "coinbaseBtn": {
+  	"message": "Besuch Coinbase.com"
+  },
+  "settingsBtn": {
+  	"message": "Optionen"
+  },
+  "strLast": {
+  	"message": ""
+  },
+  "strOptions": {
+  	"message": "Optionen"
+  },
+  "strCurrency": {
+  	"message": "Währung"
+  },
+  "strCrypto": {
+  	"message": "Kryptowährung"
+  },
+  "strDelay": {
+  	"message": "Verzögerungszeit"
+  },
+  "strNotifications": {
+  	"message": "0 um Benachrichtigungen zu deaktivieren"
+  },
+  "strColorChange": {
+  	"message": "Farbe Ändern Sie das Ikone"
+  },
+  "strSound": {
+  	"message": "Klingen"
+  },
+  "strRound": {
+  	"message": "Runder Ikone Text"
+  },
+  "strSave": {
+  	"message": "Änderungen übernehmen"
+  },
+  "strDonations": {
+  	"message": "Spenden"
+  },
+  "strDonationsTxt": {
+  	"message": "Wenn du dich großzügig und dankbar fühlst, dann bitte eine Spende machen!"
+  },
+  "strSeconds": {
+  	"message": " sekunden"
+  }
+}
