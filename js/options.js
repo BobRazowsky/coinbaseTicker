@@ -71,6 +71,16 @@ function updatePanicValue(event){
     localStorage.panicValue = event.target.value;
 }
 
+/*chrome.i18n.getUILanguage = function(){
+    console.log("easy");
+    return localStorage.lang;
+};*/
+
+/*chrome.i18n.getMessage = function(str){
+    console.log("easy?");
+    return str;
+};*/
+
 function translate(){
 
     document.getElementById("strOptions").innerHTML = chrome.i18n.getMessage("strOptions");
@@ -86,7 +96,10 @@ function translate(){
     document.getElementById("strDonations").innerHTML = chrome.i18n.getMessage("strDonations");
     document.getElementById("strDonationsTxt").innerHTML = chrome.i18n.getMessage("strDonationsTxt");
     document.getElementById("strSeconds").innerHTML = chrome.i18n.getMessage("strSeconds");
+
 }
+
+
 
 // function toggleNotificationSound(event){
 //     if(event.target.checked === true){

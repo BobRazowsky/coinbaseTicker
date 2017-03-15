@@ -62,10 +62,10 @@ function updateTicker() {
             }
             
             if(parseFloat(price) > localStorage.alertValue && localStorage.alertValue > 0){
-                createNotification(" is over ", localStorage.alertValue);
+                createNotification(chrome.i18n.getMessage("strOver"), localStorage.alertValue);
             }
             else if(parseFloat(price) < localStorage.panicValue && localStorage.panicValue > 0){
-                createNotification(" is under ", localStorage.panicValue);
+                createNotification(chrome.i18n.getMessage("strUnder"), localStorage.panicValue);
             }
             localStorage.lastPrice = price;
     });
@@ -85,11 +85,11 @@ function createNotification(sentence, value){
     chrome.notifications.create("price", {
         type: "basic",
         title: localStorage.targetCurrency + "" + sentence + "" + value,
-        message: localStorage.targetCurrency + " rate price is " + priceString,
+        message: localStorage.targetCurrency + chrome.i18n.getMessage("notifTxt") + priceString,
         iconUrl: "img/icon80.png",
         buttons: [
             {
-                title: "Go to Coinbase",
+                title: chrome.i18n.getMessage("coinbaseBtn"),
                 iconUrl: "img/icon.png"
             }
         ]

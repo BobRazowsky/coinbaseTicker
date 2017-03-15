@@ -79,5 +79,14 @@
   },
   "strSeconds": {
   	"message": " seconds"
+  },
+  "notifTxt": {
+    "message": " price is "
+  },
+  "strOver": {
+    "message": " is over "
+  },
+  "strUnder": {
+    "message": " is under "
   }
 }

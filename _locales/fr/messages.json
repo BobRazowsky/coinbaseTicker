@@ -79,5 +79,14 @@
   },
   "strSeconds": {
     "message": " secondes"
+  },
+  "notifTxt": {
+    "message": " vaut "
+  },
+  "strOver": {
+    "message": " vaut plus de "
+  },
+  "strUnder": {
+    "message": " vaut moins de "
   }
 }
