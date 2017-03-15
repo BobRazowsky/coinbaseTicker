@@ -43,5 +43,41 @@
   },
   "strLast": {
    "message": ""
+  },
+  "strOptions": {
+    "message": "Options"
+  },
+  "strCurrency": {
+    "message": "Devise"
+  },
+  "strCrypto": {
+    "message": "Crypto-monnaie"
+  },
+  "strDelay": {
+    "message": "Délais de rafraichissement"
+  },
+  "strNotifications": {
+    "message": "Mettre la valeur à 0 pour désactiver les notifications"
+  },
+  "strColorChange": {
+    "message": "Changement de couleur de l'icone"
+  },
+  "strSound": {
+    "message": "Son"
+  },
+  "strRound": {
+    "message": "Arrondir la valeur du badge"
+  },
+  "strSave": {
+    "message": "Appliquer les changements"
+  },
+  "strDonations": {
+    "message": "Dons"
+  },
+  "strDonationsTxt": {
+    "message": "Si vous vous sentez généreux et souhaitez me remercier, faites un don!"
+  },
+  "strSeconds": {
+    "message": " secondes"
   }
 }

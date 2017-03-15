@@ -43,5 +43,41 @@
   },
   "strLast": {
   	"message": "Last"
+  },
+  "strOptions": {
+  	"message": "Options"
+  },
+  "strCurrency": {
+  	"message": "Currency"
+  },
+  "strCrypto": {
+  	"message": "Crypto Currency"
+  },
+  "strDelay": {
+  	"message": "Refresh delay"
+  },
+  "strNotifications": {
+  	"message": "Choose 0 to disable notifications"
+  },
+  "strColorChange": {
+  	"message": "Icon color change"
+  },
+  "strSound": {
+  	"message": "Sound"
+  },
+  "strRound": {
+  	"message": "Round badge text"
+  },
+  "strSave": {
+  	"message": "Save changes"
+  },
+  "strDonations": {
+  	"message": "Donations"
+  },
+  "strDonationsTxt": {
+  	"message": "If you're feeling generous and thankful, please consider making a donation!"
+  },
+  "strSeconds": {
+  	"message": " seconds"
   }
 }

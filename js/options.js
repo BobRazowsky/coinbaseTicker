@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     populateCurrencies();
     startListeners();
+    translate();
 });
 
 function updateValues(){
@@ -9,7 +10,7 @@ function updateValues(){
     document.querySelector('input[name="refreshDelay"]').value = localStorage.delay / 1000;
     document.querySelector('select[name="currency"]').value = localStorage.sourceCurrency;
     document.querySelector('select[name="crypto"]').value = localStorage.targetCurrency;
-    document.querySelector('input[name="soundToggle"]').checked = (localStorage.soundNotification == 1) ? true : false;
+    // document.querySelector('input[name="soundToggle"]').checked = (localStorage.soundNotification == 1) ? true : false;
     document.querySelector('input[name="colorChange"]').checked = (localStorage.colorChange == 1) ? true : false;
     document.querySelector('select[name="soundSample"]').value = localStorage.soundSample;
     document.querySelector('input[name="roundBadge"]').checked = (localStorage.roundBadge == 1) ? true : false;
@@ -24,7 +25,7 @@ function startListeners(){
     document.querySelector('input[name="refreshDelay"]').onchange = updateDelay;
     document.querySelector('input[name="alertValue"]').onchange = updateAlertValue;
     document.querySelector('input[name="panicValue"]').onchange = updatePanicValue;
-    document.querySelector('input[name="soundToggle"]').onclick = toggleNotificationSound;
+    // document.querySelector('input[name="soundToggle"]').onclick = toggleNotificationSound;
     document.querySelector('input[name="colorChange"]').onclick = toggleColorChange;
     document.querySelector('input[name="roundBadge"]').onclick = toggleRoundBadge;
     document.getElementById("save").addEventListener("click", saveAndApply);
@@ -70,32 +71,46 @@ function updatePanicValue(event){
     localStorage.panicValue = event.target.value;
 }
 
-// function updateBtcAmount(event){
-//     localStorage.btcAmount = event.target.value;
-// }
+function translate(){
 
-// function updateEthAmount(event){
-//     localStorage.ethAmount = event.target.value;
-// }
-
-function toggleNotificationSound(event){
-    if(event.target.checked === true){
-        localStorage.soundNotification = 1;
-        var notif = new Audio("sounds/"+ localStorage.soundSample +".mp3");
-        notif.play();
-    } else{
-        localStorage.soundNotification = 0;
-    }
+    document.getElementById("strOptions").innerHTML = chrome.i18n.getMessage("strOptions");
+    document.getElementById("strCurrency").innerHTML = chrome.i18n.getMessage("strCurrency");
+    document.getElementById("strCrypto").innerHTML = chrome.i18n.getMessage("strCrypto");
+    document.getElementById("strDelay").innerHTML = chrome.i18n.getMessage("strDelay");
+    document.getElementById("strTargetPrice").innerHTML = chrome.i18n.getMessage("strTargetPrice");
+    document.getElementById("strPanicPrice").innerHTML = chrome.i18n.getMessage("strPanicPrice");
+    document.getElementById("strColorChange").innerHTML = chrome.i18n.getMessage("strColorChange");
+    document.getElementById("strSound").innerHTML = chrome.i18n.getMessage("strSound");
+    document.getElementById("strRound").innerHTML = chrome.i18n.getMessage("strRound");
+    document.getElementById("save").innerHTML = chrome.i18n.getMessage("strSave");
+    document.getElementById("strDonations").innerHTML = chrome.i18n.getMessage("strDonations");
+    document.getElementById("strDonationsTxt").innerHTML = chrome.i18n.getMessage("strDonationsTxt");
+    document.getElementById("strSeconds").innerHTML = chrome.i18n.getMessage("strSeconds");
 }
+
+// function toggleNotificationSound(event){
+//     if(event.target.checked === true){
+//         localStorage.soundNotification = 1;
+//         var notif = new Audio("sounds/"+ localStorage.soundSample +".mp3");
+//         notif.play();
+//     } else{
+//         localStorage.soundNotification = 0;
+//     }
+// }
 
 function toggleColorChange(event){
     localStorage.colorChange = (event.target.checked === true) ? 1 : 0;
 }
 
 function updateSoundSample(event){
-    localStorage.soundSample = event.target.value;
-    var sound = new Audio("sounds/"+ event.target.value +".mp3");
-    sound.play();
+    if(event.target.value == "mute"){
+        localStorage.soundNotification = 0;
+    } else{
+        localStorage.soundNotification = 1;
+        localStorage.soundSample = event.target.value;
+        var sound = new Audio("sounds/"+ event.target.value +".mp3");
+        sound.play();
+    }
 }
 
 function toggleRoundBadge(event){
