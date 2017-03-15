@@ -3,7 +3,10 @@
     "message": "Coinbase Ticker"
   },
   "appDesc": {
-    "message": "Track Ethereum and Bitcoin prices from Coinbase in all supported currencies"
+    "message": "Verfolgen Sie Ethereum und Bitcoin Preise von Coinbase in allen unterstützten Währungen"
+  },
+  "appTooltip": {
+    "message" : "Klicken Sie hier, um Preise und Charts zu sehen"
   },
   "strSpotrate": {
   	"message": "Spotrate"

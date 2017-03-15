@@ -5,6 +5,9 @@
   "appDesc": {
     "message": "Suivez les cours du Bitcoin et de l'Ethereum chez Coinbase en Euro"
   },
+  "appTooltip": {
+    "message" : "Cliquez pour voir les prix et les graphiques"
+  },
   "strSpotrate": {
    "message": "Cours"
   },

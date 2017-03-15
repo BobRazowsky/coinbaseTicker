@@ -1,6 +1,6 @@
 {
    "name": "__MSG_appName__",
-   "version": "0.0.0.2",
+   "version": "0.0.0.3",
    "description": "__MSG_appDesc__",
    "default_locale": "en",
    "background": {
@@ -9,7 +9,7 @@
    "browser_action": {
       "default_icon": "img/icon.png",
       "default_popup": "popup.html",
-      "default_title": "Click to see prices and graphics"
+      "default_title": "__MSG_appTooltip__"
    },
    "options_page": "options.html",
    "permissions": ["storage","alarms", "notifications" ],

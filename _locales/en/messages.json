@@ -5,6 +5,9 @@
   "appDesc": {
     "message": "Track Ethereum and Bitcoin prices from Coinbase in all supported currencies"
   },
+  "appTooltip": {
+    "message" : "Click to see prices and charts"
+  },
   "strSpotrate": {
   	"message": "Spotrate"
   },
