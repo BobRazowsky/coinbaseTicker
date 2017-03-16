@@ -1,6 +1,6 @@
 {
   "appName": {
-    "message": "Coinbase Ticker - Bitcoin and Ethereum Tracker"
+    "message": "Coinbase Bitcoin and Ethereum Ticker"
   },
   "appDesc": {
     "message": "Track Ethereum and Bitcoin prices from Coinbase in all supported currencies"
