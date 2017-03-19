@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
     getChartValues();
 
     translate();
-
 });
 
 function startListeners(){
@@ -18,7 +17,6 @@ function startListeners(){
 
     document.querySelector('input[name="targetPrice"]').onchange=updateAlertValue;
     document.querySelector('input[name="panicValue"]').onchange=updatePanicValue;
-    //document.querySelector('input[name="currAmount"]').onchange=updateCurrAmount;
 
     document.querySelector('input[name="targetPrice"]').onkeypress = function(e){
         if(!e) e = window.event;
@@ -55,39 +53,45 @@ function updateInputValues(){
     document.querySelector('input[name="targetPrice"]').value = localStorage.alertValue;
     document.querySelector('input[name="panicValue"]').value = localStorage.panicValue;
 
+}
 
-    //document.querySelector('input[name="currAmount"]').value = (localStorage.targetCurrency == "ETH") ? localStorage.ethAmount : localStorage.btcAmount;
+function getJSON(url, callback){
+    var request = new XMLHttpRequest();
+    request.open('GET', url, true);
+    request.onload = function(){
+        if(request.status >= 200 && request.status < 400){
+            var data = JSON.parse(request.responseText);
+            callback(data, request);
+        }
+    }
+    request.onerror = function() {};
+    request.send();
 }
 
 function updatePrices(){
 
     var baseURL = "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/";
-    jQuery.getJSON(
+    getJSON(
         baseURL + "spot",
-        function (data, txtStatus, xhr) {
+        function (data) {
             priceString = data.data.amount.toString();
             price = data.data.amount;
             var ethRate = document.getElementById("priceRate");
             ethRate.innerHTML = priceString.toString();
-
-            // var persAmount = (localStorage.targetCurrency == "ETH") ? (price * localStorage.ethAmount).toFixed(2) : (price * localStorage.btcAmount).toFixed(2);
-            // document.querySelector('#targetAmount').innerHTML = (localStorage.targetCurrency == "ETH") ? localStorage.ethAmount + " ETH": localStorage.btcAmount + " BTC";
-            // document.querySelector('#sourceAmount').innerHTML = persAmount + " " + localStorage.sourceCurrency;
-
     });
 
-    jQuery.getJSON(
+    getJSON(
         baseURL + "buy",
-        function (data, txtStatus, xhr) {
+        function (data) {
             priceString = data.data.amount.toString();
             price = data.data.amount;
             var ethBuy = document.getElementById("priceBuy");
             ethBuy.innerHTML = priceString.toString();
     });
 
-    jQuery.getJSON(
+    getJSON(
         baseURL + "sell",
-        function (data, txtStatus, xhr) {
+        function (data) {
             priceString = data.data.amount.toString();
             price = data.data.amount;
             var ethSell = document.getElementById("priceSell");
@@ -134,15 +138,15 @@ function getChartValues(){
 
     var chartsData = [];
 
-    jQuery.getJSON(
+    getJSON(
         "https://min-api.cryptocompare.com/data/histo"+ type +
         "?fsym="+ localStorage.targetCurrency +
         "&tsym="+ localStorage.sourceCurrency +
         "&limit="+ limit +
         "&aggregate="+ aggregate +
         "&useBTC=false",
-        function (data, txtStatus, xhr) {
-            if(data.Response == "Error"){
+        function (data, request) {
+            if(request.Response == "Error"){
                 console.log("No chart data for this currency");
                 document.getElementById("chart").style.display = "none";
                 return;
@@ -214,8 +218,6 @@ function buildChart(chartsData){
       lineAtIndex: 2
     }
     );
-
-    //priceChart.destroy();
 }
 
 function updateAlertValue(event){
@@ -243,21 +245,8 @@ function translate(){
     document.getElementById("strLast").innerHTML = chrome.i18n.getMessage("strLast");
 
 }
-// function updateCurrAmount(event){
-//   if(localStorage.targetCurrency == "ETH"){
-//     localStorage.ethAmount = event.target.value;
-//   } else{
-//     localStorage.btcAmount = event.target.value;
-//   }
-
-//   updatePrices();
-// }
 
 function updateChartPeriod(event){
     localStorage.chartPeriod = event.target.value;
     getChartValues();
 }
-
-
-
-// window.setInterval(updatePrices, localStorage.delay);

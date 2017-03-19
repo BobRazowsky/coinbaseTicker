@@ -36,9 +36,9 @@ function initializeConfig(configuration){
 }
 
 function updateTicker() {
-    jQuery.getJSON(
+    getJSON(
         "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/spot",
-        function (data, txtStatus, xhr) {
+        function (data) {
             priceString = data.data.amount.toString();
             console.log(parseFloat(data.data.amount).toFixed(1));
             price = data.data.amount;
@@ -73,7 +73,20 @@ function updateTicker() {
     
 }
 
+function getJSON(url, callback){
+    var request = new XMLHttpRequest();
+    request.open('GET', url, true);
+    request.onload = function(){
+        if(request.status >= 200 && request.status < 400){
+            var data = JSON.parse(request.responseText);
+            callback(data);
+        }
+    }
 
+    request.onerror = function() {};
+
+    request.send();
+}
 
 function setBadgeColor(color){
     chrome.browserAction.setBadgeBackgroundColor({color: color});
