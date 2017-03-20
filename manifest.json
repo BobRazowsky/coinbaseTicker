@@ -1,6 +1,6 @@
 {
    "name": "__MSG_appName__",
-   "version": "0.0.0.4",
+   "version": "0.0.0.5",
    "description": "__MSG_appDesc__",
    "default_locale": "en",
    "background": {
@@ -12,6 +12,6 @@
       "default_title": "__MSG_appTooltip__"
    },
    "options_page": "options.html",
-   "permissions": ["storage","alarms", "notifications" ],
+   "permissions": ["storage","alarms", "notifications", "https://api.coinbase.com/"],
    "manifest_version": 2
 }
