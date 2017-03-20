@@ -35,13 +35,26 @@ function initializeConfig(configuration){
     setInterval(updateTicker, localStorage.delay);
 }
 
+function getJSON(url, callback){
+    var request = new XMLHttpRequest();
+    request.open('GET', url, true);
+    request.onload = function(){
+        if(request.status >= 200 && request.status < 400){
+            var data = JSON.parse(request.responseText);
+            callback(data);
+        }
+    }
+    request.onerror = function() {};
+    request.send();
+}
+
 function updateTicker() {
     getJSON(
         "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/spot",
         function (data) {
-            priceString = data.data.amount.toString();
+            var priceString = data.data.amount.toString();
             console.log(parseFloat(data.data.amount).toFixed(1));
-            price = data.data.amount;
+            var price = data.data.amount;
             if(localStorage.colorChange == true){
                 if(parseFloat(price) > localStorage.lastPrice){
                     setBadgeColor("#2B8F28");
@@ -69,23 +82,6 @@ function updateTicker() {
             }
             localStorage.lastPrice = price;
     });
-
-    
-}
-
-function getJSON(url, callback){
-    var request = new XMLHttpRequest();
-    request.open('GET', url, true);
-    request.onload = function(){
-        if(request.status >= 200 && request.status < 400){
-            var data = JSON.parse(request.responseText);
-            callback(data);
-        }
-    }
-
-    request.onerror = function() {};
-
-    request.send();
 }
 
 function setBadgeColor(color){

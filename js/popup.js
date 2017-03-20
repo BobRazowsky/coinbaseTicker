@@ -70,6 +70,8 @@ function getJSON(url, callback){
 
 function updatePrices(){
 
+    var priceString, price;
+
     var baseURL = "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/";
     getJSON(
         baseURL + "spot",
