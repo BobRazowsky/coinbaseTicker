@@ -1,9 +1,9 @@
 {
   "appName": {
-    "message": "Coinbase Bitcoin und Ethereum Ticker"
+    "message": "Coinbase Bitcoin, Ethereum un Litecoin Ticker"
   },
   "appDesc": {
-    "message": "Verfolgen Sie Ethereum und Bitcoin Preise von Coinbase in allen unterstützten Währungen"
+    "message": "Verfolgen Sie Ethereum, Bitcoin und Litecoin Preise von Coinbase in allen unterstützten Währungen"
   },
   "appTooltip": {
     "message" : "Klicken Sie hier, um Preise und Charts zu sehen"

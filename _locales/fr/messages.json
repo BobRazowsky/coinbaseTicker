@@ -1,9 +1,9 @@
 {
   "appName": {
-    "message": "Coinbase Ticker Bitcoin et Ethereum"
+    "message": "Coinbase Ticker Bitcoin, Ethereum et Litecoin"
   },
   "appDesc": {
-    "message": "Suivez les cours du Bitcoin et de l'Ethereum chez Coinbase en Euro"
+    "message": "Suivez les cours du Bitcoin, de l'Ethereum et du Litecoin chez Coinbase en Euro"
   },
   "appTooltip": {
     "message" : "Cliquez pour voir les prix et les graphiques"

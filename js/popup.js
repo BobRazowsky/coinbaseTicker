@@ -42,8 +42,10 @@ function startListeners(){
 function changeCurrencyIcon(){
     if(localStorage.targetCurrency === "ETH"){
         document.querySelector('img[name="currIco"]').src = "img/eth16.png";
-    } else{
+    } else if(localStorage.targetCurrency === "BTC"){
         document.querySelector('img[name="currIco"]').src = "img/btc16.png";
+    } else {
+        document.querySelector('img[name="currIco"]').src = "img/ltc.png";
     }
 }
 
