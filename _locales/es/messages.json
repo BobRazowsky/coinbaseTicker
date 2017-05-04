@@ -1,6 +1,6 @@
 {
   "appName": {
-    "message": "Coinbase Bitcoin, Ethereum y Litecoin Ticker"
+    "message": "Coinbase BTC, ETH y LTC Ticker"
   },
   "appDesc": {
     "message": "Seguir los precios de Ethereum, Bitcoin y Litecoin de Coinbase en todas las divisas compatibles"
