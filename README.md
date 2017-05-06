@@ -8,7 +8,7 @@ Available on the [Chrome Web Store]
 * Live update on icon with customizable delay and color changes
 * Set "up" and "low" notifications with sound
 
-![alt tag](https://raw.githubusercontent.com/BobRazowsky/coinbaseTicker/master/img/capture.png)
+![alt tag](https://raw.githubusercontent.com/BobRazowsky/coinbaseTicker/master/img/screenshot.png)
 
 ## APIs
 
