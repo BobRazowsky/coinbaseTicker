@@ -18,6 +18,8 @@ function startListeners(){
     document.querySelector('input[name="targetPrice"]').onchange=updateAlertValue;
     document.querySelector('input[name="panicValue"]').onchange=updatePanicValue;
 
+    document.querySelector('th[name="ico"').onclick = rollCurrency;
+
     document.querySelector('input[name="targetPrice"]').onkeypress = function(e){
         if(!e) e = window.event;
         var keyCode = e.keyCode || e.which;
@@ -47,6 +49,21 @@ function changeCurrencyIcon(){
     } else {
         document.querySelector('img[name="currIco"]').src = "img/ltc.png";
     }
+}
+
+function rollCurrency(){
+    console.log("Roll!")
+    var currencies = ["BTC", "ETH", "LTC"];
+    var currentCurrIndex = currencies.indexOf(localStorage.targetCurrency);
+    var nextIndex = currentCurrIndex + 1;
+    if(nextIndex > 2){
+        nextIndex = 0;
+    }
+    localStorage.targetCurrency = currencies[nextIndex];
+    changeCurrencyIcon();
+    updatePrices();
+    getChartValues();
+    updateInputValues();
 }
 
 function updateInputValues(){
