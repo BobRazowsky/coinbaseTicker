@@ -16,6 +16,11 @@ td{
     height: 25px;
 }
 
+#currIco:hover{
+  width: 18px;
+  height: 18px;
+}
+
 .priceTable td{
     text-align: center;
     vertical-align: middle;
