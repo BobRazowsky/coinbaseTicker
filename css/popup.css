@@ -1,103 +1,69 @@
-thead{
-    
+body {
+  background: #f4f7fa;
+  color: #5c6878;
+  font-family: 'Roboto', sans-serif;
 }
-
-tbody{
-    
+td {
+  height: 25px;
 }
-
-body{
-    background: #f4f7fa;
-    color: #5c6878;
-    font-family: 'Roboto', sans-serif;
-}
-
-td{
-    height: 25px;
-}
-
-#currIco:hover{
+#currIco:hover {
   width: 18px;
   height: 18px;
 }
-
-.priceTable td{
-    text-align: center;
-    vertical-align: middle;
+.priceTable td {
+  text-align: center;
+  vertical-align: middle;
 }
-
-#tabletitle{
-    display: inline;
+#tabletitle {
+  display: inline;
 }
-
 .flat-butt {
   display: inline-block;
-  margin:0px 5px 0px 5px;
+  margin: 0px 5px 0px 5px;
   border-radius: 2px;
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   padding: 6px 10px;
   border: 0;
-  background-color:#3c90df;
+  background-color: #3c90df;
   color: #ffffff;
   cursor: pointer;
   outline: 0;
 }
-
 .flat-butt:hover {
   background: #2e7bc4;
   color: white;
 }
-
 a {
   color: #1abc9c;
 }
-
-a:link{
-    text-decoration: none;
+a:link {
+  text-decoration: none;
 }
-
-.prices{
-    border: 1px solid #dae1e9;
-    background: #ffffff;
-    padding: 5px;
-    border-radius: 2px;
-    margin: 5px 5px 0px 5px;
-}
-
-
-
-#closeBtn{
-    color: #3c90df;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-#chart{
-  width: 180px;
+.whiteBorder2 {
   background-color: white;
   border-radius: 2px;
-  border: 1px solid #dae1e9;
   padding: 5px;
-  margin: auto;
-  margin-top: 5px;
+  border: 1px solid #dae1e9;
 }
-
-#wallet{
-  width: 180px;
+.prices {
+  margin: 5px 5px 0px 5px;
   background-color: white;
   border-radius: 2px;
-  border: 1px solid #dae1e9;
   padding: 5px;
+  border: 1px solid #dae1e9;
+}
+#closeBtn {
+  color: #3c90df;
+  cursor: pointer;
+  font-size: 20px;
+}
+#chart {
+  width: 180px;
   margin: auto;
   margin-top: 5px;
-}
-
-#meMoney{
-  width: 150px;
-  height: 100px;
-  border: 1px solid #dae1e9;
+  background-color: white;
   border-radius: 2px;
-  margin: auto;
-  background: #f4f7fa;
+  padding: 5px;
+  border: 1px solid #dae1e9;
 }
