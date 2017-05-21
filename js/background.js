@@ -94,7 +94,7 @@ function createNotification(sentence, value){
     chrome.notifications.create("price", {
         type: "basic",
         title: localStorage.targetCurrency + "" + sentence + "" + value,
-        message: localStorage.targetCurrency + chrome.i18n.getMessage("notifTxt") + priceString,
+        message: localStorage.targetCurrency + chrome.i18n.getMessage("notifTxt") + value,
         iconUrl: "img/icon80.png",
         buttons: [
             {
