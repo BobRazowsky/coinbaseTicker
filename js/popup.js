@@ -28,7 +28,7 @@ function startListeners(){
             updateAlertValue(e);
             return false;
         }
-    }
+    };
 
     document.querySelector('input[name="panicValue"]').onkeypress = function(e){
         if(!e) e = window.event;
@@ -38,7 +38,7 @@ function startListeners(){
             updatePanicValue(e);
             return false;
         }
-    }
+    };
 }
 
 function changeCurrencyIcon(){
@@ -46,17 +46,18 @@ function changeCurrencyIcon(){
         document.querySelector('img[name="currIco"]').src = "img/eth16.png";
     } else if(localStorage.targetCurrency === "BTC"){
         document.querySelector('img[name="currIco"]').src = "img/btc16.png";
-    } else {
+    } else if(localStorage.targetCurrency === "LTC"){
         document.querySelector('img[name="currIco"]').src = "img/ltc.png";
+    } else {
+        document.querySelector('img[name="currIco"]').src = "img/etc16.png";
     }
 }
 
 function rollCurrency(){
-    console.log("Roll!")
-    var currencies = ["BTC", "ETH", "LTC"];
+    var currencies = ["BTC", "ETH", "LTC", "ETC"];
     var currentCurrIndex = currencies.indexOf(localStorage.targetCurrency);
     var nextIndex = currentCurrIndex + 1;
-    if(nextIndex > 2){
+    if(nextIndex > 3){
         nextIndex = 0;
     }
     localStorage.targetCurrency = currencies[nextIndex];

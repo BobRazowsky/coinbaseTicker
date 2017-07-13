@@ -43,7 +43,7 @@ function getJSON(url, callback){
             var data = JSON.parse(request.responseText);
             callback(data);
         }
-    }
+    };
     request.onerror = function() {};
     request.send();
 }
@@ -55,7 +55,7 @@ function updateTicker() {
             var priceString = data.data.amount.toString();
             console.log(parseFloat(data.data.amount).toFixed(1));
             var price = data.data.amount;
-            if(localStorage.colorChange == true){
+            if(localStorage.colorChange === true){
                 if(parseFloat(price) > localStorage.lastPrice){
                     setBadgeColor("#2B8F28");
                     setTimeout(function(){
