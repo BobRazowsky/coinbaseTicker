@@ -47,7 +47,7 @@ function changeCurrencyIcon(){
     } else if(localStorage.targetCurrency === "BTC"){
         document.querySelector('img[name="currIco"]').src = "img/btc16.png";
     } else {
-        document.querySelector('img[name="currIco"]').src = "img/ltc.png";
+        document.querySelector('img[name="currIco"]').src = "img/ltc16.png";
     }
 }
 
@@ -79,11 +79,15 @@ function getJSON(url, callback){
     request.open('GET', url, true);
     request.onload = function(){
         if(request.status >= 200 && request.status < 400){
+
             var data = JSON.parse(request.responseText);
             callback(data, request);
         }
     }
-    request.onerror = function() {};
+    request.onerror = function() {
+        document.getElementById("priceNumbers").style.visibility = "hidden";
+        document.getElementById("error").style.visibility = "visible";
+    };
     request.send();
 }
 
@@ -95,6 +99,8 @@ function updatePrices(){
     getJSON(
         baseURL + "spot",
         function (data) {
+            document.getElementById("priceNumbers").style.visibility = "visible";
+            document.getElementById("error").style.visibility = "hidden";
             priceString = data.data.amount.toString();
             price = data.data.amount;
             var ethRate = document.getElementById("priceRate");

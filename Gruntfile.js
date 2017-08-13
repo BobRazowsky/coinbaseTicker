@@ -5,14 +5,45 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
+    copy: {
+      main: {
+        files: [
+          {expand: true, src: ['*.html'], dest: 'cbt_release/'},
+          {expand: true, src: ['img/*'], dest: 'cbt_release/'},
+          {expand: true, src: ['css/bootstrap.min.css'], dest: 'cbt_release/'},
+          {expand: true, src: ['_locales/**'], dest: 'cbt_release/'},
+          {expand: true, src: ['sounds/*'], dest: 'cbt_release/'},
+          {expand: true, src: ['vendors/*'], dest: 'cbt_release/'},
+          {expand: true, src: ['manifest.json'], dest: 'cbt_release/'}
+        ]
+      }
+    },
+
     less: {
       production: {
         options: {
           path: ['css']
         },
         files: {
-          'css/popup.css':'less/popup.less'
+          'cbt_release/css/popup.css':'less/popup.less'
         }
+      }
+    },
+
+    uglify: {
+      main: {
+        files: [
+          {
+              expand: true,
+              src: 'js/*.js',
+              dest: 'cbt_release/'
+          },
+          {
+              expand: true,
+              src: 'vendors/*.js',
+              dest: 'cbt_release/'
+          }
+        ]
       }
     },
 
@@ -22,24 +53,20 @@ module.exports = function(grunt) {
           archive: 'oldPackages/<%= pkg.short %><%= pkg.version %>.zip'
         },
         files: [
-          {src: ['_locales/**'], dest: './'},
-          {src: ['css/*'], dest: './'},
-          {src: ['img/*'], dest: './'},
-          {src: ['js/*'], dest: './'},
-          {src: ['sounds/*'], dest: './'},
-          {src: ['manifest.json'], dest: './'},
-          {src: ['options.html'], dest: './'},
-          {src: ['popup.html'], dest: './'},
+          {src: ['cbt_release/**'], dest: '/'}
         ]
       }
     }
-
   });
   
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Default task(s).
-  grunt.registerTask('default', ['compress']);
-
+  grunt.registerTask('default', ['less']);
+  grunt.registerTask('build', ['copy', 'uglify', 'less']);
+  grunt.registerTask('pack', ['compress']);
+  grunt.registerTask('release', ['copy', 'uglify', 'less', 'compress']);
 };

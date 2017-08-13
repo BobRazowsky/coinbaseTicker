@@ -17,7 +17,8 @@
 					</tr>
 					
 				</thead>
-				<tbody style="border-bottom: 1px solid #dae1e9;">
+				<div id="error" style="visibility: hidden;position: absolute;top: 60px;left:15px;color: red;"><p>Coinbase is not responding</p></div>
+				<tbody id="priceNumbers" style="border-bottom: 1px solid #dae1e9;">
 					<tr>
 						<td id="strSpotrate" style="margin:auto;">Spotrate</td>
 						<td id="priceRate" style="margin:auto;">0</td>
@@ -65,7 +66,7 @@
 	</div>
 	<br/>
 
-	<script type="text/javascript" src="js/Chart.bundle.js"></script>
+	<script type="text/javascript" src="vendors/Chart.bundle.js"></script>
     <script type="text/javascript" src="js/popup.js"></script>
     
 </body>

@@ -1,4 +1,4 @@
-let default_config = {
+var base_config = {
     "sourceCurrency": "EUR",
     "targetCurrency": "ETH",
     "chartPeriod":"day",
@@ -44,17 +44,20 @@ function getJSON(url, callback){
             callback(data);
         }
     }
-    request.onerror = function() {};
+    request.onerror = function(error) {
+        console.log("Coinbase does not respond.");
+    };
     request.send();
 }
+
 
 function updateTicker() {
     getJSON(
         "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/spot",
         function (data) {
-            var priceString = data.data.amount.toString();
-            console.log(parseFloat(data.data.amount).toFixed(1));
+            console.log(parseFloat(data.data.amount).toFixed(0));
             var price = data.data.amount;
+            var priceString = data.data.amount.toString();
             if(localStorage.colorChange == true){
                 if(parseFloat(price) > localStorage.lastPrice){
                     setBadgeColor("#2B8F28");
@@ -69,11 +72,14 @@ function updateTicker() {
                 }
             }
             if(localStorage.roundBadge == 1){
-                chrome.browserAction.setBadgeText({text: parseFloat(data.data.amount).toFixed(1).toString()});
+                if(price >= 100){
+                    chrome.browserAction.setBadgeText({text: parseFloat(data.data.amount).toFixed(0).toString()});
+                } else if(price < 100) {
+                    chrome.browserAction.setBadgeText({text: parseFloat(data.data.amount).toFixed(1).toString()});
+                }
             } else{
                 chrome.browserAction.setBadgeText({text: priceString});
             }
-            
             if(parseFloat(price) > localStorage.alertValue && localStorage.alertValue > 0){
                 createNotification(chrome.i18n.getMessage("strOver"), localStorage.alertValue);
             }
@@ -81,7 +87,8 @@ function updateTicker() {
                 createNotification(chrome.i18n.getMessage("strUnder"), localStorage.panicValue);
             }
             localStorage.lastPrice = price;
-    });
+        }
+    );
 }
 
 function setBadgeColor(color){
@@ -94,7 +101,7 @@ function createNotification(sentence, value){
     chrome.notifications.create("price", {
         type: "basic",
         title: localStorage.targetCurrency + "" + sentence + "" + value,
-        message: localStorage.targetCurrency + chrome.i18n.getMessage("notifTxt") + priceString,
+        message: localStorage.targetCurrency + chrome.i18n.getMessage("notifTxt") + value,
         iconUrl: "img/icon80.png",
         buttons: [
             {
@@ -130,6 +137,6 @@ function startExtensionListeners(){
     });
 }
 
-initializeConfig(default_config);
+initializeConfig(base_config);
 updateTicker();
 startExtensionListeners();

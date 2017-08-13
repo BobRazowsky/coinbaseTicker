@@ -116,5 +116,5 @@ function toggleRoundBadge(event){
 }
 
 function saveAndApply(){
-    chrome.extension.sendMessage({msg: "resetTicker"});
+    //chrome.extension.sendMessage({msg: "resetTicker"});
 }
