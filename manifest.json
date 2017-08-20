@@ -1,6 +1,10 @@
 {
    "name": "__MSG_appName__",
+<<<<<<< HEAD
    "version": "0.0.1.4",
+=======
+   "version": "0.0.1.1",
+>>>>>>> ef46c3375f92eb3d510e433e7d688deae22c723a
    "description": "__MSG_appDesc__",
    "default_locale": "en",
    "background": {
