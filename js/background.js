@@ -50,14 +50,13 @@ function getJSON(url, callback){
     request.send();
 }
 
-
 function updateTicker() {
     getJSON(
         "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/spot",
         function (data) {
-            console.log(parseFloat(data.data.amount).toFixed(0));
             var price = data.data.amount;
             var priceString = data.data.amount.toString();
+            var badgeText = priceString;
             if(localStorage.colorChange == true){
                 if(parseFloat(price) > localStorage.lastPrice){
                     setBadgeColor("#2B8F28");
@@ -71,15 +70,19 @@ function updateTicker() {
                     }, 4000);
                 }
             }
+            if(localStorage.hideDecimal == 1) {
+                badgeText = parseFloat(data.data.amount).toFixed(0).toString();
+            }
             if(localStorage.roundBadge == 1){
                 if(price >= 100){
-                    chrome.browserAction.setBadgeText({text: parseFloat(data.data.amount).toFixed(0).toString()});
+                    badgeText = parseFloat(data.data.amount).toFixed(0).toString();
                 } else if(price < 100) {
-                    chrome.browserAction.setBadgeText({text: parseFloat(data.data.amount).toFixed(1).toString()});
+                    badgeText = parseFloat(data.data.amount).toFixed(1).toString();
                 }
             } else{
-                chrome.browserAction.setBadgeText({text: priceString});
+                badgeText = priceString;
             }
+            chrome.browserAction.setBadgeText({text: badgeText});
             if(parseFloat(price) > localStorage.alertValue && localStorage.alertValue > 0){
                 createNotification(chrome.i18n.getMessage("strOver"), localStorage.alertValue);
             }

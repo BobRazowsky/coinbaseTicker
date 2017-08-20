@@ -5,6 +5,16 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
+    watch: {
+      scripts: {
+        files: ['js/*.js'],
+        tasks: ['build'],
+        options: {
+          spawn: false
+        }
+      }
+    },
+
     copy: {
       main: {
         files: [
@@ -59,6 +69,7 @@ module.exports = function(grunt) {
     }
   });
   
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-uglify');
