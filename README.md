@@ -17,6 +17,8 @@ Available on the [Chrome Web Store]
 
 ## Installation
 
+Install "cbt_release" folder like this :
+
 Google Chrome > Extensions tab > Activate Developer Mode > Load Unpacked Extension
 
 [Coinbase API]: https://developers.coinbase.com/api/v2
