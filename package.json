@@ -1,11 +1,7 @@
 {
   "name": "coinbaseticker",
   "short": "cbt",
-<<<<<<< HEAD
-  "version": "0.0.1.4",
-=======
-  "version": "0.0.1.1",
->>>>>>> ef46c3375f92eb3d510e433e7d688deae22c723a
+  "version": "0.0.1.6",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-compress": "^1.4.1",

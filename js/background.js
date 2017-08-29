@@ -13,6 +13,16 @@ var base_config = {
     "ethAmount" : 0
 };
 
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-105414043-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = 'https://ssl.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
 function initializeConfig(configuration){
 
     if (typeof localStorage.beenHereBefore === "undefined") {
@@ -71,7 +81,7 @@ function updateTicker() {
                 }
             }
             if(localStorage.hideDecimal == 1) {
-                badgeText = parseFloat(data.data.amount).toFixed(0).toString();
+                badgeText = Math.abs(parseFloat(data.data.amount)).toString();
             }
             if(localStorage.roundBadge == 1){
                 if(price >= 100){
@@ -143,3 +153,4 @@ function startExtensionListeners(){
 initializeConfig(base_config);
 updateTicker();
 startExtensionListeners();
+//analytics();

@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['js/*.js'],
+        files: ['js/*.js', 'less/*.less', '*.html'],
         tasks: ['build'],
         options: {
           spawn: false
@@ -20,7 +20,7 @@ module.exports = function(grunt) {
         files: [
           {expand: true, src: ['*.html'], dest: 'cbt_release/'},
           {expand: true, src: ['img/*'], dest: 'cbt_release/'},
-          {expand: true, src: ['css/bootstrap.min.css'], dest: 'cbt_release/'},
+          {expand: true, src: ['css/*.css'], dest: 'cbt_release/'},
           {expand: true, src: ['_locales/**'], dest: 'cbt_release/'},
           {expand: true, src: ['sounds/*'], dest: 'cbt_release/'},
           {expand: true, src: ['vendors/*'], dest: 'cbt_release/'},
@@ -35,7 +35,8 @@ module.exports = function(grunt) {
           path: ['css']
         },
         files: {
-          'cbt_release/css/popup.css':'less/popup.less'
+          'cbt_release/css/popup.css':'less/popup.less',
+          'cbt_release/css/donate.css':'less/donate.less',
         }
       }
     },

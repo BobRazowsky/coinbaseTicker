@@ -1,10 +1,6 @@
 {
    "name": "__MSG_appName__",
-<<<<<<< HEAD
-   "version": "0.0.1.4",
-=======
-   "version": "0.0.1.1",
->>>>>>> ef46c3375f92eb3d510e433e7d688deae22c723a
+   "version": "0.0.1.6",
    "description": "__MSG_appDesc__",
    "default_locale": "en",
    "background": {
@@ -17,5 +13,6 @@
    },
    "options_page": "options.html",
    "permissions": ["storage","alarms", "notifications", "https://api.coinbase.com/"],
+   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
    "manifest_version": 2
 }

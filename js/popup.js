@@ -5,9 +5,31 @@ document.addEventListener('DOMContentLoaded', function () {
     updatePrices();
     changeCurrencyIcon();
     getChartValues();
-
+    analytics();
     translate();
-});
+}); 
+
+function analytics() {
+    _gaq = [];
+    _gaq.push(['_setAccount', 'UA-105414043-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = 'https://ssl.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    document.getElementById("coinbaseBtn").onclick = function() {
+        console.log("track");
+        _gaq.push(['_trackEvent', "coinbaseButton", 'clicked']);
+    }.bind(this);
+
+    document.getElementById("settingsBtn").onclick = function() {
+        console.log("track");
+        _gaq.push(['_trackEvent', "settingsButton", 'clicked']);
+    }.bind(this);
+}
 
 function startListeners(){
     document.querySelector('select[name="chartPeriod"]').onchange = function(e){
@@ -17,9 +39,7 @@ function startListeners(){
 
     document.querySelector('input[name="targetPrice"]').onchange=updateAlertValue;
     document.querySelector('input[name="panicValue"]').onchange=updatePanicValue;
-
     document.querySelector('th[name="ico"').onclick = rollCurrency;
-
     document.querySelector('input[name="targetPrice"]').onkeypress = function(e){
         if(!e) e = window.event;
         var keyCode = e.keyCode || e.which;
@@ -71,7 +91,6 @@ function updateInputValues(){
     document.getElementById("tabletitle").innerHTML = localStorage.targetCurrency + " to " + localStorage.sourceCurrency;
     document.querySelector('input[name="targetPrice"]').value = localStorage.alertValue;
     document.querySelector('input[name="panicValue"]').value = localStorage.panicValue;
-
 }
 
 function getJSON(url, callback){
@@ -268,7 +287,7 @@ function translate(){
     document.getElementById("strMonth").innerHTML = chrome.i18n.getMessage("strMonth");
     document.getElementById("strYear").innerHTML = chrome.i18n.getMessage("strYear");
     document.getElementById("coinbaseBtn").innerHTML = chrome.i18n.getMessage("coinbaseBtn");
-    document.getElementById("settingsBtn").innerHTML = chrome.i18n.getMessage("settingsBtn");
+    //document.getElementById("settingsBtn").innerHTML = chrome.i18n.getMessage("settingsBtn");
     document.getElementById("strLast").innerHTML = chrome.i18n.getMessage("strLast");
 
 }

@@ -2,7 +2,25 @@ document.addEventListener('DOMContentLoaded', function () {
     populateCurrencies();
     startListeners();
     translate();
+    analytics();
 });
+
+function analytics() {
+    _gaq = [];
+    _gaq.push(['_setAccount', 'UA-105414043-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = 'https://ssl.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    // document.getElementById("save").onclick = function() {
+    //     console.log("track");
+    //     _gaq.push(['_trackEvent', "saveBtn", 'clicked']);
+    // }.bind(this);
+}
 
 function updateValues(){
     document.querySelector('input[name="alertValue"]').value = localStorage.alertValue;
