@@ -1,0 +1,95 @@
+{
+  "appName": {
+    "message": "Coinbase BTC, ETH and LTC Ticker"
+  },
+  "appDesc": {
+    "message": "Track Ethereum, Bitcoin and Litecoin prices from Coinbase in all supported currencies"
+  },
+  "appTooltip": {
+    "message" : "Click to see prices and charts"
+  },
+  "strSpotrate": {
+  	"message": "Spotrate"
+  },
+  "strBuyPrice": {
+  	"message": "Buy Price"
+  },
+  "strSellPrice": {
+  	"message": "Sell Price"
+  },
+  "strPanicPrice": {
+  	"message": "Panic Price"
+  },
+  "strTargetPrice": {
+  	"message": "Target Price"
+  },
+  "strHour": {
+  	"message": "Hour"
+  },
+  "strDay": {
+  	"message": "Day"
+  },
+  "strWeek": {
+  	"message": "Week"
+  },
+  "strMonth": {
+  	"message": "Month"
+  },
+  "strYear": {
+  	"message": "Year"
+  },
+  "coinbaseBtn": {
+  	"message": "Go to Coinbase"
+  },
+  "settingsBtn": {
+  	"message": "Settings"
+  },
+  "strLast": {
+  	"message": "Last"
+  },
+  "strOptions": {
+  	"message": "Options"
+  },
+  "strCurrency": {
+  	"message": "Currency"
+  },
+  "strCrypto": {
+  	"message": "Crypto Currency"
+  },
+  "strDelay": {
+  	"message": "Refresh delay"
+  },
+  "strNotifications": {
+  	"message": "Choose 0 to disable notifications"
+  },
+  "strColorChange": {
+  	"message": "Icon color change"
+  },
+  "strSound": {
+  	"message": "Sound"
+  },
+  "strRound": {
+  	"message": "Round badge text"
+  },
+  "strSave": {
+  	"message": "Save changes"
+  },
+  "strDonations": {
+  	"message": "Donations"
+  },
+  "strDonationsTxt": {
+  	"message": "If you're feeling generous and thankful, please consider making a donation!"
+  },
+  "strSeconds": {
+  	"message": " seconds"
+  },
+  "notifTxt": {
+    "message": " price is "
+  },
+  "strOver": {
+    "message": " is over "
+  },
+  "strUnder": {
+    "message": " is under "
+  }
+}
