@@ -3,25 +3,25 @@
   "short": "cbt",
   "version": "0.0.1.8",
   "devDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-contrib-compress": "^1.4.1",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-less": "^1.4.1",
-    "grunt-contrib-uglify": "^3.0.1",
-    "grunt-contrib-watch": "^1.0.0"
+	"grunt": "~0.4.5",
+	"grunt-contrib-compress": "^1.4.1",
+	"grunt-contrib-copy": "^1.0.0",
+	"grunt-contrib-less": "^1.4.1",
+	"grunt-contrib-uglify": "^3.0.1",
+	"grunt-contrib-watch": "^1.0.0"
   },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+	"test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BobRazowsky/coinbaseTicker.git"
+	"type": "git",
+	"url": "git+https://github.com/BobRazowsky/coinbaseTicker.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/BobRazowsky/coinbaseTicker/issues"
+	"url": "https://github.com/BobRazowsky/coinbaseTicker/issues"
   },
   "homepage": "https://github.com/BobRazowsky/coinbaseTicker#readme"
 }

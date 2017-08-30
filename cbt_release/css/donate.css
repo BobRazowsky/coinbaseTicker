@@ -4,12 +4,17 @@
   max-width: 350px;
   margin: 15px;
 }
-.card p {
-  text-align: center;
-}
 .card:hover > .QR {
   filter: blur(0);
-  transition: 0.3s;
+}
+.card p {
+  text-align: center;
+  transition: 0.5s;
+  cursor: hand;
+}
+.card p.success {
+  background: #9de2a9;
+  user-select: none;
 }
 .card .title {
   font-weight: bold;

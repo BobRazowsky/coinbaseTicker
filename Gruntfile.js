@@ -2,72 +2,72 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-    pkg: grunt.file.readJSON('package.json'),
+	pkg: grunt.file.readJSON('package.json'),
 
-    watch: {
-      scripts: {
-        files: ['js/*.js', 'less/*.less', '*.html'],
-        tasks: ['build'],
-        options: {
-          spawn: false
-        }
-      }
-    },
+	watch: {
+	  scripts: {
+		files: ['js/*.js', 'less/*.less', '*.html'],
+		tasks: ['build'],
+		options: {
+		  spawn: false
+		}
+	  }
+	},
 
-    copy: {
-      main: {
-        files: [
-          {expand: true, src: ['*.html'], dest: 'cbt_release/'},
-          {expand: true, src: ['img/*'], dest: 'cbt_release/'},
-          {expand: true, src: ['css/*.css'], dest: 'cbt_release/'},
-          {expand: true, src: ['_locales/**'], dest: 'cbt_release/'},
-          {expand: true, src: ['sounds/*'], dest: 'cbt_release/'},
-          {expand: true, src: ['vendors/*'], dest: 'cbt_release/'},
-          {expand: true, src: ['manifest.json'], dest: 'cbt_release/'}
-        ]
-      }
-    },
+	copy: {
+	  main: {
+		files: [
+		  {expand: true, src: ['*.html'], dest: 'cbt_release/'},
+		  {expand: true, src: ['img/*'], dest: 'cbt_release/'},
+		  {expand: true, src: ['css/*.css'], dest: 'cbt_release/'},
+		  {expand: true, src: ['_locales/**'], dest: 'cbt_release/'},
+		  {expand: true, src: ['sounds/*'], dest: 'cbt_release/'},
+		  {expand: true, src: ['vendors/*'], dest: 'cbt_release/'},
+		  {expand: true, src: ['manifest.json'], dest: 'cbt_release/'}
+		]
+	  }
+	},
 
-    less: {
-      production: {
-        options: {
-          path: ['css']
-        },
-        files: {
-          'cbt_release/css/popup.css':'less/popup.less',
-          'cbt_release/css/donate.css':'less/donate.less',
-          'cbt_release/css/options.css':'less/options.less'
-        }
-      }
-    },
+	less: {
+	  production: {
+		options: {
+		  path: ['css']
+		},
+		files: {
+		  'cbt_release/css/popup.css':'less/popup.less',
+		  'cbt_release/css/donate.css':'less/donate.less',
+		  'cbt_release/css/options.css':'less/options.less'
+		}
+	  }
+	},
 
-    uglify: {
-      main: {
-        files: [
-          {
-              expand: true,
-              src: 'js/*.js',
-              dest: 'cbt_release/'
-          },
-          {
-              expand: true,
-              src: 'vendors/*.js',
-              dest: 'cbt_release/'
-          }
-        ]
-      }
-    },
+	uglify: {
+	  main: {
+		files: [
+		  {
+			  expand: true,
+			  src: 'js/*.js',
+			  dest: 'cbt_release/'
+		  },
+		  {
+			  expand: true,
+			  src: 'vendors/*.js',
+			  dest: 'cbt_release/'
+		  }
+		]
+	  }
+	},
 
-    compress: {
-      main: {
-        options: {
-          archive: 'oldPackages/<%= pkg.short %><%= pkg.version %>.zip'
-        },
-        files: [
-          {src: ['cbt_release/**'], dest: '/'}
-        ]
-      }
-    }
+	compress: {
+	  main: {
+		options: {
+		  archive: 'oldPackages/<%= pkg.short %><%= pkg.version %>.zip'
+		},
+		files: [
+		  {src: ['cbt_release/**'], dest: '/'}
+		]
+	  }
+	}
   });
   
   grunt.loadNpmTasks('grunt-contrib-watch');

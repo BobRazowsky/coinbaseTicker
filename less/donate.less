@@ -4,6 +4,10 @@
 	max-width: 350px;
 	margin: 15px;
 
+	&:hover > .QR {
+		filter: blur(0);
+	}
+
 	.center(@width) {
 		position: relative;
 		left: 50%;
@@ -12,11 +16,13 @@
 
 	p {
 		text-align: center;
-	}
+		transition: 0.5s;
+		cursor: hand;
 
-	&:hover > .QR {
-		filter: blur(0);
-		transition: 0.3s;
+		&.success {
+			background: #9de2a9;
+			user-select: none;
+		}
 	}
 
 	.title {
