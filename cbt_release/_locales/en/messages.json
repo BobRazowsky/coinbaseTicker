@@ -91,5 +91,8 @@
   },
   "strUnder": {
     "message": " is under "
+  },
+  "copied": {
+    "message": "Copied to clipboard"
   }
 }

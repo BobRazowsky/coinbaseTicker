@@ -91,5 +91,8 @@
   },
   "strUnder": {
     "message": " vaut moins de "
+  },
+  "copied": {
+    "message": "Copié"
   }
 }

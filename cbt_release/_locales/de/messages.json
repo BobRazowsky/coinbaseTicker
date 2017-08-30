@@ -91,5 +91,8 @@
   },
   "strUnder": {
     "message": " Preis liegt unter "
+  },
+  "copied": {
+    "message": "Kopiert"
   }
 }

@@ -56,7 +56,7 @@ function copyAdressToClipboard(adressID) {
 	        window.getSelection().removeAllRanges();
 	    }
 	    element.classList.add("success");
-	    element.innerHTML = chrome.i18n.getMessage("copied");
+	    element.innerHTML = "Copied to clipboard";
 	    setTimeout(function() {
 	    	element.classList.remove("success");
 	    	element.innerHTML = adress;
