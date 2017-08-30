@@ -1,0 +1,98 @@
+{
+  "appName": {
+    "message": "Coinbase Ticker BTC, ETH & LTC"
+  },
+  "appDesc": {
+    "message": "Следуйте курсам Биткойн, Эфириум и Литекоин в Coinbase"
+  },
+  "appTooltip": {
+    "message" : "Нажмите, чтобы посмотреть цены и графики"
+  },
+  "strSpotrate": {
+   "message": "котировка"
+  },
+  "strBuyPrice": {
+   "message": "Покупная цена"
+  },
+  "strSellPrice": {
+   "message": "Цена продажи"
+  },
+  "strPanicPrice": {
+   "message": "Критический приз"
+  },
+  "strTargetPrice": {
+   "message": "Целевая цена"
+  },
+  "strHour": {
+   "message": "время"
+  },
+  "strDay": {
+   "message": "день"
+  },
+  "strWeek": {
+   "message": "неделя"
+  },
+  "strMonth": {
+   "message": "месяц"
+  },
+  "strYear": {
+   "message": "год"
+  },
+  "coinbaseBtn": {
+   "message": "Coinbase"
+  },
+  "settingsBtn": {
+   "message": "регулировка"
+  },
+  "strLast": {
+   "message": ""
+  },
+  "strOptions": {
+    "message": "опции"
+  },
+  "strCurrency": {
+    "message": "девиз"
+  },
+  "strCrypto": {
+    "message": "Криптовалюта "
+  },
+  "strDelay": {
+    "message": "Время обновления"
+  },
+  "strNotifications": {
+    "message": "Установите значение в ноль. Отключить уведомления"
+  },
+  "strColorChange": {
+    "message": "Изменение цвета значка"
+  },
+  "strSound": {
+    "message": "звук"
+  },
+  "strRound": {
+    "message": "Обозначьте значение значка"
+  },
+  "strSave": {
+    "message": "Применить изменения"
+  },
+  "strDonations": {
+    "message": "дары"
+  },
+  "strDonationsTxt": {
+    "message": "Если вы чувствуете себя щедрым и хотите поблагодарить меня, сделайте пожертвование!"
+  },
+  "strSeconds": {
+    "message": " секунд"
+  },
+  "notifTxt": {
+    "message": " стоит "
+  },
+  "strOver": {
+    "message": " стоит больше, чем "
+  },
+  "strUnder": {
+    "message": " стоит меньше, чем "
+  },
+  "copied": {
+    "message": "скопированный"
+  }
+}
