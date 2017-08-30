@@ -1,0 +1,95 @@
+{
+  "appName": {
+    "message": "Coinbase Ticker BTC, ETH & LTC"
+  },
+  "appDesc": {
+    "message": "Следуйте курсам Биткойн, Эфириум и Литекоин в Coinbase"
+  },
+  "appTooltip": {
+    "message" : "Cliquez pour voir les prix et les graphiques"
+  },
+  "strSpotrate": {
+   "message": "Cours"
+  },
+  "strBuyPrice": {
+   "message": "Prix achat"
+  },
+  "strSellPrice": {
+   "message": "Prix vente"
+  },
+  "strPanicPrice": {
+   "message": "Prix critique"
+  },
+  "strTargetPrice": {
+   "message": "Prix cible"
+  },
+  "strHour": {
+   "message": "Heure"
+  },
+  "strDay": {
+   "message": "Jour"
+  },
+  "strWeek": {
+   "message": "Semaine"
+  },
+  "strMonth": {
+   "message": "Mois"
+  },
+  "strYear": {
+   "message": "Année"
+  },
+  "coinbaseBtn": {
+   "message": "Coinbase"
+  },
+  "settingsBtn": {
+   "message": "Réglages"
+  },
+  "strLast": {
+   "message": ""
+  },
+  "strOptions": {
+    "message": "Options"
+  },
+  "strCurrency": {
+    "message": "Devise"
+  },
+  "strCrypto": {
+    "message": "Crypto-monnaie"
+  },
+  "strDelay": {
+    "message": "Délais de rafraichissement"
+  },
+  "strNotifications": {
+    "message": "Mettre la valeur à 0 pour désactiver les notifications"
+  },
+  "strColorChange": {
+    "message": "Changement de couleur de l'icone"
+  },
+  "strSound": {
+    "message": "Son"
+  },
+  "strRound": {
+    "message": "Arrondir la valeur du badge"
+  },
+  "strSave": {
+    "message": "Appliquer les changements"
+  },
+  "strDonations": {
+    "message": "Dons"
+  },
+  "strDonationsTxt": {
+    "message": "Si vous vous sentez généreux et souhaitez me remercier, faites un don!"
+  },
+  "strSeconds": {
+    "message": " secondes"
+  },
+  "notifTxt": {
+    "message": " vaut "
+  },
+  "strOver": {
+    "message": " vaut plus de "
+  },
+  "strUnder": {
+    "message": " vaut moins de "
+  }
+}
