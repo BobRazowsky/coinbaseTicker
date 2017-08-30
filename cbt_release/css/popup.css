@@ -47,11 +47,11 @@ a:link {
   border: 1px solid #dae1e9;
 }
 .prices {
-  margin: 5px 5px 0px 5px;
   background-color: white;
   border-radius: 2px;
   padding: 5px;
   border: 1px solid #dae1e9;
+  margin: 5px 5px 0px 5px;
 }
 #closeBtn {
   color: #3c90df;
@@ -59,11 +59,11 @@ a:link {
   font-size: 20px;
 }
 #chart {
-  width: 180px;
-  margin: auto;
-  margin-top: 5px;
   background-color: white;
   border-radius: 2px;
   padding: 5px;
   border: 1px solid #dae1e9;
+  width: 180px;
+  margin: auto;
+  margin-top: 5px;
 }

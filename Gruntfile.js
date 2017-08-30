@@ -37,6 +37,7 @@ module.exports = function(grunt) {
         files: {
           'cbt_release/css/popup.css':'less/popup.less',
           'cbt_release/css/donate.css':'less/donate.less',
+          'cbt_release/css/options.css':'less/options.less'
         }
       }
     },

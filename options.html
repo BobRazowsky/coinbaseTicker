@@ -4,15 +4,11 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="css/options.css" type="text/css"/>
     <script src="js/options.js"></script>
-    <style type="text/css">
-        .form-horizontal .control-label{
-            width: auto;
-        }
-    </style>
 </head>
-<body style="background-color: #f4f7fa; font-family: 'Roboto', sans-serif;">
-<div class="container well" style="margin-top: 25px; background-color: #FFF;">
+<body>
+<div id="main" class="container well">
     <form class="form-horizontal">
         <fieldset>
             <legend id="strOptions">Ticker Options</legend>
@@ -35,18 +31,18 @@
             <div class="control-group">
                 <label id="strDelay" class="control-label">Refresh delay</label>
                 <div class="controls">
-                    <input id="refreshDelay" name="refreshDelay" type="text" placeholder="" class="input-medium" style="height: 30px;"><p id="strSeconds" style="display:inline;"> seconds</p>
+                    <input id="refreshDelay" name="refreshDelay" type="text" placeholder="" class="input-medium"><p id="strSeconds"> seconds</p>
                 </div>
             </div>
             <div class="control-group">
                 <label id="strTargetPrice" class="control-label">Alert price</label>
                 <div class="controls">
-                    <input id="alertValue" name="alertValue" type="text" placeholder="" class="input-medium" style="height: 30px;">
+                    <input id="alertValue" name="alertValue" type="text" placeholder="" class="input-medium">
                     <p id="strNotifications">Choose 0 to stop notifications</p>
                 </div>
                 <label id="strPanicPrice" class="control-label">Panic price</label>
                 <div class="controls">
-                    <input id="panicValue" name="panicValue" type="text" placeholder="" class="input-medium" style="height: 30px;">
+                    <input id="panicValue" name="panicValue" type="text" placeholder="" class="input-medium">
                     <p id="strNotifications">Choose 0 to stop notifications</p>
                 </div>
                 <label id="strSound" class="control-label">Sound</label>
@@ -63,11 +59,11 @@
                 </div>
                 <label id="strColorChange" class="control-label">Icon color change</label>
                 <div class="controls">
-                    <input id="colorChange" name="colorChange" type="checkbox" placeholder="" class="input-medium" style="height: 30px;">
+                    <input id="colorChange" name="colorChange" type="checkbox" placeholder="" class="input-medium">
                 </div>
                 <label id="strRound" class="control-label">Round badge text</label>
                 <div class="controls">
-                    <input id="roundBadge" name="roundBadge" type="checkbox" placeholder="" class="input-medium" style="height: 30px;">
+                    <input id="roundBadge" name="roundBadge" type="checkbox" placeholder="" class="input-medium">
                 </div>
             </div>
             <div class="control-group">
