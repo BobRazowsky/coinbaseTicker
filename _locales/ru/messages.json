@@ -6,90 +6,90 @@
     "message": "Следуйте курсам Биткойн, Эфириум и Литекоин в Coinbase"
   },
   "appTooltip": {
-    "message" : "Cliquez pour voir les prix et les graphiques"
+    "message" : "Нажмите, чтобы посмотреть цены и графики"
   },
   "strSpotrate": {
-   "message": "Cours"
+   "message": "котировка"
   },
   "strBuyPrice": {
-   "message": "Prix achat"
+   "message": "Покупная цена"
   },
   "strSellPrice": {
-   "message": "Prix vente"
+   "message": "Цена продажи"
   },
   "strPanicPrice": {
-   "message": "Prix critique"
+   "message": "Критический приз"
   },
   "strTargetPrice": {
-   "message": "Prix cible"
+   "message": "Целевая цена"
   },
   "strHour": {
-   "message": "Heure"
+   "message": "время"
   },
   "strDay": {
-   "message": "Jour"
+   "message": "день"
   },
   "strWeek": {
-   "message": "Semaine"
+   "message": "неделя"
   },
   "strMonth": {
-   "message": "Mois"
+   "message": "месяц"
   },
   "strYear": {
-   "message": "Année"
+   "message": "год"
   },
   "coinbaseBtn": {
    "message": "Coinbase"
   },
   "settingsBtn": {
-   "message": "Réglages"
+   "message": "регулировка"
   },
   "strLast": {
    "message": ""
   },
   "strOptions": {
-    "message": "Options"
+    "message": "опции"
   },
   "strCurrency": {
-    "message": "Devise"
+    "message": "девиз"
   },
   "strCrypto": {
-    "message": "Crypto-monnaie"
+    "message": "Криптовалюта "
   },
   "strDelay": {
-    "message": "Délais de rafraichissement"
+    "message": "Время обновления"
   },
   "strNotifications": {
-    "message": "Mettre la valeur à 0 pour désactiver les notifications"
+    "message": "Установите значение в ноль. Отключить уведомления"
   },
   "strColorChange": {
-    "message": "Changement de couleur de l'icone"
+    "message": "Изменение цвета значка"
   },
   "strSound": {
-    "message": "Son"
+    "message": "звук"
   },
   "strRound": {
-    "message": "Arrondir la valeur du badge"
+    "message": "Обозначьте значение значка"
   },
   "strSave": {
-    "message": "Appliquer les changements"
+    "message": "Применить изменения"
   },
   "strDonations": {
-    "message": "Dons"
+    "message": "дары"
   },
   "strDonationsTxt": {
-    "message": "Si vous vous sentez généreux et souhaitez me remercier, faites un don!"
+    "message": "Если вы чувствуете себя щедрым и хотите поблагодарить меня, сделайте пожертвование!"
   },
   "strSeconds": {
-    "message": " secondes"
+    "message": " секунд"
   },
   "notifTxt": {
-    "message": " vaut "
+    "message": " стоит "
   },
   "strOver": {
-    "message": " vaut plus de "
+    "message": " стоит больше, чем "
   },
   "strUnder": {
-    "message": " vaut moins de "
+    "message": " стоит меньше, чем "
   }
 }
