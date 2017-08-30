@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-  
     startListeners();
     updateInputValues();
     updatePrices();
@@ -7,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     getChartValues();
     analytics();
     translate();
-}); 
+});
 
 function analytics() {
     _gaq = [];
@@ -21,13 +20,15 @@ function analytics() {
     })();
 
     document.getElementById("coinbaseBtn").onclick = function() {
-        console.log("track");
         _gaq.push(['_trackEvent', "coinbaseButton", 'clicked']);
     }.bind(this);
 
     document.getElementById("settingsBtn").onclick = function() {
-        console.log("track");
         _gaq.push(['_trackEvent', "settingsButton", 'clicked']);
+    }.bind(this);
+
+    document.getElementById("donateBtn").onclick = function() {
+        _gaq.push(['_trackEvent', "donateButton", 'clicked']);
     }.bind(this);
 }
 
@@ -35,7 +36,7 @@ function startListeners(){
     document.querySelector('select[name="chartPeriod"]').onchange = function(e){
         this.blur();
         updateChartPeriod(e);
-    }
+    };
 
     document.querySelector('input[name="targetPrice"]').onchange=updateAlertValue;
     document.querySelector('input[name="panicValue"]').onchange=updatePanicValue;
@@ -48,7 +49,7 @@ function startListeners(){
             updateAlertValue(e);
             return false;
         }
-    }
+    };
 
     document.querySelector('input[name="panicValue"]').onkeypress = function(e){
         if(!e) e = window.event;
@@ -58,7 +59,7 @@ function startListeners(){
             updatePanicValue(e);
             return false;
         }
-    }
+    };
 }
 
 function changeCurrencyIcon(){
@@ -72,7 +73,6 @@ function changeCurrencyIcon(){
 }
 
 function rollCurrency(){
-    console.log("Roll!")
     var currencies = ["BTC", "ETH", "LTC"];
     var currentCurrIndex = currencies.indexOf(localStorage.targetCurrency);
     var nextIndex = currentCurrIndex + 1;
@@ -102,7 +102,7 @@ function getJSON(url, callback){
             var data = JSON.parse(request.responseText);
             callback(data, request);
         }
-    }
+    };
     request.onerror = function() {
         document.getElementById("priceNumbers").style.visibility = "hidden";
         document.getElementById("error").style.visibility = "visible";
@@ -214,7 +214,6 @@ function getChartValues(){
 
             document.querySelector('#changeValue').innerHTML = sign + change.toFixed(2) + "%";
             document.querySelector('#changeValue').style.color = color;
-
         }
     );
 }
@@ -262,8 +261,7 @@ function buildChart(chartsData){
     },
     {
       lineAtIndex: 2
-    }
-    );
+    });
 }
 
 function updateAlertValue(event){
@@ -287,9 +285,8 @@ function translate(){
     document.getElementById("strMonth").innerHTML = chrome.i18n.getMessage("strMonth");
     document.getElementById("strYear").innerHTML = chrome.i18n.getMessage("strYear");
     document.getElementById("coinbaseBtn").innerHTML = chrome.i18n.getMessage("coinbaseBtn");
-    //document.getElementById("settingsBtn").innerHTML = chrome.i18n.getMessage("settingsBtn");
+    document.getElementById("settingsBtn").innerHTML = chrome.i18n.getMessage("settingsBtn");
     document.getElementById("strLast").innerHTML = chrome.i18n.getMessage("strLast");
-
 }
 
 function updateChartPeriod(event){
