@@ -53,11 +53,6 @@ a:link {
   border: 1px solid #dae1e9;
   margin: 5px 5px 0px 5px;
 }
-#closeBtn {
-  color: #3c90df;
-  cursor: pointer;
-  font-size: 20px;
-}
 #chart {
   background-color: white;
   border-radius: 2px;
