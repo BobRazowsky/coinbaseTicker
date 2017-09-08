@@ -19,6 +19,13 @@ window.browser = (function () {
         window.chrome;
 })();
 
+var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+// Edge 20+
+var isEdge = !isIE && !!window.StyleMedia;
+
+var storage = window.localStorage;
+
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-105414043-1']);
 _gaq.push(['_trackPageview']);
@@ -31,24 +38,24 @@ _gaq.push(['_trackPageview']);
 
 function initializeConfig(configuration){
 
-	if (typeof localStorage.beenHereBefore === "undefined") {
+	if (typeof storage.beenHereBefore === "undefined") {
 
-		localStorage.setItem("delay", configuration.updateDelay * 1000);
-		localStorage.setItem("chartPeriod", configuration.chartPeriod);
-		localStorage.setItem("alertValue", configuration.alertValue);
-		localStorage.setItem("panicValue", configuration.panicValue);
-		localStorage.setItem("sourceCurrency", configuration.sourceCurrency);
-		localStorage.setItem("targetCurrency", configuration.targetCurrency);
-		localStorage.setItem("soundNotification", configuration.soundNotification);
-		localStorage.setItem("colorChange", configuration.colorChange);
-		localStorage.setItem("lastPrice", 0);
-		localStorage.setItem("soundSample", "pop");
-		localStorage.setItem("beenHereBefore", "yes");
-		localStorage.setItem("btcAmount", configuration.btcAmount);
-		localStorage.setItem("ethAmount", configuration.ethAmount);
+		storage.setItem("delay", configuration.updateDelay * 1000);
+		storage.setItem("chartPeriod", configuration.chartPeriod);
+		storage.setItem("alertValue", configuration.alertValue);
+		storage.setItem("panicValue", configuration.panicValue);
+		storage.setItem("sourceCurrency", configuration.sourceCurrency);
+		storage.setItem("targetCurrency", configuration.targetCurrency);
+		storage.setItem("soundNotification", configuration.soundNotification);
+		storage.setItem("colorChange", configuration.colorChange);
+		storage.setItem("lastPrice", 0);
+		storage.setItem("soundSample", "pop");
+		storage.setItem("beenHereBefore", "yes");
+		storage.setItem("btcAmount", configuration.btcAmount);
+		storage.setItem("ethAmount", configuration.ethAmount);
 	}
 
-	setInterval(updateTicker, localStorage.delay);
+	setInterval(updateTicker, storage.delay);
 }
 
 function getJSON(url, callback){
@@ -68,28 +75,28 @@ function getJSON(url, callback){
 
 function updateTicker() {
 	getJSON(
-		"https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/spot",
+		"https://api.coinbase.com/v2/prices/"+ storage.targetCurrency +"-"+ storage.sourceCurrency +"/spot",
 		function (data) {
 			var price = data.data.amount;
 			var priceString = data.data.amount.toString();
 			var badgeText = priceString;
-			if(localStorage.colorChange === true){
-				if(parseFloat(price) > localStorage.lastPrice){
+			if(storage.colorChange === true){
+				if(parseFloat(price) > storage.lastPrice){
 					setBadgeColor("#2B8F28");
 					setTimeout(function(){
 						setBadgeColor("#2E7BC4");
 					}, 4000);
-				} else if(parseFloat(price) < localStorage.lastPrice){
+				} else if(parseFloat(price) < storage.lastPrice){
 					setBadgeColor("#FF4143");
 					setTimeout(function(){
 						setBadgeColor("#2E7BC4");
 					}, 4000);
 				}
 			}
-			if(localStorage.hideDecimal == 1) {
+			/*if(storage.hideDecimal == 1) {
 				badgeText = Math.abs(parseFloat(data.data.amount)).toString();
 			}
-			if(localStorage.roundBadge == 1){
+			if(storage.roundBadge == 1){
 				if(price >= 100){
 					badgeText = parseFloat(data.data.amount).toFixed(0).toString();
 				} else if(price < 100) {
@@ -97,15 +104,18 @@ function updateTicker() {
 				}
 			} else{
 				badgeText = priceString;
+			}*/
+			if(isEdge || storage.roundBadge == 1) {
+				badgeText = badgeText.substring(0, 4);
 			}
 			browser.browserAction.setBadgeText({text: badgeText});
-			if(parseFloat(price) > localStorage.alertValue && localStorage.alertValue > 0){
-				createNotification(browser.i18n.getMessage("strOver"), localStorage.alertValue);
+			if(parseFloat(price) > storage.alertValue && storage.alertValue > 0){
+				createNotification(browser.i18n.getMessage("strOver"), storage.alertValue);
 			}
-			else if(parseFloat(price) < localStorage.panicValue && localStorage.panicValue > 0){
-				createNotification(browser.i18n.getMessage("strUnder"), localStorage.panicValue);
+			else if(parseFloat(price) < storage.panicValue && storage.panicValue > 0){
+				createNotification(browser.i18n.getMessage("strUnder"), storage.panicValue);
 			}
-			localStorage.lastPrice = price;
+			storage.lastPrice = price;
 		}
 	);
 }
@@ -119,8 +129,8 @@ function createNotification(sentence, value){
 
 	browser.notifications.create("price", {
 		type: "basic",
-		title: localStorage.targetCurrency + "" + sentence + "" + value,
-		message: localStorage.targetCurrency + browser.i18n.getMessage("notifTxt") + value,
+		title: storage.targetCurrency + "" + sentence + "" + value,
+		message: storage.targetCurrency + browser.i18n.getMessage("notifTxt") + value,
 		iconUrl: "img/icon80.png",
 		buttons: [
 			{
@@ -132,13 +142,13 @@ function createNotification(sentence, value){
 			myNotificationID = id;
 	});
 
-	if(parseFloat(localStorage.soundNotification) !== 0){
+	if(parseFloat(storage.soundNotification) !== 0){
 		audioNotif();
 	}
 }
 
 function audioNotif(){
-	var notif = new Audio("sounds/"+ localStorage.soundSample +".mp3");
+	var notif = new Audio("sounds/"+ storage.soundSample +".mp3");
 	notif.play();
 }
 
