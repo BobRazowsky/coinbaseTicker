@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	translate();
 });
 
+window.browser = (function () {
+    return window.msBrowser ||
+        window.browser ||
+        window.chrome;
+})();
+
 function analytics() {
 	_gaq = [];
 	_gaq.push(['_setAccount', 'UA-105414043-1']);
@@ -273,19 +279,19 @@ function updatePanicValue(event){
 }
 
 function translate(){
-	document.getElementById("strSpotrate").innerHTML = chrome.i18n.getMessage("strSpotrate");
-	document.getElementById("strBuyPrice").innerHTML = chrome.i18n.getMessage("strBuyPrice");
-	document.getElementById("strSellPrice").innerHTML = chrome.i18n.getMessage("strSellPrice");
-	document.getElementById("strTargetPrice").innerHTML = chrome.i18n.getMessage("strTargetPrice");
-	document.getElementById("strPanicPrice").innerHTML = chrome.i18n.getMessage("strPanicPrice");
-	document.getElementById("strHour").innerHTML = chrome.i18n.getMessage("strHour");
-	document.getElementById("strDay").innerHTML = chrome.i18n.getMessage("strDay");
-	document.getElementById("strWeek").innerHTML = chrome.i18n.getMessage("strWeek");
-	document.getElementById("strMonth").innerHTML = chrome.i18n.getMessage("strMonth");
-	document.getElementById("strYear").innerHTML = chrome.i18n.getMessage("strYear");
-	document.getElementById("coinbaseBtn").innerHTML = chrome.i18n.getMessage("coinbaseBtn");
-	document.getElementById("settingsBtn").innerHTML = chrome.i18n.getMessage("settingsBtn");
-	document.getElementById("strLast").innerHTML = chrome.i18n.getMessage("strLast");
+	document.getElementById("strSpotrate").innerHTML = browser.i18n.getMessage("strSpotrate");
+	document.getElementById("strBuyPrice").innerHTML = browser.i18n.getMessage("strBuyPrice");
+	document.getElementById("strSellPrice").innerHTML = browser.i18n.getMessage("strSellPrice");
+	document.getElementById("strTargetPrice").innerHTML = browser.i18n.getMessage("strTargetPrice");
+	document.getElementById("strPanicPrice").innerHTML = browser.i18n.getMessage("strPanicPrice");
+	document.getElementById("strHour").innerHTML = browser.i18n.getMessage("strHour");
+	document.getElementById("strDay").innerHTML = browser.i18n.getMessage("strDay");
+	document.getElementById("strWeek").innerHTML = browser.i18n.getMessage("strWeek");
+	document.getElementById("strMonth").innerHTML = browser.i18n.getMessage("strMonth");
+	document.getElementById("strYear").innerHTML = browser.i18n.getMessage("strYear");
+	document.getElementById("coinbaseBtn").innerHTML = browser.i18n.getMessage("coinbaseBtn");
+	document.getElementById("settingsBtn").innerHTML = browser.i18n.getMessage("settingsBtn");
+	document.getElementById("strLast").innerHTML = browser.i18n.getMessage("strLast");
 }
 
 function updateChartPeriod(event){

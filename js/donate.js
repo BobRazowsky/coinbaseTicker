@@ -4,10 +4,16 @@ function initialize() {
 	startListeners();
 }
 
+window.browser = (function () {
+    return window.msBrowser ||
+        window.browser ||
+        window.chrome;
+})();
+
 function translate(){
-	document.getElementById("strDonations").innerHTML = chrome.i18n.getMessage("strDonations");
-	document.getElementById("strDonationsTxt").innerHTML = chrome.i18n.getMessage("strDonationsTxt");
-	document.title = chrome.i18n.getMessage("strDonations");
+	document.getElementById("strDonations").innerHTML = browser.i18n.getMessage("strDonations");
+	document.getElementById("strDonationsTxt").innerHTML = browser.i18n.getMessage("strDonationsTxt");
+	document.title = browser.i18n.getMessage("strDonations");
 }
 
 function analytics() {

@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	analytics();
 });
 
+window.browser = (function () {
+    return window.msBrowser ||
+        window.browser ||
+        window.chrome;
+})();
+
 function analytics() {
 	_gaq = [];
 	_gaq.push(['_setAccount', 'UA-105414043-1']);
@@ -48,7 +54,7 @@ function getJSON(url, callback){
 			var data = JSON.parse(request.responseText);
 			callback(data, request);
 		}
-	}
+	};
 	request.onerror = function() {};
 	request.send();
 }
@@ -91,18 +97,18 @@ function updatePanicValue(event){
 }
 
 function translate(){
-	document.getElementById("strOptions").innerHTML = chrome.i18n.getMessage("strOptions");
-	document.getElementById("strCurrency").innerHTML = chrome.i18n.getMessage("strCurrency");
-	document.getElementById("strCrypto").innerHTML = chrome.i18n.getMessage("strCrypto");
-	document.getElementById("strDelay").innerHTML = chrome.i18n.getMessage("strDelay");
-	document.getElementById("strTargetPrice").innerHTML = chrome.i18n.getMessage("strTargetPrice");
-	document.getElementById("strPanicPrice").innerHTML = chrome.i18n.getMessage("strPanicPrice");
-	document.getElementById("strColorChange").innerHTML = chrome.i18n.getMessage("strColorChange");
-	document.getElementById("strSound").innerHTML = chrome.i18n.getMessage("strSound");
-	document.getElementById("strRound").innerHTML = chrome.i18n.getMessage("strRound");
-	document.getElementById("save").innerHTML = chrome.i18n.getMessage("strSave");
-	document.getElementById("strSeconds").innerHTML = chrome.i18n.getMessage("strSeconds");
-	document.title = chrome.i18n.getMessage("settingsBtn");
+	document.getElementById("strOptions").innerHTML = browser.i18n.getMessage("strOptions");
+	document.getElementById("strCurrency").innerHTML = browser.i18n.getMessage("strCurrency");
+	document.getElementById("strCrypto").innerHTML = browser.i18n.getMessage("strCrypto");
+	document.getElementById("strDelay").innerHTML = browser.i18n.getMessage("strDelay");
+	document.getElementById("strTargetPrice").innerHTML = browser.i18n.getMessage("strTargetPrice");
+	document.getElementById("strPanicPrice").innerHTML = browser.i18n.getMessage("strPanicPrice");
+	document.getElementById("strColorChange").innerHTML = browser.i18n.getMessage("strColorChange");
+	document.getElementById("strSound").innerHTML = browser.i18n.getMessage("strSound");
+	document.getElementById("strRound").innerHTML = browser.i18n.getMessage("strRound");
+	document.getElementById("save").innerHTML = browser.i18n.getMessage("strSave");
+	document.getElementById("strSeconds").innerHTML = browser.i18n.getMessage("strSeconds");
+	document.title = browser.i18n.getMessage("settingsBtn");
 }
 
 function toggleColorChange(event){
@@ -122,9 +128,9 @@ function updateSoundSample(event){
 
 function toggleRoundBadge(event){
 	localStorage.roundBadge = (event.target.checked === true) ? 1 : 0;
-	chrome.extension.sendMessage({msg: "resetTicker"});
+	browser.extension.sendMessage({msg: "resetTicker"});
 }
 
 function saveAndApply(){
-	//chrome.extension.sendMessage({msg: "resetTicker"});
+	//browser.extension.sendMessage({msg: "resetTicker"});
 }
