@@ -20,7 +20,7 @@ Works with Google Chrome, Mozilla Firefox, Microsoft Edge, Opera, Vivaldi & Brav
 
 ### Google Chrome
 
-* Google Chrome > Extensions tab > Activate Developer Mode > Load Unpacked Extension and select the *cbt_release* folder.
+* *Google Chrome* -> *More tools* -> *Extensions* -> *Activate Developer Mode* -> *Load Unpacked Extension* and select the *cbt_release* folder.
 
 ### Mozilla Firefox
 
@@ -28,9 +28,9 @@ Works with Google Chrome, Mozilla Firefox, Microsoft Edge, Opera, Vivaldi & Brav
 
 ### Microsoft Edge
 
-* Navigate to “about:flags” and check “Enable extension developer features”.
-* Click on “…” in the Edge’s bar -> “Extensions” -> “Load extension” and select *cbt_release* folder.
-* Click on this freshly loaded extension and enable the “Show button next to the address bar”
+* Navigate to *about:flags* and check *Enable extension developer features*.
+* Click on *…* in the Edge’s bar -> *Extensions* -> *Load extension* and select *cbt_release* folder.
+* Click on this freshly loaded extension and enable the *Show button next to the address bar*
 
 ### Opera
 
