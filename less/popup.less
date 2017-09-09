@@ -2,54 +2,168 @@ body{
 	background: #f4f7fa;
 	color: #5c6878;
 	font-family: 'Roboto', sans-serif;
+	width: 200px;
 	max-width: 100%;
 	overflow-x: hidden;
-}
+	height: 240px;
 
-td{
-	height: 25px;
-}
-
-#currIco {
-	&:hover {
-		width: 18px;
-		height: 18px;
+	a {
+		&:link {
+			text-decoration: none;
+		}
 	}
-}
 
-.priceTable td{
-	text-align: center;
-	vertical-align: middle;
-}
+	#currIco {
+		&:hover {
+			width: 18px;
+			height: 18px;
+		}
+	}
 
-#tabletitle{
-	display: inline;
-}
+	.flat-butt {
+		display: inline-block;
+		border-radius: 2px;
+		font-family: "Roboto", sans-serif;
+		font-size: 14px;
+		padding: 6px 10px;
+		border: 0;
+		background-color:#3c90df;
+		color: #ffffff;
+		cursor: pointer;
+		outline: 0;
+		text-align: center;
+		-webkit-appearance : inherit!important;
+		margin-bottom: 5px;
 
-.flat-butt {
-	display: inline-block;
-	margin:0px 5px 0px 5px;
-	border-radius: 2px;
-	font-family: "Roboto", sans-serif;
-	font-size: 14px;
-	padding: 6px 10px;
-	border: 0;
-	background-color:#3c90df;
-	color: #ffffff;
-	cursor: pointer;
-	outline: 0;
+		&:hover {
+			background: #2e7bc4;
+			color: white;
+		}
+	}
 
-  &:hover {
-	  background: #2e7bc4;
-	  color: white;
-  }
-}
+	.prices {
+		.whiteBorder2;
+		margin: 5px 5px 0px 5px;
+	}
 
-a {
-	color: #1abc9c;
+	.main {
+		width:185px;
+		margin-bottom:5px;
 
-	&:link {
-	  text-decoration: none;
+		#error {
+			visibility: hidden;
+			position: absolute;
+			top: 60px;
+			left:15px;
+			color: red;
+		}
+
+		.priceTable {
+			margin: auto;
+
+			tbody {
+				border-bottom: 1px solid #dae1e9;
+
+				td {
+					margin: auto;
+					height: 25px;
+					text-align: center;
+					vertical-align: middle;
+				}
+			}
+
+			thead {
+				margin:auto;
+				border-bottom: 1px solid #dae1e9;
+
+				th {
+					text-align: center;
+				}
+			}
+
+			#tabletitle{
+				display: inline;
+			}
+		}
+	}
+
+	#limitOptions {
+		width:180px;
+		margin:auto;
+
+		label {
+			width: 100px;
+			display:inline;
+			margin-left:22px;
+			font-size: 14px;
+		}
+
+		input {
+			height: 20px;
+			width:50px;
+			display:inline;
+			margin-left:3px;
+			margin-bottom: 0px;
+			margin-right: 15px;
+			float: right;
+			color: #5c6878;
+		}
+	}
+
+	#chart {
+		.whiteBorder2;
+		width: 190px;
+		margin: auto;
+		margin-top: 5px;
+
+		canvas {
+			display: inline!important;
+		}
+
+		label {
+			width: 30px;
+			display:inline;
+		}
+
+		select {
+			width:50%;
+			margin-top: 7px;
+			height: 30px;
+			display: inline;
+		}
+
+		.form-control {
+			padding: 0px;
+		}
+
+		#changeValue {
+			width: 70px;
+			display: inline;
+			text-align: center;
+		}
+	}
+
+	#coinbaseBtn {
+		width: 190px;
+		margin-left: 5px;
+		margin-bottom: 5px;
+		margin-top: 5px;
+	}
+
+	#settingsBtn{
+		width: 92px;
+		margin-left: 5px;
+	}
+
+	#donateBtn {
+		width: 92px;
+		float: right;
+		margin-right: 5px;
+	}
+
+	.buttonContainer {
+		margin: auto;
+		width: 200px;
 	}
 }
 
@@ -59,17 +173,3 @@ a {
 	padding: 5px;
 	border: 1px solid #dae1e9;
 }
-
-.prices{
-	.whiteBorder2;
-	margin: 5px 5px 0px 5px;
-}
-
-#chart{
-	.whiteBorder2;
-	width: 180px;
-	margin: auto;
-	margin-top: 5px;
-}
-
-

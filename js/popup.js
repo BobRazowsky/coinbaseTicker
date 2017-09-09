@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+	var isChrome = !!window.chrome && !!window.chrome.webstore;
+	var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+	var isFirefox = typeof InstallTrigger !== 'undefined';
+	var isIE = /*@cc_on!@*/false || !!document.documentMode;
+	var isEdge = !isIE && !!window.StyleMedia;
+
 	startListeners();
 	updateInputValues();
 	updatePrices();
@@ -6,12 +13,16 @@ document.addEventListener('DOMContentLoaded', function () {
 	getChartValues();
 	analytics();
 	translate();
+
+	if(isOpera || isFirefox || isIE || isEdge) {
+		hideUselessFields();
+	}
 });
 
 window.browser = (function () {
-    return window.msBrowser ||
-        window.browser ||
-        window.chrome;
+	return window.msBrowser ||
+		window.browser ||
+		window.chrome;
 })();
 
 function analytics() {
@@ -215,7 +226,7 @@ function getChartValues(){
 			var end = (data.Data[indexEnd].close + data.Data[indexEnd].open) / 2;
 			var change = ((100 * end) / start) - 100;
 
-			var sign = (change > 0) ? "+" : "-";
+			var sign = (change > 0) ? "+" : "";
 			var color = (change > 0) ? "#2B8F28" : "#FF4143";
 
 			document.querySelector('#changeValue').innerHTML = sign + change.toFixed(2) + "%";
@@ -292,6 +303,11 @@ function translate(){
 	document.getElementById("coinbaseBtn").innerHTML = browser.i18n.getMessage("coinbaseBtn");
 	document.getElementById("settingsBtn").innerHTML = browser.i18n.getMessage("settingsBtn");
 	document.getElementById("strLast").innerHTML = browser.i18n.getMessage("strLast");
+}
+
+function hideUselessFields() {
+	document.querySelector('div[id="limitOptions"]').style.visibility = "hidden";
+	document.querySelector('div[id="limitOptions"]').style.height = "0px";
 }
 
 function updateChartPeriod(event){

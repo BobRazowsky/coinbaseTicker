@@ -3,6 +3,16 @@ document.addEventListener('DOMContentLoaded', function () {
 	startListeners();
 	translate();
 	analytics();
+
+	var isChrome = !!window.chrome && !!window.chrome.webstore;
+	var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+	var isFirefox = typeof InstallTrigger !== 'undefined';
+	var isIE = /*@cc_on!@*/false || !!document.documentMode;
+	var isEdge = !isIE && !!window.StyleMedia;
+
+	if(isOpera || isFirefox || isIE || isEdge) {
+		hideUselessFields();
+	}
 });
 
 window.browser = (function () {
@@ -10,6 +20,8 @@ window.browser = (function () {
         window.browser ||
         window.chrome;
 })();
+
+
 
 function analytics() {
 	_gaq = [];
@@ -97,7 +109,7 @@ function updatePanicValue(event){
 }
 
 function translate(){
-	document.getElementById("strOptions").innerHTML = browser.i18n.getMessage("strOptions");
+	//document.getElementById("strOptions").innerHTML = browser.i18n.getMessage("strOptions"); 
 	document.getElementById("strCurrency").innerHTML = browser.i18n.getMessage("strCurrency");
 	document.getElementById("strCrypto").innerHTML = browser.i18n.getMessage("strCrypto");
 	document.getElementById("strDelay").innerHTML = browser.i18n.getMessage("strDelay");
@@ -108,6 +120,7 @@ function translate(){
 	document.getElementById("strRound").innerHTML = browser.i18n.getMessage("strRound");
 	document.getElementById("save").innerHTML = browser.i18n.getMessage("strSave");
 	document.getElementById("strSeconds").innerHTML = browser.i18n.getMessage("strSeconds");
+	document.getElementById("strNotifications").innerHTML = browser.i18n.getMessage("strNotifications");
 	document.title = browser.i18n.getMessage("settingsBtn");
 }
 
@@ -134,3 +147,10 @@ function toggleRoundBadge(event){
 function saveAndApply(){
 	//browser.extension.sendMessage({msg: "resetTicker"});
 }
+
+function hideUselessFields() {
+	document.querySelector('div[id="alertOptn"]').style.visibility = "hidden";
+	document.querySelector('div[id="panicOptn"]').style.visibility = "hidden";
+	document.querySelector('div[id="soundOptn"]').style.visibility = "hidden";
+}
+

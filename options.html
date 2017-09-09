@@ -9,69 +9,58 @@
 </head>
 <body>
 <div id="main" class="container well">
-	<form class="form-horizontal">
-		<fieldset>
-			<legend id="strOptions">Ticker Options</legend>
-			<div class="control-group">
-				<label id="strCurrency" class="control-label" for="currency">Currency</label>
-				<div class="controls">
-					<select id="currency" name="currency" class="form-control"></select>
-				</div>
-			</div>
-			<div class="control-group">
-				<label id="strCrypto" class="control-label" for="crypto">Crypto Currency</label>
-				<div class="controls">
-					<select id="crypto" name="crypto" class="form-control">
-						<option value="ETH" >ETH</option>
-						<option value="BTC" >BTC</option>
-						<option value="LTC" >LTC</option>
-					</select>
-				</div>
-			</div>
-			<div class="control-group">
-				<label id="strDelay" class="control-label">Refresh delay</label>
-				<div class="controls">
-					<input id="refreshDelay" name="refreshDelay" type="text" placeholder="" class="input-medium"><p id="strSeconds"> seconds</p>
-				</div>
-			</div>
-			<div class="control-group">
-				<label id="strTargetPrice" class="control-label">Alert price</label>
-				<div class="controls">
-					<input id="alertValue" name="alertValue" type="text" placeholder="" class="input-medium">
-					<p id="strNotifications">Choose 0 to stop notifications</p>
-				</div>
-				<label id="strPanicPrice" class="control-label">Panic price</label>
-				<div class="controls">
-					<input id="panicValue" name="panicValue" type="text" placeholder="" class="input-medium">
-					<p id="strNotifications">Choose 0 to stop notifications</p>
-				</div>
-				<label id="strSound" class="control-label">Sound</label>
-				<div class="controls">
-					<select id="soundSample" name="soundSample" class="form-control">
-						<option value="mute" >Mute</option>
-						<option value="pop" >Pop</option>
-						<option value="clicClac" >Click-Clack</option>
-						<option value="clacClic" >Clack-Click</option>
-						<option value="clickOff" >Click-Off</option>
-						<option value="pling" >Pling</option>
-						<option value="ting" >Ting</option>
-					</select>
-				</div>
-				<label id="strColorChange" class="control-label">Icon color change</label>
-				<div class="controls">
-					<input id="colorChange" name="colorChange" type="checkbox" placeholder="" class="input-medium">
-				</div>
-				<label id="strRound" class="control-label">Round badge text</label>
-				<div class="controls">
-					<input id="roundBadge" name="roundBadge" type="checkbox" placeholder="" class="input-medium">
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="controls">
-					<div id="save" type="button" class="btn btn-primary">Save changes</div>
-				</div>
-			</div>
-		</fieldset>
+	<form>
+		<div class="form-group">
+			<label id="strCurrency" for="currency">Currency</label>
+			<select id="currency" name="currency" class="form-control"></select>
+		</div>
+		<div class="form-group">
+			<label id="strCrypto" for="crypto">Crypto Currency</label>
+			<select id="crypto" name="crypto" class="form-control">
+				<option value="ETH" >ETH</option>
+				<option value="BTC" >BTC</option>
+				<option value="LTC" >LTC</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label id="strDelay" for="refreshDelay">Refresh delay</label>
+			<input id="refreshDelay" class="form-control" name="refreshDelay" type="text">
+			<small id="strSeconds" class="form-text text-muted">seconds</small>
+		</div>
+		<div class="form-check">
+			<label class="form-check-label">
+				<input id="colorChange" name="colorChange" type="checkbox" class="form-check-input">
+				<span id="strColorChange">Icon color change</span>
+			</label>
+		</div>
+		<div class="form-check">
+			<label class="form-check-label">
+				<input id="roundBadge" name="roundBadge" type="checkbox" class="form-check-input">
+				<span id="strRound">Round badge text</span>
+			</label>
+		</div>
+		<div id="alertOptn" class="form-group">
+			<label id="strTargetPrice" for="alertValue">Alert price</label>
+			<input id="alertValue" name="alertValue" type="text" class="form-control">
+		</div>
+		<div id="panicOptn" class="form-group">
+			<label id="strPanicPrice" for="panicValue">Panic price</label>
+			<input id="panicValue" name="panicValue" type="text" class="form-control">
+			<small id="strNotifications" class="form-text text-muted">Choose 0 to stop notifications</small>
+		</div>
+		<div id="soundOptn" class="form-group">
+			<label id="strSound" for="soundSample">Sound</label>
+			<select id="soundSample" name="soundSample" class="form-control">
+				<option value="mute" >Mute</option>
+				<option value="pop" >Pop</option>
+				<option value="clicClac" >Click-Clack</option>
+				<option value="clacClic" >Clack-Click</option>
+				<option value="clickOff" >Click-Off</option>
+				<option value="pling" >Pling</option>
+				<option value="ting" >Ting</option>
+			</select>
+		</div>
+		<button id="save" type="submit" class="flat-butt">Save changes</button>
 	</form>
 </div>
 </body>
