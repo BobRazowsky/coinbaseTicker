@@ -2,16 +2,36 @@ body {
   background-color: #f4f7fa;
   font-family: 'Roboto', sans-serif;
 }
-body #refreshDelay {
-  display: inline;
+body .flat-butt {
+  display: inline-block;
+  border-radius: 2px;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  padding: 6px 10px;
+  border: 0;
+  background-color: #3c90df;
+  color: #ffffff;
+  cursor: pointer;
+  outline: 0;
+  text-align: center;
+  -webkit-appearance: inherit!important;
+  margin-bottom: 5px;
+  margin-top: 30px;
+}
+body .flat-butt:hover {
+  background: #2e7bc4;
+  color: white;
 }
 body #main {
   margin-top: 25px;
+  padding: 20px;
   background-color: #FFF;
+  box-shadow: inset 0px 0px 2px 1px #bfbfbf;
+  border-radius: 4px;
 }
-body.input-medium {
-  height: 30px;
+body #main label {
+  color: #5c6878;
 }
-body.form-horizontal body.control-label {
-  width: auto;
+body.form-control {
+  width: 200px!important;
 }

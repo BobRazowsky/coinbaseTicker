@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+	var isChrome = !!window.chrome && !!window.chrome.webstore;
+	var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+	var isFirefox = typeof InstallTrigger !== 'undefined';
+	var isIE = /*@cc_on!@*/false || !!document.documentMode;
+	var isEdge = !isIE && !!window.StyleMedia;
+
 	startListeners();
 	updateInputValues();
 	updatePrices();
@@ -6,7 +13,17 @@ document.addEventListener('DOMContentLoaded', function () {
 	getChartValues();
 	analytics();
 	translate();
+
+	if(isOpera || isFirefox || isIE || isEdge) {
+		hideUselessFields();
+	}
 });
+
+window.browser = (function () {
+	return window.msBrowser ||
+		window.browser ||
+		window.chrome;
+})();
 
 function analytics() {
 	_gaq = [];
@@ -209,7 +226,7 @@ function getChartValues(){
 			var end = (data.Data[indexEnd].close + data.Data[indexEnd].open) / 2;
 			var change = ((100 * end) / start) - 100;
 
-			var sign = (change > 0) ? "+" : "-";
+			var sign = (change > 0) ? "+" : "";
 			var color = (change > 0) ? "#2B8F28" : "#FF4143";
 
 			document.querySelector('#changeValue').innerHTML = sign + change.toFixed(2) + "%";
@@ -273,19 +290,24 @@ function updatePanicValue(event){
 }
 
 function translate(){
-	document.getElementById("strSpotrate").innerHTML = chrome.i18n.getMessage("strSpotrate");
-	document.getElementById("strBuyPrice").innerHTML = chrome.i18n.getMessage("strBuyPrice");
-	document.getElementById("strSellPrice").innerHTML = chrome.i18n.getMessage("strSellPrice");
-	document.getElementById("strTargetPrice").innerHTML = chrome.i18n.getMessage("strTargetPrice");
-	document.getElementById("strPanicPrice").innerHTML = chrome.i18n.getMessage("strPanicPrice");
-	document.getElementById("strHour").innerHTML = chrome.i18n.getMessage("strHour");
-	document.getElementById("strDay").innerHTML = chrome.i18n.getMessage("strDay");
-	document.getElementById("strWeek").innerHTML = chrome.i18n.getMessage("strWeek");
-	document.getElementById("strMonth").innerHTML = chrome.i18n.getMessage("strMonth");
-	document.getElementById("strYear").innerHTML = chrome.i18n.getMessage("strYear");
-	document.getElementById("coinbaseBtn").innerHTML = chrome.i18n.getMessage("coinbaseBtn");
-	document.getElementById("settingsBtn").innerHTML = chrome.i18n.getMessage("settingsBtn");
-	document.getElementById("strLast").innerHTML = chrome.i18n.getMessage("strLast");
+	document.getElementById("strSpotrate").innerHTML = browser.i18n.getMessage("strSpotrate");
+	document.getElementById("strBuyPrice").innerHTML = browser.i18n.getMessage("strBuyPrice");
+	document.getElementById("strSellPrice").innerHTML = browser.i18n.getMessage("strSellPrice");
+	document.getElementById("strTargetPrice").innerHTML = browser.i18n.getMessage("strTargetPrice");
+	document.getElementById("strPanicPrice").innerHTML = browser.i18n.getMessage("strPanicPrice");
+	document.getElementById("strHour").innerHTML = browser.i18n.getMessage("strHour");
+	document.getElementById("strDay").innerHTML = browser.i18n.getMessage("strDay");
+	document.getElementById("strWeek").innerHTML = browser.i18n.getMessage("strWeek");
+	document.getElementById("strMonth").innerHTML = browser.i18n.getMessage("strMonth");
+	document.getElementById("strYear").innerHTML = browser.i18n.getMessage("strYear");
+	document.getElementById("coinbaseBtn").innerHTML = browser.i18n.getMessage("coinbaseBtn");
+	document.getElementById("settingsBtn").innerHTML = browser.i18n.getMessage("settingsBtn");
+	document.getElementById("strLast").innerHTML = browser.i18n.getMessage("strLast");
+}
+
+function hideUselessFields() {
+	document.querySelector('div[id="limitOptions"]').style.visibility = "hidden";
+	document.querySelector('div[id="limitOptions"]').style.height = "0px";
 }
 
 function updateChartPeriod(event){

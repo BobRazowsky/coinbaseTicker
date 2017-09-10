@@ -13,6 +13,16 @@ var base_config = {
 	"ethAmount" : 0
 };
 
+window.browser = (function () {
+	return window.msBrowser ||
+		window.browser ||
+		window.chrome;
+})();
+
+var isIE = /*@cc_on!@*/false || !!document.documentMode;
+var isEdge = !isIE && !!window.StyleMedia;
+var isChrome = !!window.chrome && !!window.chrome.webstore;
+
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-105414043-1']);
 _gaq.push(['_trackPageview']);
@@ -53,7 +63,7 @@ function getJSON(url, callback){
 			var data = JSON.parse(request.responseText);
 			callback(data);
 		}
-	}
+	};
 	request.onerror = function(error) {
 		console.log("Coinbase does not respond.");
 	};
@@ -67,7 +77,7 @@ function updateTicker() {
 			var price = data.data.amount;
 			var priceString = data.data.amount.toString();
 			var badgeText = priceString;
-			if(localStorage.colorChange == true){
+			if(localStorage.colorChange === true){
 				if(parseFloat(price) > localStorage.lastPrice){
 					setBadgeColor("#2B8F28");
 					setTimeout(function(){
@@ -80,9 +90,6 @@ function updateTicker() {
 					}, 4000);
 				}
 			}
-			if(localStorage.hideDecimal == 1) {
-				badgeText = Math.abs(parseFloat(data.data.amount)).toString();
-			}
 			if(localStorage.roundBadge == 1){
 				if(price >= 100){
 					badgeText = parseFloat(data.data.amount).toFixed(0).toString();
@@ -92,12 +99,17 @@ function updateTicker() {
 			} else{
 				badgeText = priceString;
 			}
-			chrome.browserAction.setBadgeText({text: badgeText});
-			if(parseFloat(price) > localStorage.alertValue && localStorage.alertValue > 0){
-				createNotification(chrome.i18n.getMessage("strOver"), localStorage.alertValue);
+			if(isEdge) {
+				badgeText = badgeText.substring(0, 4);
 			}
-			else if(parseFloat(price) < localStorage.panicValue && localStorage.panicValue > 0){
-				createNotification(chrome.i18n.getMessage("strUnder"), localStorage.panicValue);
+			browser.browserAction.setBadgeText({text: badgeText});
+			if(isChrome) {
+				if(parseFloat(price) > localStorage.alertValue && localStorage.alertValue > 0){
+					createNotification(browser.i18n.getMessage("strOver"), localStorage.alertValue);
+				}
+				else if(parseFloat(price) < localStorage.panicValue && localStorage.panicValue > 0){
+					createNotification(browser.i18n.getMessage("strUnder"), localStorage.panicValue);
+				}
 			}
 			localStorage.lastPrice = price;
 		}
@@ -105,20 +117,20 @@ function updateTicker() {
 }
 
 function setBadgeColor(color){
-	chrome.browserAction.setBadgeBackgroundColor({color: color});
+	browser.browserAction.setBadgeBackgroundColor({color: color});
 }
 
 function createNotification(sentence, value){
 	var myNotificationID = null;
 
-	chrome.notifications.create("price", {
+	browser.notifications.create("price", {
 		type: "basic",
 		title: localStorage.targetCurrency + "" + sentence + "" + value,
-		message: localStorage.targetCurrency + chrome.i18n.getMessage("notifTxt") + value,
+		message: localStorage.targetCurrency + browser.i18n.getMessage("notifTxt") + value,
 		iconUrl: "img/icon80.png",
 		buttons: [
 			{
-				title: chrome.i18n.getMessage("coinbaseBtn"),
+				title: browser.i18n.getMessage("coinbaseBtn"),
 				iconUrl: "img/icon.png"
 			}
 		]
@@ -137,7 +149,7 @@ function audioNotif(){
 }
 
 function startExtensionListeners(){
-	chrome.extension.onMessage.addListener(
+	browser.extension.onMessage.addListener(
 		function (request, sender, sendResponse) {
 			if (request.msg == "resetTicker"){
 				updateTicker();
@@ -145,8 +157,8 @@ function startExtensionListeners(){
 		}
 	);
 
-	chrome.notifications.onButtonClicked.addListener(function(notifId, btnIdx) {
-		chrome.tabs.create({ url: "https://www.coinbase.com/dashboard" });
+	browser.notifications.onButtonClicked.addListener(function(notifId, btnIdx) {
+		browser.tabs.create({ url: "https://www.coinbase.com/dashboard" });
 	});
 }
 
