@@ -20,7 +20,7 @@ Compatible with Google Chrome, Mozilla Firefox, Microsoft Edge, Opera, Vivaldi &
 ## Building
 
 * Install packages with `npm install`
-* `grunt build` to create release folder
+* `grunt build` to update *cbt_release* folder
 
 ## Installation
 
