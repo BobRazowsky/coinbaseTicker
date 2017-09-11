@@ -41,10 +41,12 @@ function analytics() {
 	}.bind(this);
 
 	document.getElementById("settingsBtn").onclick = function() {
+		browser.tabs.create({url: "options.html"});
 		_gaq.push(['_trackEvent', "settingsButton", 'clicked']);
 	}.bind(this);
 
 	document.getElementById("donateBtn").onclick = function() {
+		browser.tabs.create({url: "donate.html"});
 		_gaq.push(['_trackEvent', "donateButton", 'clicked']);
 	}.bind(this);
 }
@@ -76,6 +78,11 @@ function startListeners(){
 			updatePanicValue(e);
 			return false;
 		}
+	};
+
+	document.getElementById("settingsBtn").onclick = function() {
+		console.log("hello");
+		browser.tabs.create({url: "options.html"});
 	};
 }
 
