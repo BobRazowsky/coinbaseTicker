@@ -2,13 +2,13 @@
 
 Available on the [Chrome Web Store]
 
-Works with Google Chrome, Mozilla Firefox, Microsoft Edge, Opera, Vivaldi & Brave !
+Compatible with Google Chrome, Mozilla Firefox, Microsoft Edge, Opera, Vivaldi & Brave !
 
 * Track BTC, ETH and LTC prices in all currencies supported by Coinbase
 * Popup with spotrate, buy and sell prices.
 * Price charts for last hour, day, week, month or year (not available for all currencies)
 * Live update on icon with customizable delay and color changes
-* Set "up" and "low" notifications with sound (only on Google Chrome) 
+* Set "up" and "low" notifications with sound (supported only on Google Chrome & Vivaldi for now)
 
 ![alt tag](https://raw.githubusercontent.com/BobRazowsky/coinbaseTicker/master/img/screenshot.png)
 
