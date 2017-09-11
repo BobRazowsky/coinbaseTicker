@@ -17,6 +17,11 @@ Compatible with Google Chrome, Mozilla Firefox, Microsoft Edge, Opera, Vivaldi &
 * Ticker data by [Coinbase API]
 * Charts data by [Cryptocompare API]
 
+## Building
+
+* Install packages with `npm install`
+* `grunt build` to create release folder
+
 ## Installation
 
 ### Google Chrome
