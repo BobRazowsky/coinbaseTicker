@@ -28,6 +28,20 @@ module.exports = function(grunt) {
 			}
 		},
 
+		typescript: {
+			base: {
+				src: ['js/*.ts'],
+				dest: 'js/',
+				options: {
+					module: 'amd',
+					target: 'es5',
+					rootDir: 'js/',
+					sourceMap: true,
+					declaration: true
+				}
+			}
+		},
+
 		less: {
 			production: {
 				options: {
@@ -83,9 +97,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-typescript');
 
 	grunt.registerTask('default', ['less']);
-	grunt.registerTask('build', ['copy', 'uglify', 'less']);
+	grunt.registerTask('ts', ['typescript']);
+	grunt.registerTask('build', ['copy', 'typescript', 'uglify', 'less']);
 	grunt.registerTask('pack', ['compress']);
 	grunt.registerTask('release', ['copy', 'uglify', 'less', 'compress']);
 };
