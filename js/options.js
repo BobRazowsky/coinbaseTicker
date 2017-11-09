@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	translate();
 	analytics();
 
-	var isChrome = !!window.chrome && !!window.chrome.webstore;
+	var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 	var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 	var isFirefox = typeof InstallTrigger !== 'undefined';
 	var isIE = /*@cc_on!@*/false || !!document.documentMode;
@@ -21,8 +21,6 @@ window.browser = (function () {
         window.chrome;
 })();
 
-
-
 function analytics() {
 	_gaq = [];
 	_gaq.push(['_setAccount', 'UA-105414043-1']);
@@ -36,8 +34,6 @@ function analytics() {
 }
 
 function updateValues(){
-	document.querySelector('input[name="alertValue"]').value = localStorage.alertValue;
-	document.querySelector('input[name="panicValue"]').value = localStorage.panicValue;
 	document.querySelector('input[name="refreshDelay"]').value = localStorage.delay / 1000;
 	document.querySelector('select[name="currency"]').value = localStorage.sourceCurrency;
 	document.querySelector('select[name="crypto"]').value = localStorage.targetCurrency;
@@ -51,8 +47,6 @@ function startListeners(){
 	document.querySelector('select[name="crypto"]').onchange = updateCrypto;
 	document.querySelector('select[name="soundSample"]').onchange = updateSoundSample;
 	document.querySelector('input[name="refreshDelay"]').onchange = updateDelay;
-	document.querySelector('input[name="alertValue"]').onchange = updateAlertValue;
-	document.querySelector('input[name="panicValue"]').onchange = updatePanicValue;
 	document.querySelector('input[name="colorChange"]').onclick = toggleColorChange;
 	document.querySelector('input[name="roundBadge"]').onclick = toggleRoundBadge;
 	document.getElementById("save").addEventListener("click", saveAndApply);
@@ -109,18 +103,14 @@ function updatePanicValue(event){
 }
 
 function translate(){
-	//document.getElementById("strOptions").innerHTML = browser.i18n.getMessage("strOptions"); 
 	document.getElementById("strCurrency").innerHTML = browser.i18n.getMessage("strCurrency");
 	document.getElementById("strCrypto").innerHTML = browser.i18n.getMessage("strCrypto");
 	document.getElementById("strDelay").innerHTML = browser.i18n.getMessage("strDelay");
-	document.getElementById("strTargetPrice").innerHTML = browser.i18n.getMessage("strTargetPrice");
-	document.getElementById("strPanicPrice").innerHTML = browser.i18n.getMessage("strPanicPrice");
 	document.getElementById("strColorChange").innerHTML = browser.i18n.getMessage("strColorChange");
 	document.getElementById("strSound").innerHTML = browser.i18n.getMessage("strSound");
 	document.getElementById("strRound").innerHTML = browser.i18n.getMessage("strRound");
 	document.getElementById("save").innerHTML = browser.i18n.getMessage("strSave");
 	document.getElementById("strSeconds").innerHTML = browser.i18n.getMessage("strSeconds");
-	document.getElementById("strNotifications").innerHTML = browser.i18n.getMessage("strNotifications");
 	document.title = browser.i18n.getMessage("settingsBtn");
 }
 
@@ -149,8 +139,6 @@ function saveAndApply(){
 }
 
 function hideUselessFields() {
-	document.querySelector('div[id="alertOptn"]').style.visibility = "hidden";
-	document.querySelector('div[id="panicOptn"]').style.visibility = "hidden";
 	document.querySelector('div[id="soundOptn"]').style.visibility = "hidden";
 }
 

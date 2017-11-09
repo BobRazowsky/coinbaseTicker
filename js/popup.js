@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-	var isChrome = !!window.chrome && !!window.chrome.webstore;
+	var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 	var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 	var isFirefox = typeof InstallTrigger !== 'undefined';
 	var isIE = /*@cc_on!@*/false || !!document.documentMode;
@@ -57,8 +57,8 @@ function startListeners(){
 		updateChartPeriod(e);
 	};
 
-	document.querySelector('input[name="targetPrice"]').onchange=updateAlertValue;
-	document.querySelector('input[name="panicValue"]').onchange=updatePanicValue;
+	document.querySelector('input[name="targetPrice"]').onchange = updateAlertValue;
+	document.querySelector('input[name="panicValue"]').onchange = updatePanicValue;
 	document.querySelector('th[name="ico"').onclick = rollCurrency;
 	document.querySelector('input[name="targetPrice"]').onkeypress = function(e){
 		if(!e) e = window.event;
@@ -111,10 +111,12 @@ function rollCurrency(){
 }
 
 function updateInputValues(){
+	var panicValues = JSON.parse(localStorage.panicValues);
+	var alertValues = JSON.parse(localStorage.alertValues);
 	document.querySelector('select[name="chartPeriod"]').value = localStorage.chartPeriod;
 	document.getElementById("tabletitle").innerHTML = localStorage.targetCurrency + " to " + localStorage.sourceCurrency;
-	document.querySelector('input[name="targetPrice"]').value = localStorage.alertValue;
-	document.querySelector('input[name="panicValue"]').value = localStorage.panicValue;
+	document.querySelector('input[name="targetPrice"]').value = alertValues[localStorage.targetCurrency];
+	document.querySelector('input[name="panicValue"]').value = panicValues[localStorage.targetCurrency];
 }
 
 function getJSON(url, callback){
@@ -289,11 +291,15 @@ function buildChart(chartsData){
 }
 
 function updateAlertValue(event){
-	localStorage.alertValue = event.target.value;
+	var alertValues = JSON.parse(localStorage.alertValues);
+	alertValues[localStorage.targetCurrency] = event.target.value;
+	localStorage.alertValues = JSON.stringify(alertValues);
 }
 
 function updatePanicValue(event){
-	localStorage.panicValue = event.target.value;
+	var panicValues = JSON.parse(localStorage.panicValues);
+	panicValues[localStorage.targetCurrency] = event.target.value;
+	localStorage.panicValues = JSON.stringify(panicValues);
 }
 
 function translate(){

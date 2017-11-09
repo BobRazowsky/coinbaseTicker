@@ -5,6 +5,16 @@ var base_config = {
 	"updateDelay": 10,
 	"panicValue" : 0,
 	"alertValue" : 0,
+	"alertValues" : {
+		"ETH" : 0,
+		"BTC" : 0,
+		"LTC" : 0
+	},
+	"panicValues" : {
+		"ETH" : 0,
+		"BTC" : 0,
+		"LTC" : 0
+	},
 	"soundNotification" : 1,
 	"soundSample" : "pop",
 	"colorChange" : 1,
@@ -21,7 +31,7 @@ window.browser = (function () {
 
 var isIE = /*@cc_on!@*/false || !!document.documentMode;
 var isEdge = !isIE && !!window.StyleMedia;
-var isChrome = !!window.chrome && !!window.chrome.webstore;
+var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-105414043-1']);
@@ -35,21 +45,21 @@ _gaq.push(['_trackPageview']);
 
 function initializeConfig(configuration){
 
-	if (typeof localStorage.beenHereBefore === "undefined") {
+	if (typeof localStorage.reallyBeenHereBefore === "undefined") {
 
 		localStorage.setItem("delay", configuration.updateDelay * 1000);
 		localStorage.setItem("chartPeriod", configuration.chartPeriod);
-		localStorage.setItem("alertValue", configuration.alertValue);
-		localStorage.setItem("panicValue", configuration.panicValue);
+		localStorage.setItem("alertValues", JSON.stringify(configuration.alertValues));
+		localStorage.setItem("panicValues", JSON.stringify(configuration.panicValues));
 		localStorage.setItem("sourceCurrency", configuration.sourceCurrency);
 		localStorage.setItem("targetCurrency", configuration.targetCurrency);
 		localStorage.setItem("soundNotification", configuration.soundNotification);
 		localStorage.setItem("colorChange", configuration.colorChange);
 		localStorage.setItem("lastPrice", 0);
 		localStorage.setItem("soundSample", "pop");
-		localStorage.setItem("beenHereBefore", "yes");
 		localStorage.setItem("btcAmount", configuration.btcAmount);
 		localStorage.setItem("ethAmount", configuration.ethAmount);
+		localStorage.setItem("reallyBeenHereBefore", "yes");
 	}
 
 	setInterval(updateTicker, localStorage.delay);
@@ -104,11 +114,14 @@ function updateTicker() {
 			}
 			browser.browserAction.setBadgeText({text: badgeText});
 			if(isChrome) {
-				if(parseFloat(price) > localStorage.alertValue && localStorage.alertValue > 0){
-					createNotification(browser.i18n.getMessage("strOver"), localStorage.alertValue);
+				var panicValues = JSON.parse(localStorage.panicValues);
+				var alertValues = JSON.parse(localStorage.alertValues);
+
+				if(parseFloat(price) > alertValues[localStorage.targetCurrency] && alertValues[localStorage.targetCurrency] > 0){
+					createNotification(browser.i18n.getMessage("strOver"), alertValues[localStorage.targetCurrency]);
 				}
-				else if(parseFloat(price) < localStorage.panicValue && localStorage.panicValue > 0){
-					createNotification(browser.i18n.getMessage("strUnder"), localStorage.panicValue);
+				else if(parseFloat(price) < panicValues[localStorage.targetCurrency] && panicValues[localStorage.targetCurrency] > 0){
+					createNotification(browser.i18n.getMessage("strUnder"), panicValues[localStorage.targetCurrency]);
 				}
 			}
 			localStorage.lastPrice = price;
