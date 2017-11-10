@@ -1,9 +1,12 @@
+@base: #f4f7fa;
+@shadow: #bfbfbf;
+
 body {
-	background-color: #f4f7fa;
+	background-color: @base;
 	font-family: 'Roboto', sans-serif;
 
 	.boxShadow {
-		box-shadow: inset 0px 0px 2px 1px #bfbfbf;
+		box-shadow: inset 0px 0px 2px 1px @shadow;
 		background: white;
 		border-radius: 5px;
 	}
@@ -12,7 +15,7 @@ body {
 		margin-top: 25px;
 		padding: 20px; 
 		background-color: #FFF;
-		box-shadow: inset 0px 0px 2px 1px #bfbfbf;
+		box-shadow: inset 0px 0px 2px 1px @shadow;
 		border-radius: 4px;
 		color: #5c6878;
 

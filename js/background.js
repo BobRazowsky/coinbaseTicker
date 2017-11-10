@@ -2,9 +2,7 @@ var base_config = {
 	"sourceCurrency": "EUR",
 	"targetCurrency": "ETH",
 	"chartPeriod":"day",
-	"updateDelay": 10,
-	"panicValue" : 0,
-	"alertValue" : 0,
+	"updateDelay": 30,
 	"alertValues" : {
 		"ETH" : 0,
 		"BTC" : 0,
@@ -14,6 +12,11 @@ var base_config = {
 		"ETH" : 0,
 		"BTC" : 0,
 		"LTC" : 0
+	},
+	"curs": {
+		0 : 'ETH',
+		1 : 'BTC', 
+		2 : 'LTC'
 	},
 	"soundNotification" : 1,
 	"soundSample" : "pop",
@@ -59,6 +62,7 @@ function initializeConfig(configuration){
 		localStorage.setItem("soundSample", "pop");
 		localStorage.setItem("btcAmount", configuration.btcAmount);
 		localStorage.setItem("ethAmount", configuration.ethAmount);
+		localStorage.setItem("curs", JSON.stringify(configuration.curs));
 		localStorage.setItem("reallyBeenHereBefore", "yes");
 	}
 
@@ -70,7 +74,7 @@ function getJSON(url, callback){
 	request.open('GET', url, true);
 	request.onload = function(){
 		if(request.status >= 200 && request.status < 400){
-			var data = JSON.parse(request.responseText);
+			var data = JSON.parse(request.responseText).data;
 			callback(data);
 		}
 	};
@@ -84,8 +88,8 @@ function updateTicker() {
 	getJSON(
 		"https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/spot",
 		function (data) {
-			var price = data.data.amount;
-			var priceString = data.data.amount.toString();
+			var price = data.amount;
+			var priceString = data.amount.toString();
 			var badgeText = priceString;
 			if(localStorage.colorChange === true){
 				if(parseFloat(price) > localStorage.lastPrice){
@@ -102,9 +106,9 @@ function updateTicker() {
 			}
 			if(localStorage.roundBadge == 1){
 				if(price >= 100){
-					badgeText = parseFloat(data.data.amount).toFixed(0).toString();
+					badgeText = parseFloat(data.amount).toFixed(0).toString();
 				} else if(price < 100) {
-					badgeText = parseFloat(data.data.amount).toFixed(1).toString();
+					badgeText = parseFloat(data.amount).toFixed(1).toString();
 				}
 			} else{
 				badgeText = priceString;
@@ -113,20 +117,35 @@ function updateTicker() {
 				badgeText = badgeText.substring(0, 4);
 			}
 			browser.browserAction.setBadgeText({text: badgeText});
-			if(isChrome) {
-				var panicValues = JSON.parse(localStorage.panicValues);
-				var alertValues = JSON.parse(localStorage.alertValues);
-
-				if(parseFloat(price) > alertValues[localStorage.targetCurrency] && alertValues[localStorage.targetCurrency] > 0){
-					createNotification(browser.i18n.getMessage("strOver"), alertValues[localStorage.targetCurrency]);
-				}
-				else if(parseFloat(price) < panicValues[localStorage.targetCurrency] && panicValues[localStorage.targetCurrency] > 0){
-					createNotification(browser.i18n.getMessage("strUnder"), panicValues[localStorage.targetCurrency]);
-				}
-			}
 			localStorage.lastPrice = price;
 		}
 	);
+	if(isChrome) {
+		notificationManager();
+	}
+}
+
+function notificationManager() {
+	var keysNb = Object.keys(JSON.parse(localStorage.curs)).length;
+	for(var i = 0; i < keysNb; i++) {
+		getJSON(
+			"https://api.coinbase.com/v2/prices/"+ JSON.parse(localStorage.curs)[i] +"-"+ localStorage.sourceCurrency +"/spot",
+			function (data) {
+				var price = data.amount;
+				var priceString = data.amount.toString();
+				var panicValues = JSON.parse(localStorage.panicValues);
+				var alertValues = JSON.parse(localStorage.alertValues);
+				var cur = data.base;
+
+				if(parseFloat(price) > alertValues[cur] && alertValues[cur] > 0){
+					createNotification(browser.i18n.getMessage("strOver"), alertValues[cur]);
+				}
+				else if(parseFloat(price) < panicValues[cur] && panicValues[cur] > 0){
+					createNotification(browser.i18n.getMessage("strUnder"), panicValues[cur]);
+				}
+			}
+		);
+	}
 }
 
 function setBadgeColor(color){
