@@ -40,6 +40,7 @@ function updateValues(){
 	document.querySelector('input[name="colorChange"]').checked = (localStorage.colorChange == 1) ? true : false;
 	document.querySelector('select[name="soundSample"]').value = localStorage.soundSample;
 	document.querySelector('input[name="roundBadge"]').checked = (localStorage.roundBadge == 1) ? true : false;
+	document.querySelector('input[name="portfolioOptns"]').checked = (localStorage.portfolio == 1) ? true : false;
 }
 
 function startListeners(){
@@ -49,6 +50,7 @@ function startListeners(){
 	document.querySelector('input[name="refreshDelay"]').onchange = updateDelay;
 	document.querySelector('input[name="colorChange"]').onclick = toggleColorChange;
 	document.querySelector('input[name="roundBadge"]').onclick = toggleRoundBadge;
+	document.querySelector('input[name="portfolioOptns"]').onclick = togglePortfolio;
 	document.getElementById("save").addEventListener("click", saveAndApply);
 }
 
@@ -100,6 +102,10 @@ function updateAlertValue(event){
 
 function updatePanicValue(event){
 	localStorage.panicValue = event.target.value;
+}
+
+function togglePortfolio() {
+	localStorage.portfolio = (event.target.checked === true) ? 1 : 0;
 }
 
 function translate(){

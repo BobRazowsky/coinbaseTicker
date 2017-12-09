@@ -13,6 +13,11 @@ var base_config = {
 		"BTC" : 0,
 		"LTC" : 0
 	},
+	"portfolioValues" : {
+		"ETH" : 0,
+		"BTC" : 0,
+		"LTC" : 0
+	},
 	"curs": {
 		0 : 'ETH',
 		1 : 'BTC', 
@@ -23,7 +28,8 @@ var base_config = {
 	"colorChange" : 1,
 	"roundBadge" : 0,
 	"btcAmount" : 0,
-	"ethAmount" : 0
+	"ethAmount" : 0,
+	"portfolio" : 0
 };
 
 window.browser = (function () {
@@ -54,6 +60,7 @@ function initializeConfig(configuration){
 		localStorage.setItem("chartPeriod", configuration.chartPeriod);
 		localStorage.setItem("alertValues", JSON.stringify(configuration.alertValues));
 		localStorage.setItem("panicValues", JSON.stringify(configuration.panicValues));
+		localStorage.setItem("portfolioValues", JSON.stringify(configuration.portfolioValues));
 		localStorage.setItem("sourceCurrency", configuration.sourceCurrency);
 		localStorage.setItem("targetCurrency", configuration.targetCurrency);
 		localStorage.setItem("soundNotification", configuration.soundNotification);
@@ -62,6 +69,7 @@ function initializeConfig(configuration){
 		localStorage.setItem("soundSample", "pop");
 		localStorage.setItem("btcAmount", configuration.btcAmount);
 		localStorage.setItem("ethAmount", configuration.ethAmount);
+		localStorage.setItem("portfolio", configuration.portfolio);
 		localStorage.setItem("curs", JSON.stringify(configuration.curs));
 		localStorage.setItem("reallyBeenHereBefore", "yes");
 	}

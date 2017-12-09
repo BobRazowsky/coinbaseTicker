@@ -6,9 +6,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	var isIE = /*@cc_on!@*/false || !!document.documentMode;
 	var isEdge = !isIE && !!window.StyleMedia;
 
+	var displayPortfolio = localStorage.portfolio;
 	startListeners();
+	
 	updateInputValues();
+	togglePortfolio(displayPortfolio.toString());
 	updatePrices();
+	updatePortfolio();
 	changeCurrencyIcon();
 	getChartValues();
 	analytics();
@@ -59,6 +63,7 @@ function startListeners(){
 
 	document.querySelector('input[name="targetPrice"]').onchange = updateAlertValue;
 	document.querySelector('input[name="panicValue"]').onchange = updatePanicValue;
+	document.querySelector('input[name="portfolioSum"]').onchange = updatePortfolioValues;
 	document.querySelector('th[name="ico"').onclick = rollCurrency;
 	document.querySelector('input[name="targetPrice"]').onkeypress = function(e){
 		if(!e) e = window.event;
@@ -89,10 +94,13 @@ function startListeners(){
 function changeCurrencyIcon(){
 	if(localStorage.targetCurrency === "ETH"){
 		document.querySelector('img[name="currIco"]').src = "img/eth16.png";
+		document.querySelector('img[name="currIco2"]').src = "img/eth16.png";
 	} else if(localStorage.targetCurrency === "BTC"){
 		document.querySelector('img[name="currIco"]').src = "img/btc16.png";
+		document.querySelector('img[name="currIco2"]').src = "img/btc16.png";
 	} else {
 		document.querySelector('img[name="currIco"]').src = "img/ltc16.png";
+		document.querySelector('img[name="currIco2"]').src = "img/ltc16.png";
 	}
 }
 
@@ -113,10 +121,12 @@ function rollCurrency(){
 function updateInputValues(){
 	var panicValues = JSON.parse(localStorage.panicValues);
 	var alertValues = JSON.parse(localStorage.alertValues);
+	var portfolioValues = JSON.parse(localStorage.portfolioValues);
 	document.querySelector('select[name="chartPeriod"]').value = localStorage.chartPeriod;
 	document.getElementById("tabletitle").innerHTML = localStorage.targetCurrency + " to " + localStorage.sourceCurrency;
 	document.querySelector('input[name="targetPrice"]').value = alertValues[localStorage.targetCurrency];
 	document.querySelector('input[name="panicValue"]').value = panicValues[localStorage.targetCurrency];
+	document.querySelector('input[name="portfolioSum"]').value = portfolioValues[localStorage.targetCurrency];
 }
 
 function getJSON(url, callback){
@@ -147,6 +157,8 @@ function updatePrices(){
 			document.getElementById("priceNumbers").style.visibility = "visible";
 			document.getElementById("error").style.visibility = "hidden";
 			priceString = data.data.amount.toString();
+			localStorage.lastSpot = data.data.amount;
+			updatePortfolio();
 			price = data.data.amount;
 			var ethRate = document.getElementById("priceRate");
 			ethRate.innerHTML = priceString.toString();
@@ -300,6 +312,39 @@ function updatePanicValue(event){
 	var panicValues = JSON.parse(localStorage.panicValues);
 	panicValues[localStorage.targetCurrency] = event.target.value;
 	localStorage.panicValues = JSON.stringify(panicValues);
+}
+
+function updatePortfolio() {
+	var portfolioValues = JSON.parse(localStorage.portfolioValues);
+	var val = portfolioValues[localStorage.targetCurrency].replace(",", ".");
+	document.getElementById("cryptoConversion").innerHTML = (val * localStorage.lastSpot).toFixed(2) + " " + localStorage.sourceCurrency;
+}
+
+function updatePortfolioValues(event) {
+	var portfolioValues = JSON.parse(localStorage.portfolioValues);
+	portfolioValues[localStorage.targetCurrency] = event.target.value;
+	localStorage.portfolioValues = JSON.stringify(portfolioValues);
+	updatePortfolio();
+}
+
+function togglePortfolio(state) {
+	switch(state) {
+		case "0":
+			document.getElementById("portfolio").style.visibility = "hidden";
+			document.getElementById("portfolio").style.height = "0px";
+			document.getElementById("portfolio").style.marginTop = "0px";
+			document.getElementById("portfolio").style.padding = "0px";
+			break;
+
+		case "1":
+			document.getElementById("portfolio").style.visibility = "visible";
+			document.getElementById("portfolio").style.height = "auto";
+			document.getElementById("portfolio").style.marginTop = "5px";
+			break;
+
+		default:
+			console.log("error", state);
+	}
 }
 
 function translate(){
