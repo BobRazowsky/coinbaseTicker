@@ -54,7 +54,7 @@ _gaq.push(['_trackPageview']);
 
 function initializeConfig(configuration){
 
-	if (typeof localStorage.reallyBeenHereBefore === "undefined") {
+	if (typeof localStorage.reallyReallyBeenHereBefore === "undefined") {
 
 		localStorage.setItem("delay", configuration.updateDelay * 1000);
 		localStorage.setItem("chartPeriod", configuration.chartPeriod);
@@ -71,7 +71,7 @@ function initializeConfig(configuration){
 		localStorage.setItem("ethAmount", configuration.ethAmount);
 		localStorage.setItem("portfolio", configuration.portfolio);
 		localStorage.setItem("curs", JSON.stringify(configuration.curs));
-		localStorage.setItem("reallyBeenHereBefore", "yes");
+		localStorage.setItem("reallyReallyBeenHereBefore", "yes");
 	}
 
 	setInterval(updateTicker, localStorage.delay);
