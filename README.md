@@ -9,6 +9,7 @@ Compatible with Google Chrome, Mozilla Firefox, Microsoft Edge, Opera, Vivaldi &
 * Price charts for last hour, day, week, month or year (not available for all currencies)
 * Live update on icon with customizable delay and color changes
 * Set "up" and "low" notifications with sound (supported only by Google Chrome & Vivaldi for now)
+* Optional portfolio feature to track your balance for each coin
 
 ![alt tag](https://raw.githubusercontent.com/BobRazowsky/coinbaseTicker/master/img/screenshot.png)
 
