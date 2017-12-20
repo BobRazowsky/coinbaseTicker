@@ -7,14 +7,15 @@ document.addEventListener('DOMContentLoaded', function () {
 	var isEdge = !isIE && !!window.StyleMedia;
 
 	var displayPortfolio = localStorage.portfolio;
+	var displayNotification = localStorage.notifications;
 	startListeners();
-	
-	updateInputValues();
+	getChartValues();
 	togglePortfolio(displayPortfolio.toString());
+	toggleNotifications(displayNotification.toString());
+	updateInputValues();
 	updatePrices();
 	updatePortfolio();
 	changeCurrencyIcon();
-	getChartValues();
 	analytics();
 	translate();
 
@@ -86,7 +87,6 @@ function startListeners(){
 	};
 
 	document.getElementById("settingsBtn").onclick = function() {
-		console.log("hello");
 		browser.tabs.create({url: "options.html"});
 	};
 }
@@ -98,17 +98,20 @@ function changeCurrencyIcon(){
 	} else if(localStorage.targetCurrency === "BTC"){
 		document.querySelector('img[name="currIco"]').src = "img/btc16.png";
 		document.querySelector('img[name="currIco2"]').src = "img/btc16.png";
-	} else {
+	} else if(localStorage.targetCurrency === "LTC"){
 		document.querySelector('img[name="currIco"]').src = "img/ltc16.png";
 		document.querySelector('img[name="currIco2"]').src = "img/ltc16.png";
+	} else if(localStorage.targetCurrency === "BCH"){
+		document.querySelector('img[name="currIco"]').src = "img/bch16.png";
+		document.querySelector('img[name="currIco2"]').src = "img/bch16.png";
 	}
 }
 
 function rollCurrency(){
-	var currencies = ["BTC", "ETH", "LTC"];
+	var currencies = ["BTC", "ETH", "LTC", "BCH"];
 	var currentCurrIndex = currencies.indexOf(localStorage.targetCurrency);
 	var nextIndex = currentCurrIndex + 1;
-	if(nextIndex > 2){
+	if(nextIndex > 3){
 		nextIndex = 0;
 	}
 	localStorage.targetCurrency = currencies[nextIndex];
@@ -119,13 +122,17 @@ function rollCurrency(){
 }
 
 function updateInputValues(){
-	var panicValues = JSON.parse(localStorage.panicValues);
-	var alertValues = JSON.parse(localStorage.alertValues);
+	if(localStorage.notifications === 1) {
+		var panicValues = JSON.parse(localStorage.panicValues);
+		var alertValues = JSON.parse(localStorage.alertValues);
+		document.querySelector('input[name="targetPrice"]').value = alertValues[localStorage.targetCurrency];
+		document.querySelector('input[name="panicValue"]').value = panicValues[localStorage.targetCurrency];
+		console.log("update");
+	}
+	
 	var portfolioValues = JSON.parse(localStorage.portfolioValues);
 	document.querySelector('select[name="chartPeriod"]').value = localStorage.chartPeriod;
 	document.getElementById("tabletitle").innerHTML = localStorage.targetCurrency + " to " + localStorage.sourceCurrency;
-	document.querySelector('input[name="targetPrice"]').value = alertValues[localStorage.targetCurrency];
-	document.querySelector('input[name="panicValue"]').value = panicValues[localStorage.targetCurrency];
 	document.querySelector('input[name="portfolioSum"]').value = portfolioValues[localStorage.targetCurrency];
 }
 
@@ -158,10 +165,10 @@ function updatePrices(){
 			document.getElementById("error").style.visibility = "hidden";
 			priceString = data.data.amount.toString();
 			localStorage.lastSpot = data.data.amount;
-			updatePortfolio();
 			price = data.data.amount;
 			var ethRate = document.getElementById("priceRate");
 			ethRate.innerHTML = priceString.toString();
+			updatePortfolio();
 	});
 
 	getJSON(
@@ -316,7 +323,7 @@ function updatePanicValue(event){
 
 function updatePortfolio() {
 	var portfolioValues = JSON.parse(localStorage.portfolioValues);
-	var val = portfolioValues[localStorage.targetCurrency].replace(",", ".");
+	var val = portfolioValues[localStorage.targetCurrency];
 	document.getElementById("cryptoConversion").innerHTML = (val * localStorage.lastSpot).toFixed(2) + " " + localStorage.sourceCurrency;
 }
 
@@ -334,12 +341,34 @@ function togglePortfolio(state) {
 			document.getElementById("portfolio").style.height = "0px";
 			document.getElementById("portfolio").style.marginTop = "0px";
 			document.getElementById("portfolio").style.padding = "0px";
+			document.getElementById("portfolio").style.display = "none";
 			break;
 
 		case "1":
 			document.getElementById("portfolio").style.visibility = "visible";
 			document.getElementById("portfolio").style.height = "auto";
 			document.getElementById("portfolio").style.marginTop = "5px";
+			break;
+
+		default:
+			console.log("error", state);
+	}
+}
+
+function toggleNotifications(state) {
+	switch(state) {
+		case "0":
+			document.getElementById("limitOptions").style.visibility = "hidden";
+			document.getElementById("limitOptions").style.height = "0px";
+			document.getElementById("limitOptions").style.marginTop = "0px";
+			document.getElementById("limitOptions").style.padding = "0px";
+			document.getElementById("limitOptions").style.display = "none";
+			break;
+
+		case "1":
+			document.getElementById("limitOptions").style.visibility = "visible";
+			document.getElementById("limitOptions").style.height = "auto";
+			document.getElementById("limitOptions").style.marginTop = "5px";
 			break;
 
 		default:

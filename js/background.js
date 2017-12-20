@@ -6,30 +6,33 @@ var base_config = {
 	"alertValues" : {
 		"ETH" : 0,
 		"BTC" : 0,
-		"LTC" : 0
+		"LTC" : 0,
+		"BCH" : 0
 	},
 	"panicValues" : {
 		"ETH" : 0,
 		"BTC" : 0,
-		"LTC" : 0
+		"LTC" : 0,
+		"BCH" : 0
 	},
 	"portfolioValues" : {
 		"ETH" : 0,
 		"BTC" : 0,
-		"LTC" : 0
+		"LTC" : 0,
+		"BCH" : 0
 	},
 	"curs": {
 		0 : 'ETH',
 		1 : 'BTC', 
-		2 : 'LTC'
+		2 : 'LTC',
+		3 : 'BCH'
 	},
 	"soundNotification" : 1,
 	"soundSample" : "pop",
 	"colorChange" : 1,
 	"roundBadge" : 0,
-	"btcAmount" : 0,
-	"ethAmount" : 0,
-	"portfolio" : 0
+	"portfolio" : 0,
+	"notifications" : 1
 };
 
 window.browser = (function () {
@@ -54,7 +57,15 @@ _gaq.push(['_trackPageview']);
 
 function initializeConfig(configuration){
 
-	if (typeof localStorage.reallyReallyBeenHereBefore === "undefined") {
+	if (typeof localStorage.trulyReallyTrulyBeenHereBefore === "undefined") {
+
+		if (typeof localStorage.notifications === "undefined") {
+			localStorage.setItem("notifications", configuration.notifications);
+		}
+
+		if (typeof localStorage.portfolio === "undefined") {
+			localStorage.setItem("portfolio", configuration.portfolio);
+		}
 
 		localStorage.setItem("delay", configuration.updateDelay * 1000);
 		localStorage.setItem("chartPeriod", configuration.chartPeriod);
@@ -67,11 +78,8 @@ function initializeConfig(configuration){
 		localStorage.setItem("colorChange", configuration.colorChange);
 		localStorage.setItem("lastPrice", 0);
 		localStorage.setItem("soundSample", "pop");
-		localStorage.setItem("btcAmount", configuration.btcAmount);
-		localStorage.setItem("ethAmount", configuration.ethAmount);
-		localStorage.setItem("portfolio", configuration.portfolio);
 		localStorage.setItem("curs", JSON.stringify(configuration.curs));
-		localStorage.setItem("reallyReallyBeenHereBefore", "yes");
+		localStorage.setItem("trulyReallyTrulyBeenHereBefore", "yes");
 	}
 
 	setInterval(updateTicker, localStorage.delay);
@@ -134,6 +142,10 @@ function updateTicker() {
 }
 
 function notificationManager() {
+	if(localStorage.notifications === 0) {
+		return;
+	}
+
 	var keysNb = Object.keys(JSON.parse(localStorage.curs)).length;
 	for(var i = 0; i < keysNb; i++) {
 		getJSON(

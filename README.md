@@ -1,10 +1,10 @@
-# Coinbase Ticker (browser extension) - Track BTC, ETH and LTC prices from Coinbase
+# Coinbase Ticker (browser extension) - Track BTC, ETH, LTC & BCH prices from Coinbase
 
 Available on the [Chrome Web Store]
 
 Compatible with Google Chrome, Mozilla Firefox, Microsoft Edge, Opera, Vivaldi & Brave !
 
-* Track BTC, ETH and LTC prices in all currencies supported by Coinbase
+* Track Bitcoin, Ethereum, Litecoin and Bitcoin Cash prices in all currencies supported by Coinbase
 * Popup with spotrate, buy and sell prices.
 * Price charts for last hour, day, week, month or year (not available for all currencies)
 * Live update on icon with customizable delay and color changes

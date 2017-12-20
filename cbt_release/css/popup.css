@@ -5,7 +5,7 @@ body {
   width: 200px;
   max-width: 100%;
   overflow-x: hidden;
-  height: 240px;
+  max-height: 350px;
 }
 body a:link {
   text-decoration: none;
@@ -54,9 +54,6 @@ body .main #error {
 body .main .priceTable {
   margin: auto;
 }
-body .main .priceTable tbody {
-  border-bottom: 1px solid #dae1e9;
-}
 body .main .priceTable tbody td {
   margin: auto;
   height: 25px;
@@ -74,8 +71,13 @@ body .main .priceTable #tabletitle {
   display: inline;
 }
 body #limitOptions {
-  width: 180px;
+  background-color: white;
+  border-radius: 2px;
+  padding: 5px;
+  border: 1px solid #dae1e9;
+  width: 190px;
   margin: auto;
+  margin-bottom: 0px;
 }
 body #limitOptions label {
   width: 100px;
@@ -101,6 +103,7 @@ body #chart {
   width: 190px;
   margin: auto;
   margin-top: 5px;
+  max-height: 153px;
 }
 body #chart canvas {
   display: inline!important;
