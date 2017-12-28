@@ -1,15 +1,8 @@
 {
 	"name": "coinbaseticker",
 	"short": "cbt",
-	"version": "0.0.2.4",
-	"devDependencies": {
-		"grunt": "~0.4.5",
-		"grunt-contrib-compress": "^1.4.1",
-		"grunt-contrib-copy": "^1.0.0",
-		"grunt-contrib-less": "^1.4.1",
-		"grunt-contrib-uglify": "^3.0.1",
-		"grunt-contrib-watch": "^1.0.0"
-	},
+	"version": "0.0.2.5",
+	"devDependencies": {},
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
@@ -23,5 +16,13 @@
 	"bugs": {
 		"url": "https://github.com/BobRazowsky/coinbaseTicker/issues"
 	},
-	"homepage": "https://github.com/BobRazowsky/coinbaseTicker#readme"
+	"homepage": "https://github.com/BobRazowsky/coinbaseTicker#readme",
+	"dependencies": {
+		"grunt": "^1.0.1",
+		"grunt-contrib-compress": "^1.4.3",
+		"grunt-contrib-copy": "^1.0.0",
+		"grunt-contrib-less": "^1.4.1",
+		"grunt-contrib-uglify": "^3.3.0",
+		"grunt-contrib-watch": "^1.0.0"
+	}
 }

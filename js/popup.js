@@ -122,7 +122,7 @@ function rollCurrency(){
 }
 
 function updateInputValues(){
-	if(localStorage.notifications === 1) {
+	if(parseInt(localStorage.notifications) === 1) {
 		var panicValues = JSON.parse(localStorage.panicValues);
 		var alertValues = JSON.parse(localStorage.alertValues);
 		document.querySelector('input[name="targetPrice"]').value = alertValues[localStorage.targetCurrency];

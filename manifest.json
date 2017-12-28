@@ -1,7 +1,7 @@
 {
 	"name": "__MSG_appName__",
 	"description": "__MSG_appDesc__",
-	"version": "0.0.2.4",
+	"version": "0.0.2.5",
 	"author": "Ari",
 	"default_locale": "en",
 	"background": {
