@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	var displayPortfolio = localStorage.portfolio;
 	var displayNotification = localStorage.notifications;
 	startListeners();
-	getChartValues();
+	getChartValues(false);
 	togglePortfolio(displayPortfolio.toString());
 	toggleNotifications(displayNotification.toString());
 	updateInputValues();
-	updatePrices();
+	updatePrices(false);
 	updatePortfolio();
 	changeCurrencyIcon();
 	analytics();
@@ -116,8 +116,8 @@ function rollCurrency(){
 	}
 	localStorage.targetCurrency = currencies[nextIndex];
 	changeCurrencyIcon();
-	updatePrices();
-	getChartValues();
+	updatePrices(true);
+	getChartValues(true);
 	updateInputValues();
 }
 
@@ -153,114 +153,132 @@ function getJSON(url, callback){
 	request.send();
 }
 
-function updatePrices(){
+function updatePrices(force){
 
-	var priceString, price;
+	if(force) {
+		console.log("force");
+		var priceString, price;
 
-	var baseURL = "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/";
-	getJSON(
-		baseURL + "spot",
-		function (data) {
-			document.getElementById("priceNumbers").style.visibility = "visible";
-			document.getElementById("error").style.visibility = "hidden";
-			priceString = data.data.amount.toString();
-			localStorage.lastSpot = data.data.amount;
-			price = data.data.amount;
-			var ethRate = document.getElementById("priceRate");
-			ethRate.innerHTML = priceString.toString();
-			updatePortfolio();
-	});
+		var baseURL = "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/";
+		getJSON(
+			baseURL + "spot",
+			function (data) {
+				document.getElementById("priceNumbers").style.visibility = "visible";
+				document.getElementById("error").style.visibility = "hidden";
+				priceString = data.data.amount.toString();
+				localStorage.lastSpot = data.data.amount;
+				price = data.data.amount;
+				var ethRate = document.getElementById("priceRate");
+				ethRate.innerHTML = priceString.toString();
+				updatePortfolio();
+		});
 
-	getJSON(
-		baseURL + "buy",
-		function (data) {
-			priceString = data.data.amount.toString();
-			price = data.data.amount;
-			var ethBuy = document.getElementById("priceBuy");
-			ethBuy.innerHTML = priceString.toString();
-	});
+		getJSON(
+			baseURL + "buy",
+			function (data) {
+				priceString = data.data.amount.toString();
+				price = data.data.amount;
+				var ethBuy = document.getElementById("priceBuy");
+				ethBuy.innerHTML = priceString.toString();
+		});
 
-	getJSON(
-		baseURL + "sell",
-		function (data) {
-			priceString = data.data.amount.toString();
-			price = data.data.amount;
-			var ethSell = document.getElementById("priceSell");
-			ethSell.innerHTML = priceString.toString();
-	});
+		getJSON(
+			baseURL + "sell",
+			function (data) {
+				priceString = data.data.amount.toString();
+				price = data.data.amount;
+				var ethSell = document.getElementById("priceSell");
+				ethSell.innerHTML = priceString.toString();
+		});
+	} else {
+		console.log("no force");
+		var spot = document.getElementById("priceRate");
+		spot.innerHTML = localStorage.lastPrice;;
+		var buy = document.getElementById("priceBuy");
+		buy.innerHTML = localStorage.buyPrice;
+		var sell = document.getElementById("priceSell");
+		sell.innerHTML = localStorage.sellPrice;
+	}
 }
 
-function getChartValues(){
-	var limit = 0;
-	var type = "";
-	var aggregate = 0;
+function getChartValues(force){
+	if(force) {
 
-	switch(localStorage.chartPeriod){
-		case "hour":
-			limit = 60;
-			type="minute";
-			aggregate = 0;
-			break;
-		case "day":
-			limit = 96;
-			type = "minute";
-			aggregate = 15;
-			break;
-		case "week":
-			limit = 84;
-			type = "hour";
-			aggregate = 2;
-			break;
-		case "month":
-			limit = 90;
-			type = "hour";
-			aggregate = 8;
-			break;
-		case "year":
-			limit = 122;
-			type = "day";
-			aggregate = 3;
-			break;
-		default:
-			limit = 60;
-			type = "minute";
-			aggregate = 0;
-	}
+		var limit = 0;
+		var type = "";
+		var aggregate = 0;
 
-	var chartsData = [];
-
-	getJSON(
-		"https://min-api.cryptocompare.com/data/histo"+ type +
-		"?fsym="+ localStorage.targetCurrency +
-		"&tsym="+ localStorage.sourceCurrency +
-		"&limit="+ limit +
-		"&aggregate="+ aggregate +
-		"&useBTC=false",
-		function (data, request) {
-			if(request.Response == "Error"){
-				console.log("No chart data for this currency");
-				document.getElementById("chart").style.display = "none";
-				return;
-			}
-
-			for(var i = 0; i < data.Data.length; i++){
-				chartsData.push({x: i*(200/limit) ,y: (data.Data[i].close + data.Data[i].open) / 2});
-			}
-
-			buildChart(chartsData);
-
-			var indexEnd = data.Data.length - 1;
-			var start = (data.Data[0].close + data.Data[0].open) / 2;
-			var end = (data.Data[indexEnd].close + data.Data[indexEnd].open) / 2;
-			var change = ((100 * end) / start) - 100;
-
-			var sign = (change > 0) ? "+" : "";
-			var color = (change > 0) ? "#2B8F28" : "#FF4143";
-
-			document.querySelector('#changeValue').innerHTML = sign + change.toFixed(2) + "%";
-			document.querySelector('#changeValue').style.color = color;
+		switch(localStorage.chartPeriod){
+			case "hour":
+				limit = 60;
+				type="minute";
+				aggregate = 0;
+				break;
+			case "day":
+				limit = 96;
+				type = "minute";
+				aggregate = 15;
+				break;
+			case "week":
+				limit = 84;
+				type = "hour";
+				aggregate = 2;
+				break;
+			case "month":
+				limit = 90;
+				type = "hour";
+				aggregate = 8;
+				break;
+			case "year":
+				limit = 122;
+				type = "day";
+				aggregate = 3;
+				break;
+			default:
+				limit = 60;
+				type = "minute";
+				aggregate = 0;
 		}
-	);
+
+		var chartsData = [];
+
+		getJSON(
+			"https://min-api.cryptocompare.com/data/histo"+ type +
+			"?fsym="+ localStorage.targetCurrency +
+			"&tsym="+ localStorage.sourceCurrency +
+			"&limit="+ limit +
+			"&aggregate="+ aggregate +
+			"&useBTC=false",
+			function (data, request) {
+				if(request.Response == "Error"){
+					console.log("No chart data for this currency");
+					document.getElementById("chart").style.display = "none";
+					return;
+				}
+
+				for(var i = 0; i < data.Data.length; i++){
+					chartsData.push({x: i*(200/limit) ,y: (data.Data[i].close + data.Data[i].open) / 2});
+				}
+
+				buildChart(chartsData);
+
+				var indexEnd = data.Data.length - 1;
+				var start = (data.Data[0].close + data.Data[0].open) / 2;
+				var end = (data.Data[indexEnd].close + data.Data[indexEnd].open) / 2;
+				var change = ((100 * end) / start) - 100;
+
+				var sign = (change > 0) ? "+" : "";
+				var color = (change > 0) ? "#2B8F28" : "#FF4143";
+
+				document.querySelector('#changeValue').innerHTML = sign + change.toFixed(2) + "%";
+				document.querySelector('#changeValue').style.color = color;
+			}
+		);
+	} else {
+		var chartsData = JSON.parse(localStorage.chartsData);
+		console.log(chartsData);
+		buildChart(chartsData);
+	}
 }
 
 function buildChart(chartsData){
@@ -399,5 +417,5 @@ function hideUselessFields() {
 
 function updateChartPeriod(event){
 	localStorage.chartPeriod = event.target.value;
-	getChartValues();
+	getChartValues(true);
 }

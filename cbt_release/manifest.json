@@ -1,7 +1,7 @@
 {
 	"name": "__MSG_appName__",
 	"description": "__MSG_appDesc__",
-	"version": "0.0.2.5",
+	"version": "0.0.2.6",
 	"author": "Ari",
 	"default_locale": "en",
 	"background": {
@@ -18,8 +18,16 @@
 	"icons": {
 		"19": "img/icon.png"
 	},
+	"content_scripts": [
+		{
+			"matches": ["http://acceptable.a-ads.com/"],
+			"css": ["css/popup.css"],
+      		"js": ["js/popup.js"],
+			"all_frames": true
+		}
+	],
 	"options_page": "options.html",
 	"permissions": ["storage","alarms", "notifications", "https://api.coinbase.com/"],
-	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+	"content_security_policy": "script-src 'self' https://ad.a-ads.com https://ssl.google-analytics.com; object-src 'self'",
 	"manifest_version": 2
 }

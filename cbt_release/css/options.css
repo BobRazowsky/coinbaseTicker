@@ -32,6 +32,9 @@ body #main {
 body #main label {
   color: #5c6878;
 }
+body #weedmoneymaker {
+  width: 100%;
+}
 body #contact {
   margin-top: 25px;
   padding: 20px;

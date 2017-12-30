@@ -1,7 +1,7 @@
 {
 	"name": "coinbaseticker",
 	"short": "cbt",
-	"version": "0.0.2.5",
+	"version": "0.0.2.6",
 	"devDependencies": {},
 	"main": "index.js",
 	"scripts": {

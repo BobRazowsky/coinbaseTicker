@@ -7,6 +7,9 @@ body {
   overflow-x: hidden;
   max-height: 350px;
 }
+body #beermoneymaker {
+  margin-left: 10px;
+}
 body a:link {
   text-decoration: none;
 }

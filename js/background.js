@@ -85,12 +85,16 @@ function initializeConfig(configuration){
 	setInterval(updateTicker, localStorage.delay);
 }
 
-function getJSON(url, callback){
+function getJSON(url, hotfix, callback){
 	var request = new XMLHttpRequest();
 	request.open('GET', url, true);
 	request.onload = function(){
 		if(request.status >= 200 && request.status < 400){
-			var data = JSON.parse(request.responseText).data;
+			if(hotfix) {
+				var data = JSON.parse(request.responseText);
+			} else {
+				var data = JSON.parse(request.responseText).data;
+			}
 			callback(data);
 		}
 	};
@@ -103,6 +107,7 @@ function getJSON(url, callback){
 function updateTicker() {
 	getJSON(
 		"https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/spot",
+		false,
 		function (data) {
 			var price = data.amount;
 			var priceString = data.amount.toString();
@@ -139,6 +144,98 @@ function updateTicker() {
 	if(isChrome) {
 		notificationManager();
 	}
+	prefetch();
+	getChartValues();
+}
+
+function prefetch() {
+	console.log("prefetching");
+	var priceString, price;
+
+	var baseURL = "https://api.coinbase.com/v2/prices/"+ localStorage.targetCurrency +"-"+ localStorage.sourceCurrency +"/";
+	
+	getJSON(
+		baseURL + "buy",
+		false,
+		function (data) {
+			price = data.amount;
+			localStorage.setItem("buyPrice", price);
+	});
+
+	getJSON(
+		baseURL + "sell",
+		false,
+		function (data) {
+			price = data.amount;
+			localStorage.setItem("sellPrice", price);
+	});
+}
+
+function getChartValues(){
+
+	var limit = 0;
+	var type = "";
+	var aggregate = 0;
+
+	switch(localStorage.chartPeriod){
+		case "hour":
+			limit = 60;
+			type="minute";
+			aggregate = 0;
+			break;
+		case "day":
+			limit = 96;
+			type = "minute";
+			aggregate = 15;
+			break;
+		case "week":
+			limit = 84;
+			type = "hour";
+			aggregate = 2;
+			break;
+		case "month":
+			limit = 90;
+			type = "hour";
+			aggregate = 8;
+			break;
+		case "year":
+			limit = 122;
+			type = "day";
+			aggregate = 3;
+			break;
+		default:
+			console.log("issue");
+			limit = 60;
+			type = "minute";
+			aggregate = 0;
+	}
+
+	var chartsData = [];
+
+	getJSON(
+		"https://min-api.cryptocompare.com/data/histo"+ type +
+		"?fsym="+ localStorage.targetCurrency +
+		"&tsym="+ localStorage.sourceCurrency +
+		"&limit="+ limit +
+		"&aggregate="+ aggregate +
+		"&useBTC=false",
+		true,
+		function (data, request) {
+			console.log("hello?");
+			// if(request.Response == "Error"){
+			// 	console.log("No chart data for this currency");
+			// 	document.getElementById("chart").style.display = "none";
+			// 	return;
+			// }
+
+			for(var i = 0; i < data.Data.length; i++){
+				chartsData.push({x: i*(200/limit) ,y: (data.Data[i].close + data.Data[i].open) / 2});
+			}
+
+			localStorage.setItem("chartsData", JSON.stringify(chartsData));
+		}
+	);
+	
 }
 
 function notificationManager() {
@@ -150,6 +247,7 @@ function notificationManager() {
 	for(var i = 0; i < keysNb; i++) {
 		getJSON(
 			"https://api.coinbase.com/v2/prices/"+ JSON.parse(localStorage.curs)[i] +"-"+ localStorage.sourceCurrency +"/spot",
+			false,
 			function (data) {
 				var price = data.amount;
 				var priceString = data.amount.toString();
