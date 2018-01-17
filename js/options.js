@@ -53,7 +53,7 @@ function startListeners(){
 	document.querySelector('input[name="roundBadge"]').onclick = toggleRoundBadge;
 	document.querySelector('input[name="portfolioOptns"]').onclick = togglePortfolio;
 	document.querySelector('input[name="notifOptns"]').onclick = toggleNotif;
-	document.getElementById("save").addEventListener("click", saveAndApply);
+	//document.getElementById("save").addEventListener("click", saveAndApply);
 }
 
 function getJSON(url, callback){
