@@ -9,22 +9,22 @@
     "message" : "Klicken Sie hier, um Preise und Charts zu sehen"
   },
   "strSpotrate": {
-  	"message": "Spotrate"
+  	"message": "Mittelkurs"
   },
   "strBuyPrice": {
-  	"message": "Kaufpreis"
+  	"message": "Preis Ankauf"
   },
   "strSellPrice": {
-  	"message": "Verkaufspreis"
+  	"message": "Preis Verkauf"
   },
   "strPanicPrice": {
-  	"message": "Bewertung Preise"
+  	"message": "Preis min."
   },
   "strTargetPrice": {
-  	"message": "Kursziel"
+  	"message": "Preis max."
   },
   "strHour": {
-  	"message": "Uhr"
+  	"message": "Stunde"
   },
   "strDay": {
   	"message": "Tag"
@@ -63,13 +63,13 @@
   	"message": "0 um Benachrichtigungen zu deaktivieren"
   },
   "strColorChange": {
-  	"message": "Farbe Ändern Sie das Ikone"
+  	"message": "Icon Farbe ändern"
   },
   "strSound": {
-  	"message": "Klingen"
+  	"message": "Nachrichtenton"
   },
   "strRound": {
-  	"message": "Runder Ikone Text"
+  	"message": "Kurs im Icon runden"
   },
   "strSave": {
   	"message": "Änderungen übernehmen"
@@ -78,7 +78,7 @@
   	"message": "Spenden"
   },
   "strDonationsTxt": {
-  	"message": "Wenn du dich großzügig und dankbar fühlst, dann bitte eine Spende machen!"
+  	"message": "Wenn Dir dieses Projekt gefällt, kannst Du gerne eine Spende machen!"
   },
   "strSeconds": {
   	"message": " sekunden"
